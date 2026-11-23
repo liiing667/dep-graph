@@ -77,28 +77,28 @@ export class Graph {
     this._defaultEdgeLabelFn = constant(undefined);
 
     // v -> label
-    this._nodes = {};
+    this._nodes = Object.create(null);
 
     if (this._isCompound) {
       // v -> parent
-      this._parent = {};
+      this._parent = Object.create(null);
 
       // v -> children
-      this._children = {};
-      this._children[GRAPH_NODE] = {};
+      this._children = Object.create(null);
+      this._children[GRAPH_NODE] = Object.create(null);
     }
 
     // u -> v -> Number
-    this._preds = {};
+    this._preds = Object.create(null);
 
     // v -> w -> Number
-    this._sucs = {};
+    this._sucs = Object.create(null);
 
     // e -> edgeObj
-    this._edgeObjs = {};
+    this._edgeObjs = Object.create(null);
 
     // e -> label
-    this._edgeLabels = {};
+    this._edgeLabels = Object.create(null);
   }
 
   /* === Graph functions ========= */
@@ -180,11 +180,11 @@ export class Graph {
     this._nodes[v] = arguments.length > 1 ? value : this._defaultNodeLabelFn(v);
     if (this._isCompound) {
       this._parent[v] = GRAPH_NODE;
-      this._children[v] = {};
+      this._children[v] = Object.create(null);
       this._children[GRAPH_NODE][v] = true;
     }
-    this._preds[v] = {};
-    this._sucs[v] = {};
+    this._preds[v] = Object.create(null);
+    this._sucs[v] = Object.create(null);
     return this;
   }
 
@@ -338,7 +338,7 @@ export class Graph {
       }
     });
 
-    const parents = {};
+    const parents = Object.create(null);
 
     function findParent(v) {
       const parent = self.parent(v);

@@ -31,27 +31,58 @@ export function createFromJSON(
     multigraph: false,
     compound: false,
   });
-  const pkgs: { [pkgId: string]: types.PkgInfo } = {};
-  const pkgNodes: { [pkgId: string]: Set<string> } = {};
+  // Use null-prototype maps so ids such as `__proto__` or `constructor` are
+  // treated as ordinary ids instead of accidentally resolving through
+  // Object.prototype.
+  const pkgs: { [pkgId: string]: types.PkgInfo } = Object.create(null);
+  const pkgNodes: { [pkgId: string]: Set<string> } = Object.create(null);
 
-  for (const { id, info } of depGraphData.pkgs) {
+  for (let i = 0; i < depGraphData.pkgs.length; i++) {
+    const pkg = depGraphData.pkgs[i];
+    assert(
+      !!pkg && typeof pkg === 'object',
+      `.pkgs[${i}] is missing or not an object`,
+    );
+    const { id, info } = pkg;
+    assert(
+      typeof id === 'string',
+      `.pkgs[${i}].id is missing or not a string`,
+    );
+    assert(!!info && typeof info === 'object', `.pkgs[${i}] is missing .info`);
     if (shouldValidate) {
-      assertValidPkg(id, info, pkgs);
+      assertValidPkg(id, info, pkgs, i);
+    } else {
+      // Even when the expensive checks are skipped, a duplicate id must not
+      // silently replace the package that was already parsed.
+      assert(
+        !Object.prototype.hasOwnProperty.call(pkgs, id),
+        `more than one pkg with same id: "${id}" (.pkgs[${i}])`,
+      );
     }
     pkgs[id] = info.version ? info : { ...info, version: undefined };
   }
 
   const rootNodeId = depGraphData.graph.rootNodeId;
-  let rootNode;
+  let rootNode: types.GraphNode | undefined;
+  const declaredNodeIds = new Set<string>();
 
-  for (const node of depGraphData.graph.nodes) {
-    if (shouldValidate) {
-      assert(!graph.hasNode(node.nodeId), 'more than one node with same id');
-      assert(
-        !!pkgs[node.pkgId],
-        'some instance nodes belong to non-existing pkgIds',
-      );
-    }
+  for (let i = 0; i < depGraphData.graph.nodes.length; i++) {
+    const node = depGraphData.graph.nodes[i];
+    assert(
+      !!node && typeof node.nodeId === 'string',
+      `graph.nodes[${i}].nodeId is missing or not a string`,
+    );
+    assert(
+      !declaredNodeIds.has(node.nodeId),
+      `more than one node with same id: "${node.nodeId}" (graph.nodes[${i}])`,
+    );
+    assert(
+      typeof node.pkgId === 'string' && !!pkgs[node.pkgId],
+      `some instance nodes belong to non-existing pkgIds: graph.nodes[${i}] ` +
+        `(node "${node.nodeId}") references unknown package "${node.pkgId}"`,
+    );
+
+    declaredNodeIds.add(node.nodeId);
     if (node.nodeId === rootNodeId) rootNode = node;
     const pkgId = node.pkgId;
     if (!pkgNodes[pkgId]) {
@@ -62,23 +93,44 @@ export function createFromJSON(
     graph.setNode(node.nodeId, { pkgId, info: node.info });
   }
 
-  for (const node of depGraphData.graph.nodes) {
-    for (const depNodeId of node.deps) {
+  for (let i = 0; i < depGraphData.graph.nodes.length; i++) {
+    const node = depGraphData.graph.nodes[i];
+    assert(
+      Array.isArray(node.deps),
+      `graph.nodes[${i}].deps is missing or not an array`,
+    );
+
+    for (let j = 0; j < node.deps.length; j++) {
+      const depNodeId = node.deps[j];
+      assert(
+        !!depNodeId && typeof depNodeId.nodeId === 'string',
+        `graph.nodes[${i}].deps[${j}].nodeId is missing or not a string`,
+      );
+      // Never let graphlib create a node implicitly for a dangling edge: that
+      // would silently change the graph that is validated and later reported.
+      assert(
+        declaredNodeIds.has(depNodeId.nodeId),
+        `node "${node.nodeId}" depends on unknown node "${depNodeId.nodeId}" ` +
+          `(graph.nodes[${i}].deps[${j}].nodeId is non-existing in graph.nodes)`,
+      );
       graph.setEdge(node.nodeId, depNodeId.nodeId);
     }
   }
 
-  if (shouldValidate) {
-    assert(!!rootNode, `.${rootNodeId} root graph node is missing`);
-    const rootPkgId = rootNode.pkgId;
-    assert(!!pkgs[rootPkgId], `.${rootPkgId} root pkg missing`);
+  assert(
+    !!rootNode,
+    `root graph node is missing: "${rootNodeId}" is not present in graph.nodes`,
+  );
+  const rootPkgId = rootNode!.pkgId;
+  assert(!!pkgs[rootPkgId], `.${rootPkgId} root pkg missing`);
 
-    validateGraph(graph, depGraphData.graph.rootNodeId, pkgs, pkgNodes);
+  if (shouldValidate) {
+    validateGraph(graph, rootNodeId, pkgs, pkgNodes);
   }
 
   return new DepGraphImpl(
     graph,
-    depGraphData.graph.rootNodeId,
+    rootNodeId,
     pkgs,
     pkgNodes,
     depGraphData.pkgManager,
@@ -91,17 +143,46 @@ function assert(condition: boolean, msg: string) {
   }
 }
 
-function assertValidSchema({ schemaVersion, pkgManager }: DepGraphData) {
+function assertValidSchema(depGraphData: DepGraphData) {
+  assert(
+    !!depGraphData && typeof depGraphData === 'object',
+    'dep-graph data is missing or not an object',
+  );
+
+  const { schemaVersion, pkgManager } = depGraphData;
   assert(
     !!semver.valid(schemaVersion) &&
       semver.satisfies(schemaVersion, SUPPORTED_SCHEMA_RANGE),
     `dep-graph schemaVersion not in "${SUPPORTED_SCHEMA_RANGE}"`,
   );
-  assert(pkgManager && !!pkgManager.name, '.pkgManager.name is missing');
+  assert(
+    !!pkgManager && typeof pkgManager === 'object',
+    '.pkgManager is missing',
+  );
+  assert(
+    typeof pkgManager.name === 'string' && !!pkgManager.name,
+    '.pkgManager.name is missing',
+  );
+  assert(Array.isArray(depGraphData.pkgs), '.pkgs is missing or not an array');
+  assert(
+    !!depGraphData.graph && typeof depGraphData.graph === 'object',
+    '.graph is missing',
+  );
+  assert(
+    typeof depGraphData.graph.rootNodeId === 'string',
+    '.graph.rootNodeId is missing or not a string',
+  );
+  assert(
+    Array.isArray(depGraphData.graph.nodes),
+    '.graph.nodes is missing or not an array',
+  );
 }
 
-function assertValidPkg(id, info, pkgs) {
-  assert(!pkgs[id], 'more than one pkg with same id');
+function assertValidPkg(id, info, pkgs, index?: number) {
+  assert(
+    !Object.prototype.hasOwnProperty.call(pkgs, id),
+    `more than one pkg with same id: "${id}" (.pkgs[${index}])`,
+  );
   assert(!!info, '.pkgs item missing .info');
   assert(id === DepGraphImpl.getPkgId(info), 'pkgs ids should be name@version');
   assert(!!info.name, 'some .pkgs elements have no .name field');

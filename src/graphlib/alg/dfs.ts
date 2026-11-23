@@ -17,7 +17,7 @@ export function dfs(g: Graph, vs: string[], order: 'pre' | 'post'): string[] {
   const navigation = (g.isDirected() ? g.successors : g.neighbors).bind(g);
 
   const acc: string[] = [];
-  const visited: { [v: string]: boolean } = {};
+  const visited: { [v: string]: boolean } = Object.create(null);
   each(vs, (v) => {
     if (!g.hasNode(v)) {
       throw new Error('Graph does not have node: ' + v);

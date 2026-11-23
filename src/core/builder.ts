@@ -13,8 +13,8 @@ class DepGraphBuilder {
     return `${pkg.name}@${pkg.version || ''}`;
   }
 
-  private _pkgs: { [pkgId: string]: types.PkgInfo } = {};
-  private _pkgNodes: { [pkgId: string]: Set<string> } = {};
+  private _pkgs: { [pkgId: string]: types.PkgInfo } = Object.create(null);
+  private _pkgNodes: { [pkgId: string]: Set<string> } = Object.create(null);
 
   private _graph: graphlib.Graph;
   private _pkgManager: types.PkgManager;

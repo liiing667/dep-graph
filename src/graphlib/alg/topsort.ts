@@ -4,8 +4,8 @@ import * as size from 'lodash.size';
 import { Graph } from '../graph';
 
 export function topsort(g: Graph): string[] {
-  const visited = {};
-  const stack = {};
+  const visited = Object.create(null);
+  const stack = Object.create(null);
   const results: any[] = [];
 
   function visit(node: string) {

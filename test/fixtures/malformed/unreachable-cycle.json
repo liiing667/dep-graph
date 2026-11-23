@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.3.0",
+  "pkgManager": {
+    "name": "npm"
+  },
+  "pkgs": [
+    {
+      "id": "root@1.0.0",
+      "info": {
+        "name": "root",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "id": "a@1.0.0",
+      "info": {
+        "name": "a",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "id": "x@1.0.0",
+      "info": {
+        "name": "x",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "id": "y@1.0.0",
+      "info": {
+        "name": "y",
+        "version": "1.0.0"
+      }
+    }
+  ],
+  "graph": {
+    "rootNodeId": "root-node",
+    "nodes": [
+      {
+        "nodeId": "root-node",
+        "pkgId": "root@1.0.0",
+        "deps": [
+          {
+            "nodeId": "a@1.0.0"
+          }
+        ]
+      },
+      {
+        "nodeId": "a@1.0.0",
+        "pkgId": "a@1.0.0",
+        "deps": []
+      },
+      {
+        "nodeId": "x@1.0.0",
+        "pkgId": "x@1.0.0",
+        "deps": [
+          {
+            "nodeId": "y@1.0.0"
+          }
+        ]
+      },
+      {
+        "nodeId": "y@1.0.0",
+        "pkgId": "y@1.0.0",
+        "deps": [
+          {
+            "nodeId": "x@1.0.0"
+          }
+        ]
+      }
+    ]
+  }
+}
