@@ -12,8 +12,40 @@ interface GraphNode {
   info?: types.NodeInfo;
 }
 
+/**
+ * State captured for a single traversal of one immutable graph version.
+ *
+ * Path counting, cycle detection and parent-chain enumeration all use this
+ * object. In particular, parent lists and package info are snapshotted here,
+ * so a graph mutation (or a cache populated by another graph) can never make
+ * one part of the result come from a different graph generation.
+ */
+interface TraversalContext {
+  readonly generation: number;
+  readonly graph: graphlib.Graph;
+  readonly graphVersion: number;
+  readonly epoch: string;
+  readonly parents: Map<NodeId, NodeId[]>;
+  readonly pkgs: Map<NodeId, types.PkgInfo>;
+}
+
+/**
+ * Internal control-flow signal used when the underlying graph changes while a
+ * traversal is still reading it. The public operation restarts from a fresh
+ * generation instead of publishing a mixture of the old and new graph.
+ */
+class TraversalGenerationChangedError extends Error {
+  constructor() {
+    super('dep-graph changed during traversal');
+    this.name = 'TraversalGenerationChangedError';
+  }
+}
+
 class DepGraphImpl implements types.DepGraphInternal {
   public static SCHEMA_VERSION = '1.3.0';
+  private static _nextTraversalNamespace = 1;
+  private static _nextGraphId = 1;
+  private static _graphIds = new WeakMap<graphlib.Graph, number>();
 
   public static getPkgId(pkg: types.Pkg): string {
     return `${pkg.name}@${pkg.version || ''}`;
@@ -25,8 +57,19 @@ class DepGraphImpl implements types.DepGraphInternal {
   private _rootPkgId: PkgId;
 
   private _countNodePathsToRootCache: Map<NodeId, number> = new Map();
+  private _countNodePathsToRootCacheMeta: Map<
+    NodeId,
+    { epoch: string; count: number }
+  > = new Map();
+  private _countNodePathsToRootCacheCurrentEpoch: string | undefined;
 
   private _hasCycles: boolean | undefined;
+  private _hasCyclesGraph: graphlib.Graph | undefined;
+  private _hasCyclesGraphVersion: number | undefined;
+
+  private _traversalGeneration = 0;
+  private readonly _traversalNamespace =
+    DepGraphImpl._nextTraversalNamespace++;
 
   public constructor(
     private _graph: graphlib.Graph,
@@ -117,48 +160,63 @@ class DepGraphImpl implements types.DepGraphInternal {
   }
 
   public hasCycles(): boolean {
-    // `isAcyclic` is expensive, so memoize
-    if (this._hasCycles === undefined) {
-      this._hasCycles = !graphlib.alg.isAcyclic(this._graph);
+    if (
+      this._hasCycles !== undefined &&
+      this._hasCyclesGraph === this._graph &&
+      this._hasCyclesGraphVersion === this._graph.version
+    ) {
+      return this._hasCycles;
     }
-    return this._hasCycles;
+    return this.runTraversal((traversal) =>
+      this.hasCyclesForTraversal(traversal),
+    );
   }
 
   public pkgPathsToRoot(
     pkg: types.Pkg,
     opts?: { limit?: number },
   ): types.PkgInfo[][] {
-    const pathsToRoot: types.PkgInfo[][] = [];
-    const limit = opts?.limit;
+    return this.runTraversal((traversal) => {
+      const pathsToRoot: types.PkgInfo[][] = [];
+      const limit = opts?.limit;
 
-    for (const nodeId of this.getPkgNodeIds(pkg)) {
-      const pathsFromNodeToRoot = this.pathsFromNodeToRoot(nodeId, [], {
-        limit,
-      });
+      for (const nodeId of this.getPkgNodeIds(pkg)) {
+        const pathsFromNodeToRoot = this.pathsFromNodeToRoot(
+          nodeId,
+          [],
+          { limit },
+          traversal,
+        );
 
-      for (const path of pathsFromNodeToRoot) {
-        pathsToRoot.push(path);
+        for (const path of pathsFromNodeToRoot) {
+          pathsToRoot.push(path);
+        }
+
+        if (limit && pathsToRoot.length >= limit) {
+          break;
+        }
       }
-
-      if (limit && pathsToRoot.length >= limit) {
-        break;
-      }
-    }
-    // note: sorting to get shorter paths first -
-    //  it's nicer - and better resembles older behaviour
-    return pathsToRoot.sort((a, b) => a.length - b.length);
+      this.assertTraversalCurrent(traversal);
+      // note: sorting to get shorter paths first -
+      //  it's nicer - and better resembles older behaviour
+      return pathsToRoot.sort((a, b) => a.length - b.length);
+    });
   }
 
   public countPathsToRoot(pkg: types.Pkg, opts?: { limit?: number }): number {
-    let count = 0;
-    const limit = opts?.limit;
-    for (const nodeId of this.getPkgNodeIds(pkg)) {
-      count += this.countNodePathsToRoot(nodeId, limit);
-      if (limit && count >= limit) {
-        return limit;
+    return this.runTraversal((traversal) => {
+      let count = 0;
+      const limit = opts?.limit;
+      for (const nodeId of this.getPkgNodeIds(pkg)) {
+        count += this.countNodePathsToRoot(nodeId, limit, traversal);
+        if (limit && count >= limit) {
+          this.assertTraversalCurrent(traversal);
+          return limit;
+        }
       }
-    }
-    return count;
+      this.assertTraversalCurrent(traversal);
+      return count;
+    });
   }
 
   public isTransitive(pkg: types.Pkg): boolean {
@@ -198,13 +256,16 @@ class DepGraphImpl implements types.DepGraphInternal {
   }
 
   public directDepsLeadingTo(pkg: types.Pkg): types.PkgInfo[] {
-    const pkgNodes = this.getPkgNodeIds(pkg);
-    const directDeps = this.getNodeDepsNodeIds(this.rootNodeId);
-    const nodes = directDeps.filter((directDep) => {
-      const reachableNodes = graphlib.alg.postorder(this._graph, [directDep]);
-      return reachableNodes.filter((node) => pkgNodes.includes(node)).length;
+    return this.runTraversal((traversal) => {
+      const pkgNodes = this.getPkgNodeIds(pkg);
+      const directDeps = this.getNodeDepsNodeIds(this.rootNodeId);
+      const nodes = directDeps.filter((directDep) => {
+        const reachableNodes = graphlib.alg.postorder(this._graph, [directDep]);
+        return reachableNodes.filter((node) => pkgNodes.includes(node)).length;
+      });
+      this.assertTraversalCurrent(traversal);
+      return nodes.map((node) => this.getNodePkg(node));
     });
-    return nodes.map((node) => this.getNodePkg(node));
   }
 
   /**
@@ -337,15 +398,169 @@ class DepGraphImpl implements types.DepGraphInternal {
     return node;
   }
 
+  /**
+   * Run an operation against one graph version. If the graph is mutated while
+   * the operation is running (for example by a re-entrant consumer), discard
+   * the partial result and start again with a fresh generation.
+   */
+  private runTraversal<T>(fn: (traversal: TraversalContext) => T): T {
+    // The first retry handles the common "replace the graph once" case. A few
+    // more attempts make re-entrant caches resilient, while still failing
+    // closed instead of returning a mixed-generation result under constant
+    // mutation.
+    const maxAttempts = 8;
+
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      const traversal = this.startTraversal();
+      try {
+        const result = fn(traversal);
+        if (this.isTraversalCurrent(traversal)) {
+          return result;
+        }
+      } catch (error) {
+        if (!(error instanceof TraversalGenerationChangedError)) {
+          throw error;
+        }
+      }
+    }
+
+    throw new Error(
+      'dep-graph changed repeatedly during traversal; refusing to return a mixed-generation result',
+    );
+  }
+
+  private startTraversal(): TraversalContext {
+    const graph = this._graph;
+    const graphVersion = graph.version;
+    const graphId = DepGraphImpl.getGraphId(graph);
+    const epoch = `${this._traversalNamespace}:${graphId}:${graphVersion}`;
+
+    if (this._countNodePathsToRootCacheCurrentEpoch !== epoch) {
+      this._countNodePathsToRootCache.clear();
+      this._countNodePathsToRootCacheMeta.clear();
+      this._countNodePathsToRootCacheCurrentEpoch = epoch;
+      this._hasCycles = undefined;
+      this._hasCyclesGraph = undefined;
+      this._hasCyclesGraphVersion = undefined;
+    }
+
+    return {
+      generation: ++this._traversalGeneration,
+      graph,
+      graphVersion,
+      epoch,
+      parents: new Map(),
+      pkgs: new Map(),
+    };
+  }
+
+  private static getGraphId(graph: graphlib.Graph): number {
+    let graphId = DepGraphImpl._graphIds.get(graph);
+    if (graphId === undefined) {
+      graphId = DepGraphImpl._nextGraphId++;
+      DepGraphImpl._graphIds.set(graph, graphId);
+    }
+    return graphId;
+  }
+
+  private isTraversalCurrent(traversal: TraversalContext): boolean {
+    return (
+      this._graph === traversal.graph &&
+      this._graph.version === traversal.graphVersion
+    );
+  }
+
+  private assertTraversalCurrent(traversal: TraversalContext): void {
+    if (!this.isTraversalCurrent(traversal)) {
+      throw new TraversalGenerationChangedError();
+    }
+  }
+
+  private getParentsForTraversal(
+    traversal: TraversalContext,
+    nodeId: NodeId,
+  ): NodeId[] {
+    const memoized = traversal.parents.get(nodeId);
+    if (memoized) {
+      return memoized;
+    }
+
+    this.assertTraversalCurrent(traversal);
+    const parents = this.getNodeParentsNodeIds(nodeId).slice();
+    this.assertTraversalCurrent(traversal);
+    traversal.parents.set(nodeId, parents);
+    return parents;
+  }
+
+  private getPkgForTraversal(
+    traversal: TraversalContext,
+    nodeId: NodeId,
+  ): types.PkgInfo {
+    const memoized = traversal.pkgs.get(nodeId);
+    if (memoized) {
+      return memoized;
+    }
+
+    this.assertTraversalCurrent(traversal);
+    const pkg = this.getNodePkg(nodeId);
+    this.assertTraversalCurrent(traversal);
+    traversal.pkgs.set(nodeId, pkg);
+    return pkg;
+  }
+
+  private getCachedPathCount(
+    nodeId: NodeId,
+    epoch: string,
+  ): number | undefined {
+    const cachedCount = this._countNodePathsToRootCache.get(nodeId);
+    if (cachedCount === undefined) {
+      return undefined;
+    }
+
+    const meta = this._countNodePathsToRootCacheMeta.get(nodeId);
+    if (!meta || meta.epoch !== epoch || meta.count !== cachedCount) {
+      this._countNodePathsToRootCache.delete(nodeId);
+      this._countNodePathsToRootCacheMeta.delete(nodeId);
+      return undefined;
+    }
+
+    return cachedCount;
+  }
+
+  private cachePathCount(nodeId: NodeId, epoch: string, count: number): void {
+    this._countNodePathsToRootCache.set(nodeId, count);
+    this._countNodePathsToRootCacheMeta.set(nodeId, { epoch, count });
+  }
+
+  private hasCyclesForTraversal(traversal: TraversalContext): boolean {
+    if (
+      this._hasCycles !== undefined &&
+      this._hasCyclesGraph === traversal.graph &&
+      this._hasCyclesGraphVersion === traversal.graphVersion
+    ) {
+      return this._hasCycles;
+    }
+
+    const hasCycles = !graphlib.alg.isAcyclic(this._graph);
+    this.assertTraversalCurrent(traversal);
+    this._hasCycles = hasCycles;
+    this._hasCyclesGraph = traversal.graph;
+    this._hasCyclesGraphVersion = traversal.graphVersion;
+    return hasCycles;
+  }
+
   private pathsFromNodeToRoot(
     nodeId: string,
     ancestors: string[] = [],
     opts: { limit?: number },
+    traversal?: TraversalContext,
   ): types.PkgInfo[][] {
-    const parentNodesIds = this.getNodeParentsNodeIds(nodeId);
-    const pkgInfo = this.getNodePkg(nodeId);
+    const activeTraversal = traversal || this.startTraversal();
+    const parentNodesIds = this.getParentsForTraversal(activeTraversal, nodeId);
+    const pkgInfo = this.getPkgForTraversal(activeTraversal, nodeId);
 
-    if (parentNodesIds.length === 0) {
+    if (nodeId === this._rootNodeId || parentNodesIds.length === 0) {
+      this.assertTraversalCurrent(activeTraversal);
       return [[pkgInfo]];
     }
 
@@ -356,7 +571,12 @@ class DepGraphImpl implements types.DepGraphInternal {
     for (const id of parentNodesIds) {
       if (ancestors.includes(id)) continue;
 
-      const pathsFromNodeToRoot = this.pathsFromNodeToRoot(id, ancestors, opts);
+      const pathsFromNodeToRoot = this.pathsFromNodeToRoot(
+        id,
+        ancestors,
+        opts,
+        activeTraversal,
+      );
 
       for (const path of pathsFromNodeToRoot) {
         allPaths.push([pkgInfo].concat(path));
@@ -367,12 +587,20 @@ class DepGraphImpl implements types.DepGraphInternal {
       }
     }
 
+    this.assertTraversalCurrent(activeTraversal);
     return allPaths;
   }
 
-  private countNodePathsToRoot(nodeId: string, limit?: number): number {
-    if (this._countNodePathsToRootCache.has(nodeId)) {
-      return this._countNodePathsToRootCache.get(nodeId)!;
+  private countNodePathsToRoot(
+    nodeId: string,
+    limit?: number,
+    traversal?: TraversalContext,
+  ): number {
+    const activeTraversal = traversal || this.startTraversal();
+    const cached = this.getCachedPathCount(nodeId, activeTraversal.epoch);
+    if (cached !== undefined) {
+      this.assertTraversalCurrent(activeTraversal);
+      return cached;
     }
 
     let count: number;
@@ -381,16 +609,24 @@ class DepGraphImpl implements types.DepGraphInternal {
     } else if (this.hasCycles()) {
       // When cycles exist, we must walk every path individually to avoid
       // counting paths that loop back on themselves.
-      count = this.countNodePathsToRootBacktracking(nodeId, limit);
+      count = this.countNodePathsToRootBacktracking(
+        nodeId,
+        limit,
+        0,
+        new Set(),
+        activeTraversal,
+      );
     } else {
       // Without cycles, we can compute path counts by summing each parent's
       // count. This avoids the exponential cost of enumerating every path.
-      count = this.countNodePathsToRootMemoized(nodeId, limit);
+      count = this.countNodePathsToRootMemoized(nodeId, limit, activeTraversal);
     }
 
     if (!limit) {
-      this._countNodePathsToRootCache.set(nodeId, count);
+      this.assertTraversalCurrent(activeTraversal);
+      this.cachePathCount(nodeId, activeTraversal.epoch, count);
     }
+    this.assertTraversalCurrent(activeTraversal);
     return count;
   }
 
@@ -398,14 +634,24 @@ class DepGraphImpl implements types.DepGraphInternal {
    * Memoized path counting, the count is the sum of the counts of the parents.
    * Only valid for acyclic graphs.
    */
-  private countNodePathsToRootMemoized(nodeId: string, limit = 0): number {
+  private countNodePathsToRootMemoized(
+    nodeId: string,
+    limit = 0,
+    traversal?: TraversalContext,
+  ): number {
+    const activeTraversal = traversal || this.startTraversal();
     let count = 0;
-    for (const parentNodeId of this.getNodeParentsNodeIds(nodeId)) {
-      count += this.countNodePathsToRoot(parentNodeId, limit);
+    for (const parentNodeId of this.getParentsForTraversal(
+      activeTraversal,
+      nodeId,
+    )) {
+      count += this.countNodePathsToRoot(parentNodeId, limit, activeTraversal);
       if (limit && count >= limit) {
+        this.assertTraversalCurrent(activeTraversal);
         return limit;
       }
     }
+    this.assertTraversalCurrent(activeTraversal);
     return count;
   }
 
@@ -418,12 +664,18 @@ class DepGraphImpl implements types.DepGraphInternal {
     limit = 0,
     count = 0,
     visited: Set<string> = new Set(),
+    traversal?: TraversalContext,
   ): number {
+    const activeTraversal = traversal || this.startTraversal();
     if (nodeId === this._rootNodeId) {
+      this.assertTraversalCurrent(activeTraversal);
       return count + 1;
     }
     visited.add(nodeId);
-    for (const parentNodeId of this.getNodeParentsNodeIds(nodeId)) {
+    for (const parentNodeId of this.getParentsForTraversal(
+      activeTraversal,
+      nodeId,
+    )) {
       if (visited.has(parentNodeId)) {
         continue;
       }
@@ -432,13 +684,16 @@ class DepGraphImpl implements types.DepGraphInternal {
         limit,
         count,
         visited,
+        activeTraversal,
       );
       if (limit && count >= limit) {
         visited.delete(nodeId);
+        this.assertTraversalCurrent(activeTraversal);
         return limit;
       }
     }
     visited.delete(nodeId);
+    this.assertTraversalCurrent(activeTraversal);
     return count;
   }
 }

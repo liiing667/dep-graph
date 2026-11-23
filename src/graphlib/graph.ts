@@ -62,6 +62,13 @@ export class Graph {
   _edgeObjs: Record<EdgeId, Edge>;
   _edgeLabels: Record<EdgeId, unknown>;
 
+  /**
+   * Monotonically increasing mutation counter. Consumers that cache results
+   * derived from this graph can bind those results to a version instead of
+   * accidentally reusing them after the graph's nodes or edges change.
+   */
+  _version = 0;
+
   constructor(opts: GraphOptions) {
     this._isDirected = opts?.directed ?? true;
     this._isMultigraph = opts?.multigraph ?? false;
@@ -115,7 +122,18 @@ export class Graph {
     return this._isCompound;
   }
 
+  /**
+   * The version changes whenever nodes or edges are added, removed or
+   * relabelled. Cached traversals are only valid for one version.
+   */
+  get version(): number {
+    return this._version;
+  }
+
   setGraph(label) {
+    if (this._label !== label) {
+      this._version++;
+    }
     this._label = label;
     return this;
   }
@@ -172,12 +190,16 @@ export class Graph {
   setNode(v: NodeId, value?: unknown): Graph {
     if (v in this._nodes) {
       if (arguments.length > 1) {
+        if (this._nodes[v] !== value) {
+          this._version++;
+        }
         this._nodes[v] = value;
       }
       return this;
     }
 
     this._nodes[v] = arguments.length > 1 ? value : this._defaultNodeLabelFn(v);
+    this._version++;
     if (this._isCompound) {
       this._parent[v] = GRAPH_NODE;
       this._children[v] = {};
@@ -199,6 +221,7 @@ export class Graph {
   removeNode(v: NodeId): Graph {
     const self = this;
     if (v in this._nodes) {
+      this._version++;
       const incidentEdges: Edge[] = [];
       for (const e in this._edgeObjs) {
         const edge = this._edgeObjs[e];
@@ -257,6 +280,7 @@ export class Graph {
     this._removeFromParentsChildList(v);
     this._parent[v] = parent;
     this._children[parent][v] = true;
+    this._version++;
     return this;
   }
 
@@ -432,6 +456,9 @@ export class Graph {
     const e = edgeArgsToId(this._isDirected, v, w, name);
     if (e in this._edgeLabels) {
       if (valueSpecified) {
+        if (this._edgeLabels[e] !== value) {
+          this._version++;
+        }
         this._edgeLabels[e] = value;
       }
       return this;
@@ -458,6 +485,7 @@ export class Graph {
     this._edgeObjs[e] = edgeObj;
     incrementOrInitEntry(this._preds[w], v);
     incrementOrInitEntry(this._sucs[v], w);
+    this._version++;
     return this;
   }
 
@@ -490,6 +518,7 @@ export class Graph {
       delete this._edgeObjs[e];
       decrementOrRemoveEntry(this._preds[w], v);
       decrementOrRemoveEntry(this._sucs[v], w);
+      this._version++;
     }
     return this;
   }
