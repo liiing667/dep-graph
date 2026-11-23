@@ -152,7 +152,7 @@ describe('depTreeToGraph goof', () => {
 
     const stripAnsiPkg = { name: 'strip-ansi', version: '3.0.1' };
     const stripAnsiNodes = depGraphInternal.getPkgNodeIds(stripAnsiPkg);
-    expect(stripAnsiNodes).toHaveLength(2);
+    expect(stripAnsiNodes).toHaveLength(6);
 
     const stripAnsiPaths = depGraph.pkgPathsToRoot(stripAnsiPkg);
     expect(stripAnsiPaths).toHaveLength(6);

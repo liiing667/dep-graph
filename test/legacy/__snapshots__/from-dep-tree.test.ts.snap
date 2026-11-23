@@ -23,13 +23,23 @@ exports[`with labels matches snapshot 1`] = `
             "key": "value",
           },
         },
-        "nodeId": "e@5.0.0",
+        "nodeId": "e@5.0.0|1",
+        "pkgId": "e@5.0.0",
+      },
+      {
+        "deps": [],
+        "info": {
+          "labels": {
+            "key": "value",
+          },
+        },
+        "nodeId": "e@5.0.0|2",
         "pkgId": "e@5.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "e@5.0.0",
+            "nodeId": "e@5.0.0|1",
           },
         ],
         "info": {
@@ -43,7 +53,7 @@ exports[`with labels matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "e@5.0.0",
+            "nodeId": "e@5.0.0|2",
           },
         ],
         "info": {
@@ -171,13 +181,24 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "type": "dependencyManagement",
           },
         },
-        "nodeId": "commons-io:commons-io@2.2",
+        "nodeId": "commons-io:commons-io@2.2|1",
+        "pkgId": "commons-io:commons-io@2.2",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/apache/struts/struts2-parent/2.3.20/struts2-parent-2.3.20.pom",
+            "type": "dependencyManagement",
+          },
+        },
+        "nodeId": "commons-io:commons-io@2.2|2",
         "pkgId": "commons-io:commons-io@2.2",
       },
       {
         "deps": [
           {
-            "nodeId": "commons-io:commons-io@2.2",
+            "nodeId": "commons-io:commons-io@2.2|1",
           },
         ],
         "info": {
@@ -197,13 +218,24 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "type": "dependency",
           },
         },
-        "nodeId": "javassist:javassist@3.11.0.GA",
+        "nodeId": "javassist:javassist@3.11.0.GA|1",
+        "pkgId": "javassist:javassist@3.11.0.GA",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/ognl/ognl/3.0.6/ognl-3.0.6.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "javassist:javassist@3.11.0.GA|2",
         "pkgId": "javassist:javassist@3.11.0.GA",
       },
       {
         "deps": [
           {
-            "nodeId": "javassist:javassist@3.11.0.GA",
+            "nodeId": "javassist:javassist@3.11.0.GA|1",
           },
         ],
         "info": {
@@ -215,7 +247,25 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "type": "property",
           },
         },
-        "nodeId": "ognl:ognl@3.0.6",
+        "nodeId": "ognl:ognl@3.0.6|1",
+        "pkgId": "ognl:ognl@3.0.6",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "javassist:javassist@3.11.0.GA|2",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/apache/struts/struts2-parent/2.3.20/struts2-parent-2.3.20.pom",
+            "property": {
+              "name": "ognl.version",
+            },
+            "type": "property",
+          },
+        },
+        "nodeId": "ognl:ognl@3.0.6|2",
         "pkgId": "ognl:ognl@3.0.6",
       },
       {
@@ -226,7 +276,18 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "type": "dependencyManagement",
           },
         },
-        "nodeId": "org.apache.commons:commons-lang3@3.2",
+        "nodeId": "org.apache.commons:commons-lang3@3.2|1",
+        "pkgId": "org.apache.commons:commons-lang3@3.2",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/apache/struts/struts2-parent/2.3.20/struts2-parent-2.3.20.pom",
+            "type": "dependencyManagement",
+          },
+        },
+        "nodeId": "org.apache.commons:commons-lang3@3.2|2",
         "pkgId": "org.apache.commons:commons-lang3@3.2",
       },
       {
@@ -240,13 +301,27 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "type": "property",
           },
         },
-        "nodeId": "org.ow2.asm:asm@5.0.2",
+        "nodeId": "org.ow2.asm:asm@5.0.2|1",
+        "pkgId": "org.ow2.asm:asm@5.0.2",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/apache/struts/struts2-parent/2.3.20/struts2-parent-2.3.20.pom",
+            "property": {
+              "name": "asm.version",
+            },
+            "type": "property",
+          },
+        },
+        "nodeId": "org.ow2.asm:asm@5.0.2|2",
         "pkgId": "org.ow2.asm:asm@5.0.2",
       },
       {
         "deps": [
           {
-            "nodeId": "org.ow2.asm:asm@5.0.2",
+            "nodeId": "org.ow2.asm:asm@5.0.2|2",
           },
         ],
         "info": {
@@ -279,13 +354,13 @@ exports[`with versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "ognl:ognl@3.0.6",
+            "nodeId": "ognl:ognl@3.0.6|2",
           },
           {
-            "nodeId": "org.apache.commons:commons-lang3@3.2",
+            "nodeId": "org.apache.commons:commons-lang3@3.2|1",
           },
           {
-            "nodeId": "org.ow2.asm:asm@5.0.2",
+            "nodeId": "org.ow2.asm:asm@5.0.2|1",
           },
           {
             "nodeId": "org.ow2.asm:asm-commons@5.0.2",
@@ -320,10 +395,10 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "nodeId": "commons-fileupload:commons-fileupload@1.3.1",
           },
           {
-            "nodeId": "commons-io:commons-io@2.2",
+            "nodeId": "commons-io:commons-io@2.2|2",
           },
           {
-            "nodeId": "ognl:ognl@3.0.6",
+            "nodeId": "ognl:ognl@3.0.6|1",
           },
           {
             "nodeId": "org.apache.struts.xwork:xwork-core@2.3.20",
@@ -347,7 +422,7 @@ exports[`with versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "org.apache.commons:commons-lang3@3.2",
+            "nodeId": "org.apache.commons:commons-lang3@3.2|2",
           },
         ],
         "info": {
@@ -370,7 +445,29 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "type": "dependency",
           },
         },
-        "nodeId": "aopalliance:aopalliance@1.0",
+        "nodeId": "aopalliance:aopalliance@1.0|1",
+        "pkgId": "aopalliance:aopalliance@1.0",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "aopalliance:aopalliance@1.0|2",
+        "pkgId": "aopalliance:aopalliance@1.0",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "aopalliance:aopalliance@1.0|3",
         "pkgId": "aopalliance:aopalliance@1.0",
       },
       {
@@ -381,13 +478,101 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "type": "dependency",
           },
         },
-        "nodeId": "commons-logging:commons-logging@1.1.1",
+        "nodeId": "commons-logging:commons-logging@1.1.1|1",
+        "pkgId": "commons-logging:commons-logging@1.1.1",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-core/3.2.6.RELEASE/spring-core-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "commons-logging:commons-logging@1.1.1|2",
+        "pkgId": "commons-logging:commons-logging@1.1.1",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-core/3.2.6.RELEASE/spring-core-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "commons-logging:commons-logging@1.1.1|3",
+        "pkgId": "commons-logging:commons-logging@1.1.1",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-core/3.2.6.RELEASE/spring-core-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "commons-logging:commons-logging@1.1.1|4",
+        "pkgId": "commons-logging:commons-logging@1.1.1",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-core/3.2.6.RELEASE/spring-core-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "commons-logging:commons-logging@1.1.1|5",
+        "pkgId": "commons-logging:commons-logging@1.1.1",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-core/3.2.6.RELEASE/spring-core-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "commons-logging:commons-logging@1.1.1|6",
+        "pkgId": "commons-logging:commons-logging@1.1.1",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-core/3.2.6.RELEASE/spring-core-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "commons-logging:commons-logging@1.1.1|7",
+        "pkgId": "commons-logging:commons-logging@1.1.1",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-core/3.2.6.RELEASE/spring-core-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "commons-logging:commons-logging@1.1.1|8",
+        "pkgId": "commons-logging:commons-logging@1.1.1",
+      },
+      {
+        "deps": [],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-core/3.2.6.RELEASE/spring-core-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "commons-logging:commons-logging@1.1.1|9",
         "pkgId": "commons-logging:commons-logging@1.1.1",
       },
       {
         "deps": [
           {
-            "nodeId": "commons-logging:commons-logging@1.1.1",
+            "nodeId": "commons-logging:commons-logging@1.1.1|1",
           },
         ],
         "info": {
@@ -396,13 +581,13 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "type": "dependency",
           },
         },
-        "nodeId": "org.springframework:spring-core@3.2.6.RELEASE",
+        "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|1",
         "pkgId": "org.springframework:spring-core@3.2.6.RELEASE",
       },
       {
         "deps": [
           {
-            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE",
+            "nodeId": "commons-logging:commons-logging@1.1.1|2",
           },
         ],
         "info": {
@@ -411,19 +596,133 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "type": "dependency",
           },
         },
-        "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE",
+        "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|2",
+        "pkgId": "org.springframework:spring-core@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "commons-logging:commons-logging@1.1.1|3",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|3",
+        "pkgId": "org.springframework:spring-core@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "commons-logging:commons-logging@1.1.1|4",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|4",
+        "pkgId": "org.springframework:spring-core@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "commons-logging:commons-logging@1.1.1|5",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|5",
+        "pkgId": "org.springframework:spring-core@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "commons-logging:commons-logging@1.1.1|6",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|6",
+        "pkgId": "org.springframework:spring-core@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "commons-logging:commons-logging@1.1.1|7",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|7",
+        "pkgId": "org.springframework:spring-core@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "commons-logging:commons-logging@1.1.1|8",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|8",
+        "pkgId": "org.springframework:spring-core@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "commons-logging:commons-logging@1.1.1|9",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|9",
+        "pkgId": "org.springframework:spring-core@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|1",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE|1",
         "pkgId": "org.springframework:spring-beans@3.2.6.RELEASE",
       },
       {
         "deps": [
           {
-            "nodeId": "aopalliance:aopalliance@1.0",
-          },
-          {
-            "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE",
-          },
-          {
-            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE",
+            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|3",
           },
         ],
         "info": {
@@ -432,13 +731,85 @@ exports[`with versionProvenance matches snapshot 1`] = `
             "type": "dependency",
           },
         },
-        "nodeId": "org.springframework:spring-aop@3.2.6.RELEASE",
+        "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE|2",
+        "pkgId": "org.springframework:spring-beans@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|4",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE|3",
+        "pkgId": "org.springframework:spring-beans@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|6",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE|4",
+        "pkgId": "org.springframework:spring-beans@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "aopalliance:aopalliance@1.0|2",
+          },
+          {
+            "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE|1",
+          },
+          {
+            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|2",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-aop@3.2.6.RELEASE|1",
         "pkgId": "org.springframework:spring-aop@3.2.6.RELEASE",
       },
       {
         "deps": [
           {
-            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE",
+            "nodeId": "aopalliance:aopalliance@1.0|3",
+          },
+          {
+            "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE|3",
+          },
+          {
+            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|5",
+          },
+        ],
+        "info": {
+          "versionProvenance": {
+            "location": "https://maven-central.storage-download.googleapis.com/repos/central/data/org/springframework/spring-web/3.2.6.RELEASE/spring-web-3.2.6.RELEASE.pom",
+            "type": "dependency",
+          },
+        },
+        "nodeId": "org.springframework:spring-aop@3.2.6.RELEASE|2",
+        "pkgId": "org.springframework:spring-aop@3.2.6.RELEASE",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|8",
           },
         ],
         "info": {
@@ -453,13 +824,13 @@ exports[`with versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "org.springframework:spring-aop@3.2.6.RELEASE",
+            "nodeId": "org.springframework:spring-aop@3.2.6.RELEASE|2",
           },
           {
-            "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE",
+            "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE|4",
           },
           {
-            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE",
+            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|7",
           },
           {
             "nodeId": "org.springframework:spring-expression@3.2.6.RELEASE",
@@ -477,19 +848,19 @@ exports[`with versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "aopalliance:aopalliance@1.0",
+            "nodeId": "aopalliance:aopalliance@1.0|1",
           },
           {
-            "nodeId": "org.springframework:spring-aop@3.2.6.RELEASE",
+            "nodeId": "org.springframework:spring-aop@3.2.6.RELEASE|1",
           },
           {
-            "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE",
+            "nodeId": "org.springframework:spring-beans@3.2.6.RELEASE|2",
           },
           {
             "nodeId": "org.springframework:spring-context@3.2.6.RELEASE",
           },
           {
-            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE",
+            "nodeId": "org.springframework:spring-core@3.2.6.RELEASE|9",
           },
         ],
         "info": {
@@ -758,22 +1129,57 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "bytes@1.0.0",
+        "nodeId": "bytes@1.0.0|1",
         "pkgId": "bytes@1.0.0",
       },
       {
         "deps": [],
-        "nodeId": "depd@1.0.1",
+        "nodeId": "bytes@1.0.0|2",
+        "pkgId": "bytes@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "depd@1.0.1|1",
         "pkgId": "depd@1.0.1",
       },
       {
         "deps": [],
-        "nodeId": "iconv-lite@0.4.4",
+        "nodeId": "depd@1.0.1|2",
+        "pkgId": "depd@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "depd@1.0.1|3",
+        "pkgId": "depd@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "depd@1.0.1|4",
+        "pkgId": "depd@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "iconv-lite@0.4.4|1",
         "pkgId": "iconv-lite@0.4.4",
       },
       {
         "deps": [],
-        "nodeId": "media-typer@0.3.0",
+        "nodeId": "iconv-lite@0.4.4|2",
+        "pkgId": "iconv-lite@0.4.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "media-typer@0.3.0|1",
+        "pkgId": "media-typer@0.3.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "media-typer@0.3.0|2",
+        "pkgId": "media-typer@0.3.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "media-typer@0.3.0|3",
         "pkgId": "media-typer@0.3.0",
       },
       {
@@ -798,10 +1204,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "bytes@1.0.0",
+            "nodeId": "bytes@1.0.0|2",
           },
           {
-            "nodeId": "iconv-lite@0.4.4",
+            "nodeId": "iconv-lite@0.4.4|2",
           },
         ],
         "nodeId": "raw-body@1.3.0",
@@ -809,25 +1215,39 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "mime-db@1.12.0",
+        "nodeId": "mime-db@1.12.0|1",
+        "pkgId": "mime-db@1.12.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "mime-db@1.12.0|2",
         "pkgId": "mime-db@1.12.0",
       },
       {
         "deps": [
           {
-            "nodeId": "mime-db@1.12.0",
+            "nodeId": "mime-db@1.12.0|1",
           },
         ],
-        "nodeId": "mime-types@2.0.14",
+        "nodeId": "mime-types@2.0.14|1",
         "pkgId": "mime-types@2.0.14",
       },
       {
         "deps": [
           {
-            "nodeId": "media-typer@0.3.0",
+            "nodeId": "mime-db@1.12.0|2",
+          },
+        ],
+        "nodeId": "mime-types@2.0.14|2",
+        "pkgId": "mime-types@2.0.14",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "media-typer@0.3.0|2",
           },
           {
-            "nodeId": "mime-types@2.0.14",
+            "nodeId": "mime-types@2.0.14|1",
           },
         ],
         "nodeId": "type-is@1.5.7",
@@ -836,16 +1256,16 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "bytes@1.0.0",
+            "nodeId": "bytes@1.0.0|1",
           },
           {
-            "nodeId": "depd@1.0.1",
+            "nodeId": "depd@1.0.1|1",
           },
           {
-            "nodeId": "iconv-lite@0.4.4",
+            "nodeId": "iconv-lite@0.4.4|1",
           },
           {
-            "nodeId": "media-typer@0.3.0",
+            "nodeId": "media-typer@0.3.0|1",
           },
           {
             "nodeId": "on-finished@2.1.0",
@@ -865,33 +1285,176 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "sprintf-js@1.0.3",
+        "nodeId": "sprintf-js@1.0.3|1",
+        "pkgId": "sprintf-js@1.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "sprintf-js@1.0.3|2",
+        "pkgId": "sprintf-js@1.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "sprintf-js@1.0.3|3",
+        "pkgId": "sprintf-js@1.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "sprintf-js@1.0.3|4",
+        "pkgId": "sprintf-js@1.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "sprintf-js@1.0.3|5",
+        "pkgId": "sprintf-js@1.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "sprintf-js@1.0.3|6",
+        "pkgId": "sprintf-js@1.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "sprintf-js@1.0.3|7",
         "pkgId": "sprintf-js@1.0.3",
       },
       {
         "deps": [
           {
-            "nodeId": "sprintf-js@1.0.3",
+            "nodeId": "sprintf-js@1.0.3|1",
           },
         ],
-        "nodeId": "argparse@1.0.10",
+        "nodeId": "argparse@1.0.10|1",
+        "pkgId": "argparse@1.0.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "sprintf-js@1.0.3|2",
+          },
+        ],
+        "nodeId": "argparse@1.0.10|2",
+        "pkgId": "argparse@1.0.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "sprintf-js@1.0.3|3",
+          },
+        ],
+        "nodeId": "argparse@1.0.10|3",
+        "pkgId": "argparse@1.0.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "sprintf-js@1.0.3|5",
+          },
+        ],
+        "nodeId": "argparse@1.0.10|4",
+        "pkgId": "argparse@1.0.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "sprintf-js@1.0.3|6",
+          },
+        ],
+        "nodeId": "argparse@1.0.10|5",
+        "pkgId": "argparse@1.0.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "sprintf-js@1.0.3|7",
+          },
+        ],
+        "nodeId": "argparse@1.0.10|6",
         "pkgId": "argparse@1.0.10",
       },
       {
         "deps": [],
-        "nodeId": "esprima@4.0.1",
+        "nodeId": "esprima@4.0.1|1",
+        "pkgId": "esprima@4.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "esprima@4.0.1|2",
+        "pkgId": "esprima@4.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "esprima@4.0.1|3",
+        "pkgId": "esprima@4.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "esprima@4.0.1|4",
+        "pkgId": "esprima@4.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "esprima@4.0.1|5",
         "pkgId": "esprima@4.0.1",
       },
       {
         "deps": [
           {
-            "nodeId": "argparse@1.0.10",
+            "nodeId": "argparse@1.0.10|1",
           },
           {
-            "nodeId": "esprima@4.0.1",
+            "nodeId": "esprima@4.0.1|1",
           },
         ],
-        "nodeId": "js-yaml@3.11.0",
+        "nodeId": "js-yaml@3.11.0|1",
+        "pkgId": "js-yaml@3.11.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "argparse@1.0.10|3",
+          },
+          {
+            "nodeId": "esprima@4.0.1|2",
+          },
+        ],
+        "nodeId": "js-yaml@3.11.0|2",
+        "pkgId": "js-yaml@3.11.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "argparse@1.0.10|4",
+          },
+          {
+            "nodeId": "esprima@4.0.1|3",
+          },
+        ],
+        "nodeId": "js-yaml@3.11.0|3",
+        "pkgId": "js-yaml@3.11.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "argparse@1.0.10|5",
+          },
+          {
+            "nodeId": "esprima@4.0.1|4",
+          },
+        ],
+        "nodeId": "js-yaml@3.11.0|4",
+        "pkgId": "js-yaml@3.11.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "argparse@1.0.10|6",
+          },
+          {
+            "nodeId": "esprima@4.0.1|5",
+          },
+        ],
+        "nodeId": "js-yaml@3.11.0|5",
         "pkgId": "js-yaml@3.11.0",
       },
       {
@@ -907,7 +1470,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "js-yaml@3.11.0",
+            "nodeId": "js-yaml@3.11.0|1",
           },
           {
             "nodeId": "ports@1.1.0",
@@ -921,13 +1484,18 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "bluebird@3.5.2",
+        "nodeId": "bluebird@3.5.2|1",
+        "pkgId": "bluebird@3.5.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "bluebird@3.5.2|2",
         "pkgId": "bluebird@3.5.2",
       },
       {
         "deps": [
           {
-            "nodeId": "bluebird@3.5.2",
+            "nodeId": "bluebird@3.5.2|1",
           },
         ],
         "nodeId": "consolidate@0.14.5",
@@ -935,7 +1503,12 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "cookie@0.1.2",
+        "nodeId": "cookie@0.1.2|1",
+        "pkgId": "cookie@0.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "cookie@0.1.2|2",
         "pkgId": "cookie@0.1.2",
       },
       {
@@ -946,7 +1519,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "cookie@0.1.2",
+            "nodeId": "cookie@0.1.2|1",
           },
           {
             "nodeId": "cookie-signature@1.0.5",
@@ -992,7 +1565,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "mime-types@2.0.14",
+            "nodeId": "mime-types@2.0.14|2",
           },
           {
             "nodeId": "negotiator@0.4.9",
@@ -1003,7 +1576,32 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "escape-html@1.0.1",
+        "nodeId": "escape-html@1.0.1|1",
+        "pkgId": "escape-html@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "escape-html@1.0.1|2",
+        "pkgId": "escape-html@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "escape-html@1.0.1|3",
+        "pkgId": "escape-html@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "escape-html@1.0.1|4",
+        "pkgId": "escape-html@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "escape-html@1.0.1|5",
+        "pkgId": "escape-html@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "escape-html@1.0.1|6",
         "pkgId": "escape-html@1.0.1",
       },
       {
@@ -1012,7 +1610,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "accepts@1.1.4",
           },
           {
-            "nodeId": "escape-html@1.0.1",
+            "nodeId": "escape-html@1.0.1|1",
           },
         ],
         "nodeId": "errorhandler@1.2.0",
@@ -1020,16 +1618,58 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "mime-db@1.37.0",
+        "nodeId": "mime-db@1.37.0|1",
+        "pkgId": "mime-db@1.37.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "mime-db@1.37.0|2",
+        "pkgId": "mime-db@1.37.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "mime-db@1.37.0|3",
+        "pkgId": "mime-db@1.37.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "mime-db@1.37.0|4",
         "pkgId": "mime-db@1.37.0",
       },
       {
         "deps": [
           {
-            "nodeId": "mime-db@1.37.0",
+            "nodeId": "mime-db@1.37.0|1",
           },
         ],
-        "nodeId": "mime-types@2.1.21",
+        "nodeId": "mime-types@2.1.21|1",
+        "pkgId": "mime-types@2.1.21",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "mime-db@1.37.0|2",
+          },
+        ],
+        "nodeId": "mime-types@2.1.21|2",
+        "pkgId": "mime-types@2.1.21",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "mime-db@1.37.0|3",
+          },
+        ],
+        "nodeId": "mime-types@2.1.21|3",
+        "pkgId": "mime-types@2.1.21",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "mime-db@1.37.0|4",
+          },
+        ],
+        "nodeId": "mime-types@2.1.21|4",
         "pkgId": "mime-types@2.1.21",
       },
       {
@@ -1040,7 +1680,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "mime-types@2.1.21",
+            "nodeId": "mime-types@2.1.21|1",
           },
           {
             "nodeId": "negotiator@0.5.3",
@@ -1066,56 +1706,211 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "ms@0.7.1",
+        "nodeId": "ms@0.7.1|1",
+        "pkgId": "ms@0.7.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "ms@0.7.1|2",
+        "pkgId": "ms@0.7.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "ms@0.7.1|3",
+        "pkgId": "ms@0.7.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "ms@0.7.1|4",
+        "pkgId": "ms@0.7.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "ms@0.7.1|5",
+        "pkgId": "ms@0.7.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "ms@0.7.1|6",
+        "pkgId": "ms@0.7.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "ms@0.7.1|7",
+        "pkgId": "ms@0.7.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "ms@0.7.1|8",
+        "pkgId": "ms@0.7.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "ms@0.7.1|9",
         "pkgId": "ms@0.7.1",
       },
       {
         "deps": [
           {
-            "nodeId": "ms@0.7.1",
+            "nodeId": "ms@0.7.1|1",
           },
         ],
-        "nodeId": "debug@2.2.0",
+        "nodeId": "debug@2.2.0|1",
+        "pkgId": "debug@2.2.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ms@0.7.1|2",
+          },
+        ],
+        "nodeId": "debug@2.2.0|2",
+        "pkgId": "debug@2.2.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ms@0.7.1|3",
+          },
+        ],
+        "nodeId": "debug@2.2.0|3",
+        "pkgId": "debug@2.2.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ms@0.7.1|5",
+          },
+        ],
+        "nodeId": "debug@2.2.0|4",
+        "pkgId": "debug@2.2.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ms@0.7.1|7",
+          },
+        ],
+        "nodeId": "debug@2.2.0|5",
+        "pkgId": "debug@2.2.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ms@0.7.1|9",
+          },
+        ],
+        "nodeId": "debug@2.2.0|6",
         "pkgId": "debug@2.2.0",
       },
       {
         "deps": [],
-        "nodeId": "crc@3.2.1",
+        "nodeId": "crc@3.2.1|1",
+        "pkgId": "crc@3.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "crc@3.2.1|2",
+        "pkgId": "crc@3.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "crc@3.2.1|3",
         "pkgId": "crc@3.2.1",
       },
       {
         "deps": [
           {
-            "nodeId": "crc@3.2.1",
+            "nodeId": "crc@3.2.1|1",
           },
         ],
-        "nodeId": "etag@1.6.0",
+        "nodeId": "etag@1.6.0|1",
+        "pkgId": "etag@1.6.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "crc@3.2.1|2",
+          },
+        ],
+        "nodeId": "etag@1.6.0|2",
+        "pkgId": "etag@1.6.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "crc@3.2.1|3",
+          },
+        ],
+        "nodeId": "etag@1.6.0|3",
         "pkgId": "etag@1.6.0",
       },
       {
         "deps": [],
-        "nodeId": "ee-first@1.1.0",
+        "nodeId": "ee-first@1.1.0|1",
+        "pkgId": "ee-first@1.1.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "ee-first@1.1.0|2",
+        "pkgId": "ee-first@1.1.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "ee-first@1.1.0|3",
+        "pkgId": "ee-first@1.1.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "ee-first@1.1.0|4",
         "pkgId": "ee-first@1.1.0",
       },
       {
         "deps": [
           {
-            "nodeId": "ee-first@1.1.0",
+            "nodeId": "ee-first@1.1.0|1",
           },
         ],
-        "nodeId": "on-finished@2.2.1",
+        "nodeId": "on-finished@2.2.1|1",
         "pkgId": "on-finished@2.2.1",
       },
       {
         "deps": [
           {
-            "nodeId": "debug@2.2.0",
+            "nodeId": "ee-first@1.1.0|2",
+          },
+        ],
+        "nodeId": "on-finished@2.2.1|2",
+        "pkgId": "on-finished@2.2.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ee-first@1.1.0|3",
+          },
+        ],
+        "nodeId": "on-finished@2.2.1|3",
+        "pkgId": "on-finished@2.2.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ee-first@1.1.0|4",
+          },
+        ],
+        "nodeId": "on-finished@2.2.1|4",
+        "pkgId": "on-finished@2.2.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "debug@2.2.0|2",
           },
           {
-            "nodeId": "escape-html@1.0.1",
+            "nodeId": "escape-html@1.0.1|3",
           },
           {
-            "nodeId": "on-finished@2.2.1",
+            "nodeId": "on-finished@2.2.1|1",
           },
         ],
         "nodeId": "finalhandler@0.3.6",
@@ -1123,7 +1918,17 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "fresh@0.2.4",
+        "nodeId": "fresh@0.2.4|1",
+        "pkgId": "fresh@0.2.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "fresh@0.2.4|2",
+        "pkgId": "fresh@0.2.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "fresh@0.2.4|3",
         "pkgId": "fresh@0.2.4",
       },
       {
@@ -1133,12 +1938,27 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "methods@1.1.2",
+        "nodeId": "methods@1.1.2|1",
         "pkgId": "methods@1.1.2",
       },
       {
         "deps": [],
-        "nodeId": "parseurl@1.3.2",
+        "nodeId": "methods@1.1.2|2",
+        "pkgId": "methods@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "parseurl@1.3.2|1",
+        "pkgId": "parseurl@1.3.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "parseurl@1.3.2|2",
+        "pkgId": "parseurl@1.3.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "parseurl@1.3.2|3",
         "pkgId": "parseurl@1.3.2",
       },
       {
@@ -1175,73 +1995,134 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "range-parser@1.0.3",
+        "nodeId": "range-parser@1.0.3|1",
         "pkgId": "range-parser@1.0.3",
       },
       {
         "deps": [],
-        "nodeId": "destroy@1.0.3",
+        "nodeId": "range-parser@1.0.3|2",
+        "pkgId": "range-parser@1.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "range-parser@1.0.3|3",
+        "pkgId": "range-parser@1.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "destroy@1.0.3|1",
         "pkgId": "destroy@1.0.3",
       },
       {
         "deps": [],
-        "nodeId": "mime@1.3.4",
+        "nodeId": "destroy@1.0.3|2",
+        "pkgId": "destroy@1.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "mime@1.3.4|1",
+        "pkgId": "mime@1.3.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "mime@1.3.4|2",
         "pkgId": "mime@1.3.4",
       },
       {
         "deps": [
           {
-            "nodeId": "debug@2.2.0",
+            "nodeId": "debug@2.2.0|3",
           },
           {
-            "nodeId": "depd@1.0.1",
+            "nodeId": "depd@1.0.1|3",
           },
           {
-            "nodeId": "destroy@1.0.3",
+            "nodeId": "destroy@1.0.3|1",
           },
           {
-            "nodeId": "escape-html@1.0.1",
+            "nodeId": "escape-html@1.0.1|4",
           },
           {
-            "nodeId": "etag@1.6.0",
+            "nodeId": "etag@1.6.0|2",
           },
           {
-            "nodeId": "fresh@0.2.4",
+            "nodeId": "fresh@0.2.4|2",
           },
           {
-            "nodeId": "mime@1.3.4",
+            "nodeId": "mime@1.3.4|1",
           },
           {
-            "nodeId": "ms@0.7.1",
+            "nodeId": "ms@0.7.1|4",
           },
           {
-            "nodeId": "on-finished@2.2.1",
+            "nodeId": "on-finished@2.2.1|3",
           },
           {
-            "nodeId": "range-parser@1.0.3",
+            "nodeId": "range-parser@1.0.3|2",
           },
         ],
-        "nodeId": "send@0.12.3",
+        "nodeId": "send@0.12.3|1",
+        "pkgId": "send@0.12.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "debug@2.2.0|4",
+          },
+          {
+            "nodeId": "depd@1.0.1|4",
+          },
+          {
+            "nodeId": "destroy@1.0.3|2",
+          },
+          {
+            "nodeId": "escape-html@1.0.1|6",
+          },
+          {
+            "nodeId": "etag@1.6.0|3",
+          },
+          {
+            "nodeId": "fresh@0.2.4|3",
+          },
+          {
+            "nodeId": "mime@1.3.4|2",
+          },
+          {
+            "nodeId": "ms@0.7.1|6",
+          },
+          {
+            "nodeId": "on-finished@2.2.1|4",
+          },
+          {
+            "nodeId": "range-parser@1.0.3|3",
+          },
+        ],
+        "nodeId": "send@0.12.3|2",
         "pkgId": "send@0.12.3",
       },
       {
         "deps": [],
-        "nodeId": "utils-merge@1.0.0",
+        "nodeId": "utils-merge@1.0.0|1",
+        "pkgId": "utils-merge@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "utils-merge@1.0.0|2",
         "pkgId": "utils-merge@1.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "escape-html@1.0.1",
+            "nodeId": "escape-html@1.0.1|5",
           },
           {
-            "nodeId": "parseurl@1.3.2",
+            "nodeId": "parseurl@1.3.2|2",
           },
           {
-            "nodeId": "send@0.12.3",
+            "nodeId": "send@0.12.3|2",
           },
           {
-            "nodeId": "utils-merge@1.0.0",
+            "nodeId": "utils-merge@1.0.0|1",
           },
         ],
         "nodeId": "serve-static@1.9.3",
@@ -1250,10 +2131,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "media-typer@0.3.0",
+            "nodeId": "media-typer@0.3.0|3",
           },
           {
-            "nodeId": "mime-types@2.1.21",
+            "nodeId": "mime-types@2.1.21|2",
           },
         ],
         "nodeId": "type-is@1.6.16",
@@ -1276,40 +2157,40 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "content-type@1.0.4",
           },
           {
-            "nodeId": "cookie@0.1.2",
+            "nodeId": "cookie@0.1.2|2",
           },
           {
             "nodeId": "cookie-signature@1.0.6",
           },
           {
-            "nodeId": "debug@2.2.0",
+            "nodeId": "debug@2.2.0|1",
           },
           {
-            "nodeId": "depd@1.0.1",
+            "nodeId": "depd@1.0.1|2",
           },
           {
-            "nodeId": "escape-html@1.0.1",
+            "nodeId": "escape-html@1.0.1|2",
           },
           {
-            "nodeId": "etag@1.6.0",
+            "nodeId": "etag@1.6.0|1",
           },
           {
             "nodeId": "finalhandler@0.3.6",
           },
           {
-            "nodeId": "fresh@0.2.4",
+            "nodeId": "fresh@0.2.4|1",
           },
           {
             "nodeId": "merge-descriptors@1.0.0",
           },
           {
-            "nodeId": "methods@1.1.2",
+            "nodeId": "methods@1.1.2|1",
           },
           {
-            "nodeId": "on-finished@2.2.1",
+            "nodeId": "on-finished@2.2.1|2",
           },
           {
-            "nodeId": "parseurl@1.3.2",
+            "nodeId": "parseurl@1.3.2|1",
           },
           {
             "nodeId": "path-to-regexp@0.1.3",
@@ -1321,10 +2202,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "qs@2.4.2",
           },
           {
-            "nodeId": "range-parser@1.0.3",
+            "nodeId": "range-parser@1.0.3|1",
           },
           {
-            "nodeId": "send@0.12.3",
+            "nodeId": "send@0.12.3|1",
           },
           {
             "nodeId": "serve-static@1.9.3",
@@ -1333,7 +2214,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "type-is@1.6.16",
           },
           {
-            "nodeId": "utils-merge@1.0.0",
+            "nodeId": "utils-merge@1.0.0|2",
           },
           {
             "nodeId": "vary@1.0.1",
@@ -1344,40 +2225,221 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "core-util-is@1.0.2",
+        "nodeId": "core-util-is@1.0.2|1",
         "pkgId": "core-util-is@1.0.2",
       },
       {
         "deps": [],
-        "nodeId": "inherits@2.0.3",
+        "nodeId": "core-util-is@1.0.2|2",
+        "pkgId": "core-util-is@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "core-util-is@1.0.2|3",
+        "pkgId": "core-util-is@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "core-util-is@1.0.2|4",
+        "pkgId": "core-util-is@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "core-util-is@1.0.2|5",
+        "pkgId": "core-util-is@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "core-util-is@1.0.2|6",
+        "pkgId": "core-util-is@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "core-util-is@1.0.2|7",
+        "pkgId": "core-util-is@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "core-util-is@1.0.2|8",
+        "pkgId": "core-util-is@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "core-util-is@1.0.2|9",
+        "pkgId": "core-util-is@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|1",
         "pkgId": "inherits@2.0.3",
       },
       {
         "deps": [],
-        "nodeId": "isarray@0.0.1",
+        "nodeId": "inherits@2.0.3|2",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|3",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|4",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|5",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|6",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|7",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|8",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|9",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|10",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|11",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|12",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|13",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.3|14",
+        "pkgId": "inherits@2.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "isarray@0.0.1|1",
         "pkgId": "isarray@0.0.1",
       },
       {
         "deps": [],
-        "nodeId": "string_decoder@0.10.31",
+        "nodeId": "isarray@0.0.1|2",
+        "pkgId": "isarray@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "isarray@0.0.1|3",
+        "pkgId": "isarray@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "isarray@0.0.1|4",
+        "pkgId": "isarray@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "isarray@0.0.1|5",
+        "pkgId": "isarray@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "string_decoder@0.10.31|1",
+        "pkgId": "string_decoder@0.10.31",
+      },
+      {
+        "deps": [],
+        "nodeId": "string_decoder@0.10.31|2",
+        "pkgId": "string_decoder@0.10.31",
+      },
+      {
+        "deps": [],
+        "nodeId": "string_decoder@0.10.31|3",
+        "pkgId": "string_decoder@0.10.31",
+      },
+      {
+        "deps": [],
+        "nodeId": "string_decoder@0.10.31|4",
+        "pkgId": "string_decoder@0.10.31",
+      },
+      {
+        "deps": [],
+        "nodeId": "string_decoder@0.10.31|5",
         "pkgId": "string_decoder@0.10.31",
       },
       {
         "deps": [
           {
-            "nodeId": "core-util-is@1.0.2",
+            "nodeId": "core-util-is@1.0.2|1",
           },
           {
-            "nodeId": "inherits@2.0.3",
+            "nodeId": "inherits@2.0.3|1",
           },
           {
-            "nodeId": "isarray@0.0.1",
+            "nodeId": "isarray@0.0.1|1",
           },
           {
-            "nodeId": "string_decoder@0.10.31",
+            "nodeId": "string_decoder@0.10.31|1",
           },
         ],
-        "nodeId": "readable-stream@1.1.14",
+        "nodeId": "readable-stream@1.1.14|1",
+        "pkgId": "readable-stream@1.1.14",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "core-util-is@1.0.2|2",
+          },
+          {
+            "nodeId": "inherits@2.0.3|2",
+          },
+          {
+            "nodeId": "isarray@0.0.1|2",
+          },
+          {
+            "nodeId": "string_decoder@0.10.31|2",
+          },
+        ],
+        "nodeId": "readable-stream@1.1.14|2",
+        "pkgId": "readable-stream@1.1.14",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "core-util-is@1.0.2|7",
+          },
+          {
+            "nodeId": "inherits@2.0.3|10",
+          },
+          {
+            "nodeId": "isarray@0.0.1|5",
+          },
+          {
+            "nodeId": "string_decoder@0.10.31|5",
+          },
+        ],
+        "nodeId": "readable-stream@1.1.14|3",
         "pkgId": "readable-stream@1.1.14",
       },
       {
@@ -1388,7 +2450,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "readable-stream@1.1.14",
+            "nodeId": "readable-stream@1.1.14|1",
           },
           {
             "nodeId": "streamsearch@0.1.2",
@@ -1403,7 +2465,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "dicer@0.2.5",
           },
           {
-            "nodeId": "readable-stream@1.1.14",
+            "nodeId": "readable-stream@1.1.14|2",
           },
         ],
         "nodeId": "busboy@0.2.14",
@@ -1420,13 +2482,18 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "graceful-fs@4.1.11",
+        "nodeId": "graceful-fs@4.1.11|1",
+        "pkgId": "graceful-fs@4.1.11",
+      },
+      {
+        "deps": [],
+        "nodeId": "graceful-fs@4.1.11|2",
         "pkgId": "graceful-fs@4.1.11",
       },
       {
         "deps": [
           {
-            "nodeId": "graceful-fs@4.1.11",
+            "nodeId": "graceful-fs@4.1.11|2",
           },
         ],
         "nodeId": "jsonfile@2.4.0",
@@ -1434,99 +2501,428 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "fs.realpath@1.0.0",
+        "nodeId": "fs.realpath@1.0.0|1",
         "pkgId": "fs.realpath@1.0.0",
       },
       {
         "deps": [],
-        "nodeId": "wrappy@1.0.2",
+        "nodeId": "fs.realpath@1.0.0|2",
+        "pkgId": "fs.realpath@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "fs.realpath@1.0.0|3",
+        "pkgId": "fs.realpath@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|1",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|2",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|3",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|4",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|5",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|6",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|7",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|8",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|9",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|10",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|11",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|12",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|13",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|14",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|15",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|16",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|17",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|18",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|19",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|20",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|21",
+        "pkgId": "wrappy@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "wrappy@1.0.2|22",
         "pkgId": "wrappy@1.0.2",
       },
       {
         "deps": [
           {
-            "nodeId": "wrappy@1.0.2",
+            "nodeId": "wrappy@1.0.2|1",
           },
         ],
-        "nodeId": "once@1.4.0",
+        "nodeId": "once@1.4.0|1",
         "pkgId": "once@1.4.0",
       },
       {
         "deps": [
           {
-            "nodeId": "once@1.4.0",
-          },
-          {
-            "nodeId": "wrappy@1.0.2",
+            "nodeId": "wrappy@1.0.2|3",
           },
         ],
-        "nodeId": "inflight@1.0.6",
+        "nodeId": "once@1.4.0|2",
+        "pkgId": "once@1.4.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|4",
+          },
+        ],
+        "nodeId": "once@1.4.0|3",
+        "pkgId": "once@1.4.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|6",
+          },
+        ],
+        "nodeId": "once@1.4.0|4",
+        "pkgId": "once@1.4.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|20",
+          },
+        ],
+        "nodeId": "once@1.4.0|5",
+        "pkgId": "once@1.4.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|22",
+          },
+        ],
+        "nodeId": "once@1.4.0|6",
+        "pkgId": "once@1.4.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "once@1.4.0|1",
+          },
+          {
+            "nodeId": "wrappy@1.0.2|2",
+          },
+        ],
+        "nodeId": "inflight@1.0.6|1",
+        "pkgId": "inflight@1.0.6",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "once@1.4.0|3",
+          },
+          {
+            "nodeId": "wrappy@1.0.2|5",
+          },
+        ],
+        "nodeId": "inflight@1.0.6|2",
+        "pkgId": "inflight@1.0.6",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "once@1.4.0|5",
+          },
+          {
+            "nodeId": "wrappy@1.0.2|21",
+          },
+        ],
+        "nodeId": "inflight@1.0.6|3",
         "pkgId": "inflight@1.0.6",
       },
       {
         "deps": [],
-        "nodeId": "balanced-match@1.0.0",
+        "nodeId": "balanced-match@1.0.0|1",
         "pkgId": "balanced-match@1.0.0",
       },
       {
         "deps": [],
-        "nodeId": "concat-map@0.0.1",
+        "nodeId": "balanced-match@1.0.0|2",
+        "pkgId": "balanced-match@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "balanced-match@1.0.0|3",
+        "pkgId": "balanced-match@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "concat-map@0.0.1|1",
+        "pkgId": "concat-map@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "concat-map@0.0.1|2",
+        "pkgId": "concat-map@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "concat-map@0.0.1|3",
+        "pkgId": "concat-map@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "concat-map@0.0.1|4",
+        "pkgId": "concat-map@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "concat-map@0.0.1|5",
+        "pkgId": "concat-map@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "concat-map@0.0.1|6",
+        "pkgId": "concat-map@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "concat-map@0.0.1|7",
+        "pkgId": "concat-map@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "concat-map@0.0.1|8",
         "pkgId": "concat-map@0.0.1",
       },
       {
         "deps": [
           {
-            "nodeId": "balanced-match@1.0.0",
+            "nodeId": "balanced-match@1.0.0|1",
           },
           {
-            "nodeId": "concat-map@0.0.1",
+            "nodeId": "concat-map@0.0.1|1",
           },
         ],
-        "nodeId": "brace-expansion@1.1.11",
+        "nodeId": "brace-expansion@1.1.11|1",
         "pkgId": "brace-expansion@1.1.11",
       },
       {
         "deps": [
           {
-            "nodeId": "brace-expansion@1.1.11",
+            "nodeId": "balanced-match@1.0.0|2",
+          },
+          {
+            "nodeId": "concat-map@0.0.1|2",
           },
         ],
-        "nodeId": "minimatch@3.0.4",
+        "nodeId": "brace-expansion@1.1.11|2",
+        "pkgId": "brace-expansion@1.1.11",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "balanced-match@1.0.0|3",
+          },
+          {
+            "nodeId": "concat-map@0.0.1|8",
+          },
+        ],
+        "nodeId": "brace-expansion@1.1.11|3",
+        "pkgId": "brace-expansion@1.1.11",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "brace-expansion@1.1.11|1",
+          },
+        ],
+        "nodeId": "minimatch@3.0.4|1",
+        "pkgId": "minimatch@3.0.4",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "brace-expansion@1.1.11|2",
+          },
+        ],
+        "nodeId": "minimatch@3.0.4|2",
+        "pkgId": "minimatch@3.0.4",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "brace-expansion@1.1.11|3",
+          },
+        ],
+        "nodeId": "minimatch@3.0.4|3",
         "pkgId": "minimatch@3.0.4",
       },
       {
         "deps": [],
-        "nodeId": "path-is-absolute@1.0.1",
+        "nodeId": "path-is-absolute@1.0.1|1",
+        "pkgId": "path-is-absolute@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "path-is-absolute@1.0.1|2",
+        "pkgId": "path-is-absolute@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "path-is-absolute@1.0.1|3",
         "pkgId": "path-is-absolute@1.0.1",
       },
       {
         "deps": [
           {
-            "nodeId": "fs.realpath@1.0.0",
+            "nodeId": "fs.realpath@1.0.0|1",
           },
           {
-            "nodeId": "inflight@1.0.6",
+            "nodeId": "inflight@1.0.6|1",
           },
           {
-            "nodeId": "inherits@2.0.3",
+            "nodeId": "inherits@2.0.3|3",
           },
           {
-            "nodeId": "minimatch@3.0.4",
+            "nodeId": "minimatch@3.0.4|1",
           },
           {
-            "nodeId": "once@1.4.0",
+            "nodeId": "once@1.4.0|2",
           },
           {
-            "nodeId": "path-is-absolute@1.0.1",
+            "nodeId": "path-is-absolute@1.0.1|1",
           },
         ],
-        "nodeId": "glob@7.1.3",
+        "nodeId": "glob@7.1.3|1",
         "pkgId": "glob@7.1.3",
       },
       {
         "deps": [
           {
-            "nodeId": "glob@7.1.3",
+            "nodeId": "fs.realpath@1.0.0|2",
+          },
+          {
+            "nodeId": "inflight@1.0.6|2",
+          },
+          {
+            "nodeId": "inherits@2.0.3|7",
+          },
+          {
+            "nodeId": "minimatch@3.0.4|2",
+          },
+          {
+            "nodeId": "once@1.4.0|4",
+          },
+          {
+            "nodeId": "path-is-absolute@1.0.1|2",
+          },
+        ],
+        "nodeId": "glob@7.1.3|2",
+        "pkgId": "glob@7.1.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "fs.realpath@1.0.0|3",
+          },
+          {
+            "nodeId": "inflight@1.0.6|3",
+          },
+          {
+            "nodeId": "inherits@2.0.3|9",
+          },
+          {
+            "nodeId": "minimatch@3.0.4|3",
+          },
+          {
+            "nodeId": "once@1.4.0|6",
+          },
+          {
+            "nodeId": "path-is-absolute@1.0.1|3",
+          },
+        ],
+        "nodeId": "glob@7.1.3|3",
+        "pkgId": "glob@7.1.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "glob@7.1.3|1",
           },
         ],
         "nodeId": "rimraf@2.6.2",
@@ -1535,7 +2931,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "graceful-fs@4.1.11",
+            "nodeId": "graceful-fs@4.1.11|1",
           },
           {
             "nodeId": "jsonfile@2.4.0",
@@ -1598,13 +2994,18 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "ms@2.0.0",
+        "nodeId": "ms@2.0.0|1",
+        "pkgId": "ms@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "ms@2.0.0|2",
         "pkgId": "ms@2.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "ms@2.0.0",
+            "nodeId": "ms@2.0.0|1",
           },
         ],
         "nodeId": "debug@3.1.0",
@@ -1621,10 +3022,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "debug@3.1.0",
           },
           {
-            "nodeId": "methods@1.1.2",
+            "nodeId": "methods@1.1.2|2",
           },
           {
-            "nodeId": "parseurl@1.3.2",
+            "nodeId": "parseurl@1.3.2|3",
           },
           {
             "nodeId": "vary@1.1.2",
@@ -1640,12 +3041,22 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "async@0.9.0",
+        "nodeId": "async@0.9.0|1",
         "pkgId": "async@0.9.0",
       },
       {
         "deps": [],
-        "nodeId": "bson@0.4.23",
+        "nodeId": "async@0.9.0|2",
+        "pkgId": "async@0.9.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "bson@0.4.23|1",
+        "pkgId": "bson@0.4.23",
+      },
+      {
+        "deps": [],
+        "nodeId": "bson@0.4.23|2",
         "pkgId": "bson@0.4.23",
       },
       {
@@ -1680,7 +3091,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "bson@0.4.23",
+            "nodeId": "bson@0.4.23|2",
           },
           {
             "nodeId": "kerberos@0.0.24",
@@ -1692,16 +3103,16 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "core-util-is@1.0.2",
+            "nodeId": "core-util-is@1.0.2|3",
           },
           {
-            "nodeId": "inherits@2.0.3",
+            "nodeId": "inherits@2.0.3|4",
           },
           {
-            "nodeId": "isarray@0.0.1",
+            "nodeId": "isarray@0.0.1|3",
           },
           {
-            "nodeId": "string_decoder@0.10.31",
+            "nodeId": "string_decoder@0.10.31|3",
           },
         ],
         "nodeId": "readable-stream@1.0.31",
@@ -1739,12 +3150,22 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "regexp-clone@0.0.1",
+        "nodeId": "regexp-clone@0.0.1|1",
         "pkgId": "regexp-clone@0.0.1",
       },
       {
         "deps": [],
-        "nodeId": "sliced@0.0.5",
+        "nodeId": "regexp-clone@0.0.1|2",
+        "pkgId": "regexp-clone@0.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "sliced@0.0.5|1",
+        "pkgId": "sliced@0.0.5",
+      },
+      {
+        "deps": [],
+        "nodeId": "sliced@0.0.5|2",
         "pkgId": "sliced@0.0.5",
       },
       {
@@ -1753,13 +3174,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "bluebird@2.9.26",
           },
           {
-            "nodeId": "debug@2.2.0",
+            "nodeId": "debug@2.2.0|5",
           },
           {
-            "nodeId": "regexp-clone@0.0.1",
+            "nodeId": "regexp-clone@0.0.1|1",
           },
           {
-            "nodeId": "sliced@0.0.5",
+            "nodeId": "sliced@0.0.5|1",
           },
         ],
         "nodeId": "mquery@1.6.3",
@@ -1773,10 +3194,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "async@0.9.0",
+            "nodeId": "async@0.9.0|1",
           },
           {
-            "nodeId": "bson@0.4.23",
+            "nodeId": "bson@0.4.23|1",
           },
           {
             "nodeId": "hooks-fixed@1.1.0",
@@ -1797,16 +3218,16 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "mquery@1.6.3",
           },
           {
-            "nodeId": "ms@0.7.1",
+            "nodeId": "ms@0.7.1|8",
           },
           {
             "nodeId": "muri@1.0.0",
           },
           {
-            "nodeId": "regexp-clone@0.0.1",
+            "nodeId": "regexp-clone@0.0.1|2",
           },
           {
-            "nodeId": "sliced@0.0.5",
+            "nodeId": "sliced@0.0.5|2",
           },
         ],
         "nodeId": "mongoose@4.2.4",
@@ -1814,13 +3235,43 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "safe-buffer@5.1.2",
+        "nodeId": "safe-buffer@5.1.2|1",
+        "pkgId": "safe-buffer@5.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "safe-buffer@5.1.2|2",
+        "pkgId": "safe-buffer@5.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "safe-buffer@5.1.2|3",
+        "pkgId": "safe-buffer@5.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "safe-buffer@5.1.2|4",
+        "pkgId": "safe-buffer@5.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "safe-buffer@5.1.2|5",
+        "pkgId": "safe-buffer@5.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "safe-buffer@5.1.2|6",
+        "pkgId": "safe-buffer@5.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "safe-buffer@5.1.2|7",
         "pkgId": "safe-buffer@5.1.2",
       },
       {
         "deps": [
           {
-            "nodeId": "safe-buffer@5.1.2",
+            "nodeId": "safe-buffer@5.1.2|1",
           },
         ],
         "nodeId": "basic-auth@2.0.1",
@@ -1829,7 +3280,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "ms@2.0.0",
+            "nodeId": "ms@2.0.0|2",
           },
         ],
         "nodeId": "debug@2.6.9",
@@ -2012,7 +3463,12 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "mime@1.2.11",
+        "nodeId": "mime@1.2.11|1",
+        "pkgId": "mime@1.2.11",
+      },
+      {
+        "deps": [],
+        "nodeId": "mime@1.2.11|2",
         "pkgId": "mime@1.2.11",
       },
       {
@@ -2032,7 +3488,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "graceful-fs@1.2.3",
           },
           {
-            "nodeId": "mime@1.2.11",
+            "nodeId": "mime@1.2.11|1",
           },
           {
             "nodeId": "negotiator@0.2.8",
@@ -2059,16 +3515,16 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "core-util-is@1.0.2",
+            "nodeId": "core-util-is@1.0.2|4",
           },
           {
-            "nodeId": "inherits@2.0.3",
+            "nodeId": "inherits@2.0.3|5",
           },
           {
-            "nodeId": "isarray@0.0.1",
+            "nodeId": "isarray@0.0.1|4",
           },
           {
-            "nodeId": "string_decoder@0.10.31",
+            "nodeId": "string_decoder@0.10.31|4",
           },
         ],
         "nodeId": "readable-stream@1.0.34",
@@ -2110,13 +3566,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "async@0.9.0",
+            "nodeId": "async@0.9.0|2",
           },
           {
             "nodeId": "combined-stream@0.0.7",
           },
           {
-            "nodeId": "mime@1.2.11",
+            "nodeId": "mime@1.2.11|2",
           },
         ],
         "nodeId": "form-data@0.1.4",
@@ -2124,22 +3580,46 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "hoek@0.9.1",
+        "nodeId": "hoek@0.9.1|1",
+        "pkgId": "hoek@0.9.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "hoek@0.9.1|2",
+        "pkgId": "hoek@0.9.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "hoek@0.9.1|3",
+        "pkgId": "hoek@0.9.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "hoek@0.9.1|4",
         "pkgId": "hoek@0.9.1",
       },
       {
         "deps": [
           {
-            "nodeId": "hoek@0.9.1",
+            "nodeId": "hoek@0.9.1|1",
           },
         ],
-        "nodeId": "boom@0.4.2",
+        "nodeId": "boom@0.4.2|1",
         "pkgId": "boom@0.4.2",
       },
       {
         "deps": [
           {
-            "nodeId": "boom@0.4.2",
+            "nodeId": "hoek@0.9.1|2",
+          },
+        ],
+        "nodeId": "boom@0.4.2|2",
+        "pkgId": "boom@0.4.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "boom@0.4.2|2",
           },
         ],
         "nodeId": "cryptiles@0.2.2",
@@ -2148,7 +3628,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "hoek@0.9.1",
+            "nodeId": "hoek@0.9.1|4",
           },
         ],
         "nodeId": "sntp@0.2.4",
@@ -2157,13 +3637,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "boom@0.4.2",
+            "nodeId": "boom@0.4.2|1",
           },
           {
             "nodeId": "cryptiles@0.2.2",
           },
           {
-            "nodeId": "hoek@0.9.1",
+            "nodeId": "hoek@0.9.1|3",
           },
           {
             "nodeId": "sntp@0.2.4",
@@ -2204,7 +3684,12 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "json-stringify-safe@5.0.1",
+        "nodeId": "json-stringify-safe@5.0.1|1",
+        "pkgId": "json-stringify-safe@5.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "json-stringify-safe@5.0.1|2",
         "pkgId": "json-stringify-safe@5.0.1",
       },
       {
@@ -2229,7 +3714,12 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "stringstream@0.0.6",
+        "nodeId": "stringstream@0.0.6|1",
+        "pkgId": "stringstream@0.0.6",
+      },
+      {
+        "deps": [],
+        "nodeId": "stringstream@0.0.6|2",
         "pkgId": "stringstream@0.0.6",
       },
       {
@@ -2239,7 +3729,17 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "punycode@1.4.1",
+        "nodeId": "punycode@1.4.1|1",
+        "pkgId": "punycode@1.4.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "punycode@1.4.1|2",
+        "pkgId": "punycode@1.4.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "punycode@1.4.1|3",
         "pkgId": "punycode@1.4.1",
       },
       {
@@ -2248,7 +3748,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "psl@1.1.29",
           },
           {
-            "nodeId": "punycode@1.4.1",
+            "nodeId": "punycode@1.4.1|1",
           },
         ],
         "nodeId": "tough-cookie@2.4.3",
@@ -2256,7 +3756,12 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "tunnel-agent@0.4.3",
+        "nodeId": "tunnel-agent@0.4.3|1",
+        "pkgId": "tunnel-agent@0.4.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "tunnel-agent@0.4.3|2",
         "pkgId": "tunnel-agent@0.4.3",
       },
       {
@@ -2283,7 +3788,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "http-signature@0.10.1",
           },
           {
-            "nodeId": "json-stringify-safe@5.0.1",
+            "nodeId": "json-stringify-safe@5.0.1|1",
           },
           {
             "nodeId": "mime-types@1.0.2",
@@ -2298,13 +3803,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "qs@1.2.2",
           },
           {
-            "nodeId": "stringstream@0.0.6",
+            "nodeId": "stringstream@0.0.6|1",
           },
           {
             "nodeId": "tough-cookie@2.4.3",
           },
           {
-            "nodeId": "tunnel-agent@0.4.3",
+            "nodeId": "tunnel-agent@0.4.3|1",
           },
         ],
         "nodeId": "request@2.42.0",
@@ -2327,13 +3832,23 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "through@2.3.8",
+        "nodeId": "through@2.3.8|1",
+        "pkgId": "through@2.3.8",
+      },
+      {
+        "deps": [],
+        "nodeId": "through@2.3.8|2",
+        "pkgId": "through@2.3.8",
+      },
+      {
+        "deps": [],
+        "nodeId": "through@2.3.8|3",
         "pkgId": "through@2.3.8",
       },
       {
         "deps": [
           {
-            "nodeId": "through@2.3.8",
+            "nodeId": "through@2.3.8|1",
           },
         ],
         "nodeId": "resumer@0.0.0",
@@ -2342,7 +3857,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "through@2.3.8",
+            "nodeId": "through@2.3.8|2",
           },
         ],
         "nodeId": "split@0.2.10",
@@ -2371,7 +3886,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "defined@0.0.0",
           },
           {
-            "nodeId": "inherits@2.0.3",
+            "nodeId": "inherits@2.0.3|6",
           },
           {
             "nodeId": "jsonify@0.0.0",
@@ -2386,7 +3901,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "stream-combiner@0.0.4",
           },
           {
-            "nodeId": "through@2.3.8",
+            "nodeId": "through@2.3.8|3",
           },
         ],
         "nodeId": "tape@2.3.0",
@@ -2421,7 +3936,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "argparse@1.0.10",
+            "nodeId": "argparse@1.0.10|2",
           },
           {
             "nodeId": "esprima@2.7.3",
@@ -2436,7 +3951,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "argparse@1.0.7",
           },
           {
-            "nodeId": "esprima@2.7.2",
+            "nodeId": "esprima@2.7.2|3",
           },
         ],
         "nodeId": "js-yaml@3.6.1|2",
@@ -2474,16 +3989,30 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "delayed-stream@1.0.0",
+        "nodeId": "delayed-stream@1.0.0|1",
+        "pkgId": "delayed-stream@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "delayed-stream@1.0.0|2",
         "pkgId": "delayed-stream@1.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "delayed-stream@1.0.0",
+            "nodeId": "delayed-stream@1.0.0|1",
           },
         ],
-        "nodeId": "combined-stream@1.0.7",
+        "nodeId": "combined-stream@1.0.7|1",
+        "pkgId": "combined-stream@1.0.7",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "delayed-stream@1.0.0|2",
+          },
+        ],
+        "nodeId": "combined-stream@1.0.7|2",
         "pkgId": "combined-stream@1.0.7",
       },
       {
@@ -2507,10 +4036,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "asynckit@0.4.0",
           },
           {
-            "nodeId": "combined-stream@1.0.7",
+            "nodeId": "combined-stream@1.0.7|2",
           },
           {
-            "nodeId": "mime-types@2.1.21",
+            "nodeId": "mime-types@2.1.21|3",
           },
         ],
         "nodeId": "form-data@2.1.4",
@@ -2523,18 +4052,33 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "escape-string-regexp@1.0.5",
+        "nodeId": "escape-string-regexp@1.0.5|1",
         "pkgId": "escape-string-regexp@1.0.5",
       },
       {
         "deps": [],
-        "nodeId": "ansi-regex@2.1.1",
+        "nodeId": "escape-string-regexp@1.0.5|2",
+        "pkgId": "escape-string-regexp@1.0.5",
+      },
+      {
+        "deps": [],
+        "nodeId": "ansi-regex@2.1.1|1",
+        "pkgId": "ansi-regex@2.1.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "ansi-regex@2.1.1|2",
+        "pkgId": "ansi-regex@2.1.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "ansi-regex@2.1.1|3",
         "pkgId": "ansi-regex@2.1.1",
       },
       {
         "deps": [
           {
-            "nodeId": "ansi-regex@2.1.1",
+            "nodeId": "ansi-regex@2.1.1|1",
           },
         ],
         "nodeId": "has-ansi@2.0.0",
@@ -2543,7 +4087,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "ansi-regex@2.1.1",
+            "nodeId": "ansi-regex@2.1.1|2",
           },
         ],
         "nodeId": "strip-ansi@3.0.1|1",
@@ -2552,10 +4096,46 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "ansi-regex@2.0.0",
+            "nodeId": "ansi-regex@2.0.0|1",
           },
         ],
         "nodeId": "strip-ansi@3.0.1|2",
+        "pkgId": "strip-ansi@3.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ansi-regex@2.0.0|2",
+          },
+        ],
+        "nodeId": "strip-ansi@3.0.1|3",
+        "pkgId": "strip-ansi@3.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ansi-regex@2.0.0|3",
+          },
+        ],
+        "nodeId": "strip-ansi@3.0.1|4",
+        "pkgId": "strip-ansi@3.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ansi-regex@2.0.0|4",
+          },
+        ],
+        "nodeId": "strip-ansi@3.0.1|5",
+        "pkgId": "strip-ansi@3.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "ansi-regex@2.1.1|3",
+          },
+        ],
+        "nodeId": "strip-ansi@3.0.1|6",
         "pkgId": "strip-ansi@3.0.1",
       },
       {
@@ -2569,7 +4149,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "ansi-styles@2.2.1",
           },
           {
-            "nodeId": "escape-string-regexp@1.0.5",
+            "nodeId": "escape-string-regexp@1.0.5|1",
           },
           {
             "nodeId": "has-ansi@2.0.0",
@@ -2591,13 +4171,18 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "is-property@1.0.2",
+        "nodeId": "is-property@1.0.2|1",
+        "pkgId": "is-property@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-property@1.0.2|2",
         "pkgId": "is-property@1.0.2",
       },
       {
         "deps": [
           {
-            "nodeId": "is-property@1.0.2",
+            "nodeId": "is-property@1.0.2|1",
           },
         ],
         "nodeId": "generate-function@2.3.1",
@@ -2606,7 +4191,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "is-property@1.0.2",
+            "nodeId": "is-property@1.0.2|2",
           },
         ],
         "nodeId": "generate-object-property@1.2.0",
@@ -2650,16 +4235,254 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "pinkie@2.0.4",
+        "nodeId": "pinkie@2.0.4|1",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|2",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|3",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|4",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|5",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|6",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|7",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|8",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|9",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|10",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|11",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|12",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|13",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|14",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|15",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|16",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|17",
+        "pkgId": "pinkie@2.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "pinkie@2.0.4|18",
         "pkgId": "pinkie@2.0.4",
       },
       {
         "deps": [
           {
-            "nodeId": "pinkie@2.0.4",
+            "nodeId": "pinkie@2.0.4|1",
           },
         ],
-        "nodeId": "pinkie-promise@2.0.1",
+        "nodeId": "pinkie-promise@2.0.1|1",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|2",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|2",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|3",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|3",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|4",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|4",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|5",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|5",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|6",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|6",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|7",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|7",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|8",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|8",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|9",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|9",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|10",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|10",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|11",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|11",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|12",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|12",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|13",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|13",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|14",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|14",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|15",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|15",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|16",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|16",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|17",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|17",
+        "pkgId": "pinkie-promise@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie@2.0.4|18",
+          },
+        ],
+        "nodeId": "pinkie-promise@2.0.1|18",
         "pkgId": "pinkie-promise@2.0.1",
       },
       {
@@ -2674,7 +4497,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "is-my-json-valid@2.19.0",
           },
           {
-            "nodeId": "pinkie-promise@2.0.1",
+            "nodeId": "pinkie-promise@2.0.1|1",
           },
         ],
         "nodeId": "har-validator@2.0.6",
@@ -2682,22 +4505,46 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "hoek@2.16.3",
+        "nodeId": "hoek@2.16.3|1",
+        "pkgId": "hoek@2.16.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "hoek@2.16.3|2",
+        "pkgId": "hoek@2.16.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "hoek@2.16.3|3",
+        "pkgId": "hoek@2.16.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "hoek@2.16.3|4",
         "pkgId": "hoek@2.16.3",
       },
       {
         "deps": [
           {
-            "nodeId": "hoek@2.16.3",
+            "nodeId": "hoek@2.16.3|1",
           },
         ],
-        "nodeId": "boom@2.10.1",
+        "nodeId": "boom@2.10.1|1",
         "pkgId": "boom@2.10.1",
       },
       {
         "deps": [
           {
-            "nodeId": "boom@2.10.1",
+            "nodeId": "hoek@2.16.3|2",
+          },
+        ],
+        "nodeId": "boom@2.10.1|2",
+        "pkgId": "boom@2.10.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "boom@2.10.1|2",
           },
         ],
         "nodeId": "cryptiles@2.0.5",
@@ -2706,7 +4553,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "hoek@2.16.3",
+            "nodeId": "hoek@2.16.3|4",
           },
         ],
         "nodeId": "sntp@1.0.9",
@@ -2715,13 +4562,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "boom@2.10.1",
+            "nodeId": "boom@2.10.1|1",
           },
           {
             "nodeId": "cryptiles@2.0.5",
           },
           {
-            "nodeId": "hoek@2.16.3",
+            "nodeId": "hoek@2.16.3|3",
           },
           {
             "nodeId": "sntp@1.0.9",
@@ -2737,12 +4584,37 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "assert-plus@1.0.0",
+        "nodeId": "assert-plus@1.0.0|1",
         "pkgId": "assert-plus@1.0.0",
       },
       {
         "deps": [],
-        "nodeId": "extsprintf@1.3.0",
+        "nodeId": "assert-plus@1.0.0|2",
+        "pkgId": "assert-plus@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "assert-plus@1.0.0|3",
+        "pkgId": "assert-plus@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "assert-plus@1.0.0|4",
+        "pkgId": "assert-plus@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "assert-plus@1.0.0|5",
+        "pkgId": "assert-plus@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "extsprintf@1.3.0|1",
+        "pkgId": "extsprintf@1.3.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "extsprintf@1.3.0|2",
         "pkgId": "extsprintf@1.3.0",
       },
       {
@@ -2753,13 +4625,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "assert-plus@1.0.0",
+            "nodeId": "assert-plus@1.0.0|2",
           },
           {
-            "nodeId": "core-util-is@1.0.2",
+            "nodeId": "core-util-is@1.0.2|5",
           },
           {
-            "nodeId": "extsprintf@1.3.0",
+            "nodeId": "extsprintf@1.3.0|2",
           },
         ],
         "nodeId": "verror@1.10.0",
@@ -2768,10 +4640,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "assert-plus@1.0.0",
+            "nodeId": "assert-plus@1.0.0|1",
           },
           {
-            "nodeId": "extsprintf@1.3.0",
+            "nodeId": "extsprintf@1.3.0|1",
           },
           {
             "nodeId": "json-schema@0.2.3",
@@ -2785,13 +4657,23 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "safer-buffer@2.1.2",
+        "nodeId": "safer-buffer@2.1.2|1",
+        "pkgId": "safer-buffer@2.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "safer-buffer@2.1.2|2",
+        "pkgId": "safer-buffer@2.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "safer-buffer@2.1.2|3",
         "pkgId": "safer-buffer@2.1.2",
       },
       {
         "deps": [
           {
-            "nodeId": "safer-buffer@2.1.2",
+            "nodeId": "safer-buffer@2.1.2|1",
           },
         ],
         "nodeId": "asn1@0.2.4",
@@ -2799,13 +4681,18 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "tweetnacl@0.14.5",
+        "nodeId": "tweetnacl@0.14.5|1",
+        "pkgId": "tweetnacl@0.14.5",
+      },
+      {
+        "deps": [],
+        "nodeId": "tweetnacl@0.14.5|2",
         "pkgId": "tweetnacl@0.14.5",
       },
       {
         "deps": [
           {
-            "nodeId": "tweetnacl@0.14.5",
+            "nodeId": "tweetnacl@0.14.5|1",
           },
         ],
         "nodeId": "bcrypt-pbkdf@1.0.2",
@@ -2814,7 +4701,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "assert-plus@1.0.0",
+            "nodeId": "assert-plus@1.0.0|4",
           },
         ],
         "nodeId": "dashdash@1.14.1",
@@ -2822,16 +4709,21 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "jsbn@0.1.1",
+        "nodeId": "jsbn@0.1.1|1",
+        "pkgId": "jsbn@0.1.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "jsbn@0.1.1|2",
         "pkgId": "jsbn@0.1.1",
       },
       {
         "deps": [
           {
-            "nodeId": "jsbn@0.1.1",
+            "nodeId": "jsbn@0.1.1|1",
           },
           {
-            "nodeId": "safer-buffer@2.1.2",
+            "nodeId": "safer-buffer@2.1.2|2",
           },
         ],
         "nodeId": "ecc-jsbn@0.1.2",
@@ -2840,7 +4732,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "assert-plus@1.0.0",
+            "nodeId": "assert-plus@1.0.0|5",
           },
         ],
         "nodeId": "getpass@0.1.7",
@@ -2852,7 +4744,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "asn1@0.2.4",
           },
           {
-            "nodeId": "assert-plus@1.0.0",
+            "nodeId": "assert-plus@1.0.0|3",
           },
           {
             "nodeId": "bcrypt-pbkdf@1.0.2",
@@ -2867,13 +4759,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "getpass@0.1.7",
           },
           {
-            "nodeId": "jsbn@0.1.1",
+            "nodeId": "jsbn@0.1.1|2",
           },
           {
-            "nodeId": "safer-buffer@2.1.2",
+            "nodeId": "safer-buffer@2.1.2|3",
           },
           {
-            "nodeId": "tweetnacl@0.14.5",
+            "nodeId": "tweetnacl@0.14.5|2",
           },
         ],
         "nodeId": "sshpk@1.15.2",
@@ -2917,7 +4809,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "punycode@1.4.1",
+            "nodeId": "punycode@1.4.1|2",
           },
         ],
         "nodeId": "tough-cookie@2.3.4",
@@ -2940,7 +4832,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "caseless@0.11.0",
           },
           {
-            "nodeId": "combined-stream@1.0.7",
+            "nodeId": "combined-stream@1.0.7|1",
           },
           {
             "nodeId": "extend@3.0.2",
@@ -2967,10 +4859,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "isstream@0.1.2",
           },
           {
-            "nodeId": "json-stringify-safe@5.0.1",
+            "nodeId": "json-stringify-safe@5.0.1|2",
           },
           {
-            "nodeId": "mime-types@2.1.21",
+            "nodeId": "mime-types@2.1.21|4",
           },
           {
             "nodeId": "oauth-sign@0.8.2",
@@ -2979,13 +4871,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "qs@6.3.2",
           },
           {
-            "nodeId": "stringstream@0.0.6",
+            "nodeId": "stringstream@0.0.6|2",
           },
           {
             "nodeId": "tough-cookie@2.3.4",
           },
           {
-            "nodeId": "tunnel-agent@0.4.3",
+            "nodeId": "tunnel-agent@0.4.3|2",
           },
           {
             "nodeId": "uuid@3.3.2",
@@ -3022,7 +4914,17 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "pseudomap@1.0.2",
+        "nodeId": "pseudomap@1.0.2|1",
+        "pkgId": "pseudomap@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "pseudomap@1.0.2|2",
+        "pkgId": "pseudomap@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "pseudomap@1.0.2|3",
         "pkgId": "pseudomap@1.0.2",
       },
       {
@@ -3033,7 +4935,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "pseudomap@1.0.2",
+            "nodeId": "pseudomap@1.0.2|1",
           },
           {
             "nodeId": "yallist@2.1.2",
@@ -3087,36 +4989,131 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "isexe@1.1.2",
+        "nodeId": "isexe@1.1.2|1",
         "pkgId": "isexe@1.1.2",
       },
       {
         "deps": [],
-        "nodeId": "is-utf8@0.2.1",
+        "nodeId": "isexe@1.1.2|2",
+        "pkgId": "isexe@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "isexe@1.1.2|3",
+        "pkgId": "isexe@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "isexe@1.1.2|4",
+        "pkgId": "isexe@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "isexe@1.1.2|5",
+        "pkgId": "isexe@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "isexe@1.1.2|6",
+        "pkgId": "isexe@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "isexe@1.1.2|7",
+        "pkgId": "isexe@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-utf8@0.2.1|1",
+        "pkgId": "is-utf8@0.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-utf8@0.2.1|2",
+        "pkgId": "is-utf8@0.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-utf8@0.2.1|3",
+        "pkgId": "is-utf8@0.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-utf8@0.2.1|4",
+        "pkgId": "is-utf8@0.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-utf8@0.2.1|5",
         "pkgId": "is-utf8@0.2.1",
       },
       {
         "deps": [
           {
-            "nodeId": "is-utf8@0.2.1",
+            "nodeId": "is-utf8@0.2.1|1",
           },
         ],
-        "nodeId": "strip-bom@2.0.0",
+        "nodeId": "strip-bom@2.0.0|1",
         "pkgId": "strip-bom@2.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "strip-bom@2.0.0",
+            "nodeId": "is-utf8@0.2.1|2",
           },
         ],
-        "nodeId": "default-require-extensions@1.0.0",
+        "nodeId": "strip-bom@2.0.0|2",
+        "pkgId": "strip-bom@2.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-utf8@0.2.1|3",
+          },
+        ],
+        "nodeId": "strip-bom@2.0.0|3",
+        "pkgId": "strip-bom@2.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-utf8@0.2.1|4",
+          },
+        ],
+        "nodeId": "strip-bom@2.0.0|4",
+        "pkgId": "strip-bom@2.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-utf8@0.2.1|5",
+          },
+        ],
+        "nodeId": "strip-bom@2.0.0|5",
+        "pkgId": "strip-bom@2.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "strip-bom@2.0.0|1",
+          },
+        ],
+        "nodeId": "default-require-extensions@1.0.0|1",
         "pkgId": "default-require-extensions@1.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "default-require-extensions@1.0.0",
+            "nodeId": "strip-bom@2.0.0|2",
+          },
+        ],
+        "nodeId": "default-require-extensions@1.0.0|2",
+        "pkgId": "default-require-extensions@1.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "default-require-extensions@1.0.0|1",
           },
         ],
         "nodeId": "append-transform@0.4.0",
@@ -3124,40 +5121,140 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "arrify@1.0.1",
+        "nodeId": "arrify@1.0.1|1",
         "pkgId": "arrify@1.0.1",
       },
       {
         "deps": [],
-        "nodeId": "md5-o-matic@0.1.1",
+        "nodeId": "arrify@1.0.1|2",
+        "pkgId": "arrify@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "md5-o-matic@0.1.1|1",
+        "pkgId": "md5-o-matic@0.1.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "md5-o-matic@0.1.1|2",
         "pkgId": "md5-o-matic@0.1.1",
       },
       {
         "deps": [
           {
-            "nodeId": "md5-o-matic@0.1.1",
+            "nodeId": "md5-o-matic@0.1.1|1",
           },
         ],
-        "nodeId": "md5-hex@1.3.0",
+        "nodeId": "md5-hex@1.3.0|1",
+        "pkgId": "md5-hex@1.3.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "md5-o-matic@0.1.1|2",
+          },
+        ],
+        "nodeId": "md5-hex@1.3.0|2",
         "pkgId": "md5-hex@1.3.0",
       },
       {
         "deps": [],
-        "nodeId": "minimist@0.0.8",
+        "nodeId": "minimist@0.0.8|1",
+        "pkgId": "minimist@0.0.8",
+      },
+      {
+        "deps": [],
+        "nodeId": "minimist@0.0.8|2",
+        "pkgId": "minimist@0.0.8",
+      },
+      {
+        "deps": [],
+        "nodeId": "minimist@0.0.8|3",
+        "pkgId": "minimist@0.0.8",
+      },
+      {
+        "deps": [],
+        "nodeId": "minimist@0.0.8|4",
+        "pkgId": "minimist@0.0.8",
+      },
+      {
+        "deps": [],
+        "nodeId": "minimist@0.0.8|5",
         "pkgId": "minimist@0.0.8",
       },
       {
         "deps": [
           {
-            "nodeId": "minimist@0.0.8",
+            "nodeId": "minimist@0.0.8|1",
           },
         ],
-        "nodeId": "mkdirp@0.5.1",
+        "nodeId": "mkdirp@0.5.1|1",
+        "pkgId": "mkdirp@0.5.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "minimist@0.0.8|2",
+          },
+        ],
+        "nodeId": "mkdirp@0.5.1|2",
+        "pkgId": "mkdirp@0.5.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "minimist@0.0.8|3",
+          },
+        ],
+        "nodeId": "mkdirp@0.5.1|3",
+        "pkgId": "mkdirp@0.5.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "minimist@0.0.8|4",
+          },
+        ],
+        "nodeId": "mkdirp@0.5.1|4",
+        "pkgId": "mkdirp@0.5.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "minimist@0.0.8|5",
+          },
+        ],
+        "nodeId": "mkdirp@0.5.1|5",
         "pkgId": "mkdirp@0.5.1",
       },
       {
         "deps": [],
-        "nodeId": "graceful-fs@4.1.4",
+        "nodeId": "graceful-fs@4.1.4|1",
+        "pkgId": "graceful-fs@4.1.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "graceful-fs@4.1.4|2",
+        "pkgId": "graceful-fs@4.1.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "graceful-fs@4.1.4|3",
+        "pkgId": "graceful-fs@4.1.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "graceful-fs@4.1.4|4",
+        "pkgId": "graceful-fs@4.1.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "graceful-fs@4.1.4|5",
+        "pkgId": "graceful-fs@4.1.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "graceful-fs@4.1.4|6",
         "pkgId": "graceful-fs@4.1.4",
       },
       {
@@ -3173,7 +5270,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "graceful-fs@4.1.4",
+            "nodeId": "graceful-fs@4.1.4|1",
           },
           {
             "nodeId": "imurmurhash@0.1.4",
@@ -3188,10 +5285,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "md5-hex@1.3.0",
+            "nodeId": "md5-hex@1.3.0|1",
           },
           {
-            "nodeId": "mkdirp@0.5.1",
+            "nodeId": "mkdirp@0.5.1|1",
           },
           {
             "nodeId": "write-file-atomic@1.1.4",
@@ -3213,28 +5310,133 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "pinkie-promise@2.0.1",
+            "nodeId": "pinkie-promise@2.0.1|2",
           },
         ],
-        "nodeId": "path-exists@2.1.0",
+        "nodeId": "path-exists@2.1.0|1",
         "pkgId": "path-exists@2.1.0",
       },
       {
         "deps": [
           {
-            "nodeId": "path-exists@2.1.0",
-          },
-          {
-            "nodeId": "pinkie-promise@2.0.1",
+            "nodeId": "pinkie-promise@2.0.1|4",
           },
         ],
-        "nodeId": "find-up@1.1.2",
+        "nodeId": "path-exists@2.1.0|2",
+        "pkgId": "path-exists@2.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie-promise@2.0.1|6",
+          },
+        ],
+        "nodeId": "path-exists@2.1.0|3",
+        "pkgId": "path-exists@2.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie-promise@2.0.1|8",
+          },
+        ],
+        "nodeId": "path-exists@2.1.0|4",
+        "pkgId": "path-exists@2.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie-promise@2.0.1|12",
+          },
+        ],
+        "nodeId": "path-exists@2.1.0|5",
+        "pkgId": "path-exists@2.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "pinkie-promise@2.0.1|15",
+          },
+        ],
+        "nodeId": "path-exists@2.1.0|6",
+        "pkgId": "path-exists@2.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "path-exists@2.1.0|1",
+          },
+          {
+            "nodeId": "pinkie-promise@2.0.1|3",
+          },
+        ],
+        "nodeId": "find-up@1.1.2|1",
         "pkgId": "find-up@1.1.2",
       },
       {
         "deps": [
           {
-            "nodeId": "find-up@1.1.2",
+            "nodeId": "path-exists@2.1.0|2",
+          },
+          {
+            "nodeId": "pinkie-promise@2.0.1|5",
+          },
+        ],
+        "nodeId": "find-up@1.1.2|2",
+        "pkgId": "find-up@1.1.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "path-exists@2.1.0|3",
+          },
+          {
+            "nodeId": "pinkie-promise@2.0.1|7",
+          },
+        ],
+        "nodeId": "find-up@1.1.2|3",
+        "pkgId": "find-up@1.1.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "path-exists@2.1.0|4",
+          },
+          {
+            "nodeId": "pinkie-promise@2.0.1|9",
+          },
+        ],
+        "nodeId": "find-up@1.1.2|4",
+        "pkgId": "find-up@1.1.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "path-exists@2.1.0|5",
+          },
+          {
+            "nodeId": "pinkie-promise@2.0.1|13",
+          },
+        ],
+        "nodeId": "find-up@1.1.2|5",
+        "pkgId": "find-up@1.1.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "path-exists@2.1.0|6",
+          },
+          {
+            "nodeId": "pinkie-promise@2.0.1|16",
+          },
+        ],
+        "nodeId": "find-up@1.1.2|6",
+        "pkgId": "find-up@1.1.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "find-up@1.1.2|1",
           },
         ],
         "nodeId": "pkg-dir@1.0.0",
@@ -3246,7 +5448,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "commondir@1.0.1",
           },
           {
-            "nodeId": "mkdirp@0.5.1",
+            "nodeId": "mkdirp@0.5.1|2",
           },
           {
             "nodeId": "pkg-dir@1.0.0",
@@ -3257,153 +5459,543 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "yallist@2.0.0",
+        "nodeId": "yallist@2.0.0|1",
+        "pkgId": "yallist@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "yallist@2.0.0|2",
         "pkgId": "yallist@2.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "pseudomap@1.0.2",
+            "nodeId": "pseudomap@1.0.2|2",
           },
           {
-            "nodeId": "yallist@2.0.0",
+            "nodeId": "yallist@2.0.0|1",
           },
         ],
-        "nodeId": "lru-cache@4.0.1",
+        "nodeId": "lru-cache@4.0.1|1",
         "pkgId": "lru-cache@4.0.1",
       },
       {
         "deps": [
           {
-            "nodeId": "isexe@1.1.2",
+            "nodeId": "pseudomap@1.0.2|3",
+          },
+          {
+            "nodeId": "yallist@2.0.0|2",
           },
         ],
-        "nodeId": "which@1.2.10",
+        "nodeId": "lru-cache@4.0.1|2",
+        "pkgId": "lru-cache@4.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "isexe@1.1.2|2",
+          },
+        ],
+        "nodeId": "which@1.2.10|1",
         "pkgId": "which@1.2.10",
       },
       {
         "deps": [
           {
-            "nodeId": "lru-cache@4.0.1",
-          },
-          {
-            "nodeId": "which@1.2.10",
+            "nodeId": "isexe@1.1.2|3",
           },
         ],
-        "nodeId": "cross-spawn-async@2.2.4",
+        "nodeId": "which@1.2.10|2",
+        "pkgId": "which@1.2.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "isexe@1.1.2|4",
+          },
+        ],
+        "nodeId": "which@1.2.10|3",
+        "pkgId": "which@1.2.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "isexe@1.1.2|5",
+          },
+        ],
+        "nodeId": "which@1.2.10|4",
+        "pkgId": "which@1.2.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "isexe@1.1.2|6",
+          },
+        ],
+        "nodeId": "which@1.2.10|5",
+        "pkgId": "which@1.2.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "isexe@1.1.2|7",
+          },
+        ],
+        "nodeId": "which@1.2.10|6",
+        "pkgId": "which@1.2.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "lru-cache@4.0.1|1",
+          },
+          {
+            "nodeId": "which@1.2.10|1",
+          },
+        ],
+        "nodeId": "cross-spawn-async@2.2.4|1",
+        "pkgId": "cross-spawn-async@2.2.4",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "lru-cache@4.0.1|2",
+          },
+          {
+            "nodeId": "which@1.2.10|4",
+          },
+        ],
+        "nodeId": "cross-spawn-async@2.2.4|2",
         "pkgId": "cross-spawn-async@2.2.4",
       },
       {
         "deps": [],
-        "nodeId": "signal-exit@2.1.2",
+        "nodeId": "signal-exit@2.1.2|1",
+        "pkgId": "signal-exit@2.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "signal-exit@2.1.2|2",
+        "pkgId": "signal-exit@2.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "signal-exit@2.1.2|3",
+        "pkgId": "signal-exit@2.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "signal-exit@2.1.2|4",
         "pkgId": "signal-exit@2.1.2",
       },
       {
         "deps": [
           {
-            "nodeId": "cross-spawn-async@2.2.4",
+            "nodeId": "cross-spawn-async@2.2.4|1",
           },
           {
-            "nodeId": "signal-exit@2.1.2",
+            "nodeId": "signal-exit@2.1.2|1",
           },
           {
-            "nodeId": "which@1.2.10",
+            "nodeId": "which@1.2.10|2",
           },
         ],
-        "nodeId": "foreground-child@1.5.1",
+        "nodeId": "foreground-child@1.5.1|1",
         "pkgId": "foreground-child@1.5.1",
       },
       {
         "deps": [
           {
-            "nodeId": "wrappy@1.0.2",
+            "nodeId": "cross-spawn-async@2.2.4|2",
+          },
+          {
+            "nodeId": "signal-exit@2.1.2|2",
+          },
+          {
+            "nodeId": "which@1.2.10|5",
           },
         ],
-        "nodeId": "once@1.3.3",
+        "nodeId": "foreground-child@1.5.1|2",
+        "pkgId": "foreground-child@1.5.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|7",
+          },
+        ],
+        "nodeId": "once@1.3.3|1",
         "pkgId": "once@1.3.3",
       },
       {
         "deps": [
           {
-            "nodeId": "once@1.3.3",
-          },
-          {
-            "nodeId": "wrappy@1.0.2",
+            "nodeId": "wrappy@1.0.2|9",
           },
         ],
-        "nodeId": "inflight@1.0.5",
+        "nodeId": "once@1.3.3|2",
+        "pkgId": "once@1.3.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|10",
+          },
+        ],
+        "nodeId": "once@1.3.3|3",
+        "pkgId": "once@1.3.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|12",
+          },
+        ],
+        "nodeId": "once@1.3.3|4",
+        "pkgId": "once@1.3.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|13",
+          },
+        ],
+        "nodeId": "once@1.3.3|5",
+        "pkgId": "once@1.3.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|14",
+          },
+        ],
+        "nodeId": "once@1.3.3|6",
+        "pkgId": "once@1.3.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|16",
+          },
+        ],
+        "nodeId": "once@1.3.3|7",
+        "pkgId": "once@1.3.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|17",
+          },
+        ],
+        "nodeId": "once@1.3.3|8",
+        "pkgId": "once@1.3.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "wrappy@1.0.2|19",
+          },
+        ],
+        "nodeId": "once@1.3.3|9",
+        "pkgId": "once@1.3.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "once@1.3.3|1",
+          },
+          {
+            "nodeId": "wrappy@1.0.2|8",
+          },
+        ],
+        "nodeId": "inflight@1.0.5|1",
+        "pkgId": "inflight@1.0.5",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "once@1.3.3|3",
+          },
+          {
+            "nodeId": "wrappy@1.0.2|11",
+          },
+        ],
+        "nodeId": "inflight@1.0.5|2",
+        "pkgId": "inflight@1.0.5",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "once@1.3.3|6",
+          },
+          {
+            "nodeId": "wrappy@1.0.2|15",
+          },
+        ],
+        "nodeId": "inflight@1.0.5|3",
+        "pkgId": "inflight@1.0.5",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "once@1.3.3|8",
+          },
+          {
+            "nodeId": "wrappy@1.0.2|18",
+          },
+        ],
+        "nodeId": "inflight@1.0.5|4",
         "pkgId": "inflight@1.0.5",
       },
       {
         "deps": [],
-        "nodeId": "inherits@2.0.1",
+        "nodeId": "inherits@2.0.1|1",
         "pkgId": "inherits@2.0.1",
       },
       {
         "deps": [],
-        "nodeId": "balanced-match@0.4.1",
+        "nodeId": "inherits@2.0.1|2",
+        "pkgId": "inherits@2.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.1|3",
+        "pkgId": "inherits@2.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "inherits@2.0.1|4",
+        "pkgId": "inherits@2.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "balanced-match@0.4.1|1",
+        "pkgId": "balanced-match@0.4.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "balanced-match@0.4.1|2",
+        "pkgId": "balanced-match@0.4.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "balanced-match@0.4.1|3",
+        "pkgId": "balanced-match@0.4.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "balanced-match@0.4.1|4",
+        "pkgId": "balanced-match@0.4.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "balanced-match@0.4.1|5",
         "pkgId": "balanced-match@0.4.1",
       },
       {
         "deps": [
           {
-            "nodeId": "balanced-match@0.4.1",
+            "nodeId": "balanced-match@0.4.1|1",
           },
           {
-            "nodeId": "concat-map@0.0.1",
+            "nodeId": "concat-map@0.0.1|3",
           },
         ],
-        "nodeId": "brace-expansion@1.1.4",
+        "nodeId": "brace-expansion@1.1.4|1",
         "pkgId": "brace-expansion@1.1.4",
       },
       {
         "deps": [
           {
-            "nodeId": "brace-expansion@1.1.4",
+            "nodeId": "balanced-match@0.4.1|2",
+          },
+          {
+            "nodeId": "concat-map@0.0.1|4",
           },
         ],
-        "nodeId": "minimatch@3.0.0",
+        "nodeId": "brace-expansion@1.1.4|2",
+        "pkgId": "brace-expansion@1.1.4",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "balanced-match@0.4.1|3",
+          },
+          {
+            "nodeId": "concat-map@0.0.1|5",
+          },
+        ],
+        "nodeId": "brace-expansion@1.1.4|3",
+        "pkgId": "brace-expansion@1.1.4",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "balanced-match@0.4.1|4",
+          },
+          {
+            "nodeId": "concat-map@0.0.1|6",
+          },
+        ],
+        "nodeId": "brace-expansion@1.1.4|4",
+        "pkgId": "brace-expansion@1.1.4",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "balanced-match@0.4.1|5",
+          },
+          {
+            "nodeId": "concat-map@0.0.1|7",
+          },
+        ],
+        "nodeId": "brace-expansion@1.1.4|5",
+        "pkgId": "brace-expansion@1.1.4",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "brace-expansion@1.1.4|1",
+          },
+        ],
+        "nodeId": "minimatch@3.0.0|1",
+        "pkgId": "minimatch@3.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "brace-expansion@1.1.4|4",
+          },
+        ],
+        "nodeId": "minimatch@3.0.0|2",
+        "pkgId": "minimatch@3.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "brace-expansion@1.1.4|5",
+          },
+        ],
+        "nodeId": "minimatch@3.0.0|3",
         "pkgId": "minimatch@3.0.0",
       },
       {
         "deps": [],
-        "nodeId": "path-is-absolute@1.0.0",
+        "nodeId": "path-is-absolute@1.0.0|1",
+        "pkgId": "path-is-absolute@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "path-is-absolute@1.0.0|2",
+        "pkgId": "path-is-absolute@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "path-is-absolute@1.0.0|3",
+        "pkgId": "path-is-absolute@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "path-is-absolute@1.0.0|4",
         "pkgId": "path-is-absolute@1.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "inflight@1.0.5",
+            "nodeId": "inflight@1.0.5|1",
           },
           {
-            "nodeId": "inherits@2.0.1",
+            "nodeId": "inherits@2.0.1|1",
           },
           {
-            "nodeId": "minimatch@3.0.0",
+            "nodeId": "minimatch@3.0.0|1",
           },
           {
-            "nodeId": "once@1.3.3",
+            "nodeId": "once@1.3.3|2",
           },
           {
-            "nodeId": "path-is-absolute@1.0.0",
+            "nodeId": "path-is-absolute@1.0.0|1",
           },
         ],
-        "nodeId": "glob@7.0.3",
+        "nodeId": "glob@7.0.3|1",
+        "pkgId": "glob@7.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "inflight@1.0.5|3",
+          },
+          {
+            "nodeId": "inherits@2.0.1|3",
+          },
+          {
+            "nodeId": "minimatch@3.0.0|2",
+          },
+          {
+            "nodeId": "once@1.3.3|7",
+          },
+          {
+            "nodeId": "path-is-absolute@1.0.0|3",
+          },
+        ],
+        "nodeId": "glob@7.0.3|2",
+        "pkgId": "glob@7.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "inflight@1.0.5|4",
+          },
+          {
+            "nodeId": "inherits@2.0.1|4",
+          },
+          {
+            "nodeId": "minimatch@3.0.0|3",
+          },
+          {
+            "nodeId": "once@1.3.3|9",
+          },
+          {
+            "nodeId": "path-is-absolute@1.0.0|4",
+          },
+        ],
+        "nodeId": "glob@7.0.3|3",
         "pkgId": "glob@7.0.3",
       },
       {
         "deps": [],
-        "nodeId": "abbrev@1.0.7",
+        "nodeId": "abbrev@1.0.7|1",
         "pkgId": "abbrev@1.0.7",
       },
       {
         "deps": [],
-        "nodeId": "async@1.5.2",
+        "nodeId": "abbrev@1.0.7|2",
+        "pkgId": "abbrev@1.0.7",
+      },
+      {
+        "deps": [],
+        "nodeId": "async@1.5.2|1",
         "pkgId": "async@1.5.2",
       },
       {
         "deps": [],
-        "nodeId": "esprima@2.7.2",
+        "nodeId": "async@1.5.2|2",
+        "pkgId": "async@1.5.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "esprima@2.7.2|1",
+        "pkgId": "esprima@2.7.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "esprima@2.7.2|2",
+        "pkgId": "esprima@2.7.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "esprima@2.7.2|3",
         "pkgId": "esprima@2.7.2",
       },
       {
@@ -3428,25 +6020,49 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "prelude-ls@1.1.2",
+        "nodeId": "prelude-ls@1.1.2|1",
+        "pkgId": "prelude-ls@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "prelude-ls@1.1.2|2",
+        "pkgId": "prelude-ls@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "prelude-ls@1.1.2|3",
+        "pkgId": "prelude-ls@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "prelude-ls@1.1.2|4",
         "pkgId": "prelude-ls@1.1.2",
       },
       {
         "deps": [
           {
-            "nodeId": "prelude-ls@1.1.2",
+            "nodeId": "prelude-ls@1.1.2|2",
           },
         ],
-        "nodeId": "type-check@0.3.2",
+        "nodeId": "type-check@0.3.2|1",
         "pkgId": "type-check@0.3.2",
       },
       {
         "deps": [
           {
-            "nodeId": "prelude-ls@1.1.2",
+            "nodeId": "prelude-ls@1.1.2|4",
+          },
+        ],
+        "nodeId": "type-check@0.3.2|2",
+        "pkgId": "type-check@0.3.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "prelude-ls@1.1.2|1",
           },
           {
-            "nodeId": "type-check@0.3.2",
+            "nodeId": "type-check@0.3.2|1",
           },
         ],
         "nodeId": "levn@0.3.0",
@@ -3454,7 +6070,12 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "wordwrap@1.0.0",
+        "nodeId": "wordwrap@1.0.0|1",
+        "pkgId": "wordwrap@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "wordwrap@1.0.0|2",
         "pkgId": "wordwrap@1.0.0",
       },
       {
@@ -3469,13 +6090,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "levn@0.3.0",
           },
           {
-            "nodeId": "prelude-ls@1.1.2",
+            "nodeId": "prelude-ls@1.1.2|3",
           },
           {
-            "nodeId": "type-check@0.3.2",
+            "nodeId": "type-check@0.3.2|2",
           },
           {
-            "nodeId": "wordwrap@1.0.0",
+            "nodeId": "wordwrap@1.0.0|1",
           },
         ],
         "nodeId": "optionator@0.8.1",
@@ -3483,13 +6104,18 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "amdefine@1.0.0",
+        "nodeId": "amdefine@1.0.0|1",
+        "pkgId": "amdefine@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "amdefine@1.0.0|2",
         "pkgId": "amdefine@1.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "amdefine@1.0.0",
+            "nodeId": "amdefine@1.0.0|1",
           },
         ],
         "nodeId": "source-map@0.2.0",
@@ -3498,7 +6124,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "esprima@2.7.2",
+            "nodeId": "esprima@2.7.2|1",
           },
           {
             "nodeId": "estraverse@1.9.3",
@@ -3519,28 +6145,37 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "brace-expansion@1.1.4",
+            "nodeId": "brace-expansion@1.1.4|2",
           },
         ],
-        "nodeId": "minimatch@2.0.10",
+        "nodeId": "minimatch@2.0.10|1",
         "pkgId": "minimatch@2.0.10",
       },
       {
         "deps": [
           {
-            "nodeId": "inflight@1.0.5",
+            "nodeId": "brace-expansion@1.1.4|3",
+          },
+        ],
+        "nodeId": "minimatch@2.0.10|2",
+        "pkgId": "minimatch@2.0.10",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "inflight@1.0.5|2",
           },
           {
-            "nodeId": "inherits@2.0.1",
+            "nodeId": "inherits@2.0.1|2",
           },
           {
-            "nodeId": "minimatch@2.0.10",
+            "nodeId": "minimatch@2.0.10|1",
           },
           {
-            "nodeId": "once@1.3.3",
+            "nodeId": "once@1.3.3|4",
           },
           {
-            "nodeId": "path-is-absolute@1.0.0",
+            "nodeId": "path-is-absolute@1.0.0|2",
           },
         ],
         "nodeId": "glob@5.0.15",
@@ -3552,7 +6187,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "glob@5.0.15",
           },
           {
-            "nodeId": "minimatch@2.0.10",
+            "nodeId": "minimatch@2.0.10|2",
           },
         ],
         "nodeId": "fileset@0.2.1",
@@ -3583,7 +6218,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "amdefine@1.0.0",
+            "nodeId": "amdefine@1.0.0|2",
           },
         ],
         "nodeId": "source-map@0.4.4",
@@ -3596,7 +6231,12 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "source-map@0.5.6",
+        "nodeId": "source-map@0.5.6|1",
+        "pkgId": "source-map@0.5.6",
+      },
+      {
+        "deps": [],
+        "nodeId": "source-map@0.5.6|2",
         "pkgId": "source-map@0.5.6",
       },
       {
@@ -3611,41 +6251,202 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "is-buffer@1.1.3",
+        "nodeId": "is-buffer@1.1.3|1",
+        "pkgId": "is-buffer@1.1.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-buffer@1.1.3|2",
+        "pkgId": "is-buffer@1.1.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-buffer@1.1.3|3",
+        "pkgId": "is-buffer@1.1.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-buffer@1.1.3|4",
+        "pkgId": "is-buffer@1.1.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-buffer@1.1.3|5",
+        "pkgId": "is-buffer@1.1.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-buffer@1.1.3|6",
+        "pkgId": "is-buffer@1.1.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-buffer@1.1.3|7",
+        "pkgId": "is-buffer@1.1.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-buffer@1.1.3|8",
+        "pkgId": "is-buffer@1.1.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-buffer@1.1.3|9",
+        "pkgId": "is-buffer@1.1.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-buffer@1.1.3|10",
         "pkgId": "is-buffer@1.1.3",
       },
       {
         "deps": [
           {
-            "nodeId": "is-buffer@1.1.3",
+            "nodeId": "is-buffer@1.1.3|1",
           },
         ],
-        "nodeId": "kind-of@3.0.3",
+        "nodeId": "kind-of@3.0.3|1",
+        "pkgId": "kind-of@3.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-buffer@1.1.3|2",
+          },
+        ],
+        "nodeId": "kind-of@3.0.3|2",
+        "pkgId": "kind-of@3.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-buffer@1.1.3|3",
+          },
+        ],
+        "nodeId": "kind-of@3.0.3|3",
+        "pkgId": "kind-of@3.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-buffer@1.1.3|4",
+          },
+        ],
+        "nodeId": "kind-of@3.0.3|4",
+        "pkgId": "kind-of@3.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-buffer@1.1.3|5",
+          },
+        ],
+        "nodeId": "kind-of@3.0.3|5",
+        "pkgId": "kind-of@3.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-buffer@1.1.3|6",
+          },
+        ],
+        "nodeId": "kind-of@3.0.3|6",
+        "pkgId": "kind-of@3.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-buffer@1.1.3|7",
+          },
+        ],
+        "nodeId": "kind-of@3.0.3|7",
+        "pkgId": "kind-of@3.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-buffer@1.1.3|8",
+          },
+        ],
+        "nodeId": "kind-of@3.0.3|8",
+        "pkgId": "kind-of@3.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-buffer@1.1.3|9",
+          },
+        ],
+        "nodeId": "kind-of@3.0.3|9",
+        "pkgId": "kind-of@3.0.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-buffer@1.1.3|10",
+          },
+        ],
+        "nodeId": "kind-of@3.0.3|10",
         "pkgId": "kind-of@3.0.3",
       },
       {
         "deps": [],
-        "nodeId": "longest@1.0.1",
+        "nodeId": "longest@1.0.1|1",
         "pkgId": "longest@1.0.1",
       },
       {
         "deps": [],
-        "nodeId": "repeat-string@1.5.4",
+        "nodeId": "longest@1.0.1|2",
+        "pkgId": "longest@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "repeat-string@1.5.4|1",
+        "pkgId": "repeat-string@1.5.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "repeat-string@1.5.4|2",
+        "pkgId": "repeat-string@1.5.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "repeat-string@1.5.4|3",
+        "pkgId": "repeat-string@1.5.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "repeat-string@1.5.4|4",
         "pkgId": "repeat-string@1.5.4",
       },
       {
         "deps": [
           {
-            "nodeId": "kind-of@3.0.3",
+            "nodeId": "kind-of@3.0.3|1",
           },
           {
-            "nodeId": "longest@1.0.1",
+            "nodeId": "longest@1.0.1|1",
           },
           {
-            "nodeId": "repeat-string@1.5.4",
+            "nodeId": "repeat-string@1.5.4|1",
           },
         ],
-        "nodeId": "align-text@0.1.4",
+        "nodeId": "align-text@0.1.4|1",
+        "pkgId": "align-text@0.1.4",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "kind-of@3.0.3|2",
+          },
+          {
+            "nodeId": "longest@1.0.1|2",
+          },
+          {
+            "nodeId": "repeat-string@1.5.4|2",
+          },
+        ],
+        "nodeId": "align-text@0.1.4|2",
         "pkgId": "align-text@0.1.4",
       },
       {
@@ -3656,7 +6457,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "align-text@0.1.4",
+            "nodeId": "align-text@0.1.4|1",
           },
           {
             "nodeId": "lazy-cache@1.0.4",
@@ -3668,7 +6469,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "align-text@0.1.4",
+            "nodeId": "align-text@0.1.4|2",
           },
         ],
         "nodeId": "right-align@0.1.3",
@@ -3696,7 +6497,12 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "decamelize@1.2.0",
+        "nodeId": "decamelize@1.2.0|1",
+        "pkgId": "decamelize@1.2.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "decamelize@1.2.0|2",
         "pkgId": "decamelize@1.2.0",
       },
       {
@@ -3713,7 +6519,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "cliui@2.1.0",
           },
           {
-            "nodeId": "decamelize@1.2.0",
+            "nodeId": "decamelize@1.2.0|1",
           },
           {
             "nodeId": "window-size@0.1.0",
@@ -3728,7 +6534,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "async@0.2.10",
           },
           {
-            "nodeId": "source-map@0.5.6",
+            "nodeId": "source-map@0.5.6|1",
           },
           {
             "nodeId": "uglify-to-browserify@1.0.2",
@@ -3743,7 +6549,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "async@1.5.2",
+            "nodeId": "async@1.5.2|2",
           },
           {
             "nodeId": "optimist@0.6.1",
@@ -3761,7 +6567,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "sprintf-js@1.0.3",
+            "nodeId": "sprintf-js@1.0.3|4",
           },
         ],
         "nodeId": "argparse@1.0.7",
@@ -3770,7 +6576,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "abbrev@1.0.7",
+            "nodeId": "abbrev@1.0.7|2",
           },
         ],
         "nodeId": "nopt@3.0.6",
@@ -3798,16 +6604,16 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "abbrev@1.0.7",
+            "nodeId": "abbrev@1.0.7|1",
           },
           {
-            "nodeId": "async@1.5.2",
+            "nodeId": "async@1.5.2|1",
           },
           {
             "nodeId": "escodegen@1.8.0",
           },
           {
-            "nodeId": "esprima@2.7.2",
+            "nodeId": "esprima@2.7.2|2",
           },
           {
             "nodeId": "fileset@0.2.1",
@@ -3819,13 +6625,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "js-yaml@3.6.1|2",
           },
           {
-            "nodeId": "mkdirp@0.5.1",
+            "nodeId": "mkdirp@0.5.1|3",
           },
           {
             "nodeId": "nopt@3.0.6",
           },
           {
-            "nodeId": "once@1.3.3",
+            "nodeId": "once@1.3.3|5",
           },
           {
             "nodeId": "resolve@1.1.7",
@@ -3834,10 +6640,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "supports-color@3.1.2",
           },
           {
-            "nodeId": "which@1.2.10",
+            "nodeId": "which@1.2.10|3",
           },
           {
-            "nodeId": "wordwrap@1.0.0",
+            "nodeId": "wordwrap@1.0.0|2",
           },
         ],
         "nodeId": "istanbul@0.4.3",
@@ -3845,310 +6651,779 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "arr-flatten@1.0.1",
+        "nodeId": "arr-flatten@1.0.1|1",
+        "pkgId": "arr-flatten@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "arr-flatten@1.0.1|2",
         "pkgId": "arr-flatten@1.0.1",
       },
       {
         "deps": [
           {
-            "nodeId": "arr-flatten@1.0.1",
+            "nodeId": "arr-flatten@1.0.1|1",
           },
         ],
-        "nodeId": "arr-diff@2.0.0",
+        "nodeId": "arr-diff@2.0.0|1",
+        "pkgId": "arr-diff@2.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "arr-flatten@1.0.1|2",
+          },
+        ],
+        "nodeId": "arr-diff@2.0.0|2",
         "pkgId": "arr-diff@2.0.0",
       },
       {
         "deps": [],
-        "nodeId": "array-unique@0.2.1",
+        "nodeId": "array-unique@0.2.1|1",
+        "pkgId": "array-unique@0.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "array-unique@0.2.1|2",
         "pkgId": "array-unique@0.2.1",
       },
       {
         "deps": [
           {
-            "nodeId": "kind-of@3.0.3",
+            "nodeId": "kind-of@3.0.3|3",
           },
         ],
-        "nodeId": "is-number@2.1.0",
+        "nodeId": "is-number@2.1.0|1",
+        "pkgId": "is-number@2.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "kind-of@3.0.3|4",
+          },
+        ],
+        "nodeId": "is-number@2.1.0|2",
+        "pkgId": "is-number@2.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "kind-of@3.0.3|7",
+          },
+        ],
+        "nodeId": "is-number@2.1.0|3",
+        "pkgId": "is-number@2.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "kind-of@3.0.3|8",
+          },
+        ],
+        "nodeId": "is-number@2.1.0|4",
         "pkgId": "is-number@2.1.0",
       },
       {
         "deps": [],
-        "nodeId": "isarray@1.0.0",
+        "nodeId": "isarray@1.0.0|1",
+        "pkgId": "isarray@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "isarray@1.0.0|2",
+        "pkgId": "isarray@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "isarray@1.0.0|3",
+        "pkgId": "isarray@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "isarray@1.0.0|4",
+        "pkgId": "isarray@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "isarray@1.0.0|5",
         "pkgId": "isarray@1.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "isarray@1.0.0",
+            "nodeId": "isarray@1.0.0|1",
           },
         ],
-        "nodeId": "isobject@2.1.0",
+        "nodeId": "isobject@2.1.0|1",
         "pkgId": "isobject@2.1.0",
       },
       {
         "deps": [
           {
-            "nodeId": "is-number@2.1.0",
-          },
-          {
-            "nodeId": "kind-of@3.0.3",
+            "nodeId": "isarray@1.0.0|2",
           },
         ],
-        "nodeId": "randomatic@1.1.5",
+        "nodeId": "isobject@2.1.0|2",
+        "pkgId": "isobject@2.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-number@2.1.0|2",
+          },
+          {
+            "nodeId": "kind-of@3.0.3|5",
+          },
+        ],
+        "nodeId": "randomatic@1.1.5|1",
+        "pkgId": "randomatic@1.1.5",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-number@2.1.0|4",
+          },
+          {
+            "nodeId": "kind-of@3.0.3|9",
+          },
+        ],
+        "nodeId": "randomatic@1.1.5|2",
         "pkgId": "randomatic@1.1.5",
       },
       {
         "deps": [],
-        "nodeId": "repeat-element@1.1.2",
+        "nodeId": "repeat-element@1.1.2|1",
+        "pkgId": "repeat-element@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "repeat-element@1.1.2|2",
+        "pkgId": "repeat-element@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "repeat-element@1.1.2|3",
+        "pkgId": "repeat-element@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "repeat-element@1.1.2|4",
         "pkgId": "repeat-element@1.1.2",
       },
       {
         "deps": [
           {
-            "nodeId": "is-number@2.1.0",
+            "nodeId": "is-number@2.1.0|1",
           },
           {
-            "nodeId": "isobject@2.1.0",
+            "nodeId": "isobject@2.1.0|1",
           },
           {
-            "nodeId": "randomatic@1.1.5",
+            "nodeId": "randomatic@1.1.5|1",
           },
           {
-            "nodeId": "repeat-element@1.1.2",
+            "nodeId": "repeat-element@1.1.2|1",
           },
           {
-            "nodeId": "repeat-string@1.5.4",
+            "nodeId": "repeat-string@1.5.4|3",
           },
         ],
-        "nodeId": "fill-range@2.2.3",
+        "nodeId": "fill-range@2.2.3|1",
         "pkgId": "fill-range@2.2.3",
       },
       {
         "deps": [
           {
-            "nodeId": "fill-range@2.2.3",
+            "nodeId": "is-number@2.1.0|3",
+          },
+          {
+            "nodeId": "isobject@2.1.0|2",
+          },
+          {
+            "nodeId": "randomatic@1.1.5|2",
+          },
+          {
+            "nodeId": "repeat-element@1.1.2|3",
+          },
+          {
+            "nodeId": "repeat-string@1.5.4|4",
           },
         ],
-        "nodeId": "expand-range@1.8.2",
+        "nodeId": "fill-range@2.2.3|2",
+        "pkgId": "fill-range@2.2.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "fill-range@2.2.3|1",
+          },
+        ],
+        "nodeId": "expand-range@1.8.2|1",
+        "pkgId": "expand-range@1.8.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "fill-range@2.2.3|2",
+          },
+        ],
+        "nodeId": "expand-range@1.8.2|2",
         "pkgId": "expand-range@1.8.2",
       },
       {
         "deps": [],
-        "nodeId": "preserve@0.2.0",
+        "nodeId": "preserve@0.2.0|1",
+        "pkgId": "preserve@0.2.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "preserve@0.2.0|2",
         "pkgId": "preserve@0.2.0",
       },
       {
         "deps": [
           {
-            "nodeId": "expand-range@1.8.2",
+            "nodeId": "expand-range@1.8.2|1",
           },
           {
-            "nodeId": "preserve@0.2.0",
+            "nodeId": "preserve@0.2.0|1",
           },
           {
-            "nodeId": "repeat-element@1.1.2",
+            "nodeId": "repeat-element@1.1.2|2",
           },
         ],
-        "nodeId": "braces@1.8.5",
+        "nodeId": "braces@1.8.5|1",
+        "pkgId": "braces@1.8.5",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "expand-range@1.8.2|2",
+          },
+          {
+            "nodeId": "preserve@0.2.0|2",
+          },
+          {
+            "nodeId": "repeat-element@1.1.2|4",
+          },
+        ],
+        "nodeId": "braces@1.8.5|2",
         "pkgId": "braces@1.8.5",
       },
       {
         "deps": [],
-        "nodeId": "is-posix-bracket@0.1.1",
+        "nodeId": "is-posix-bracket@0.1.1|1",
+        "pkgId": "is-posix-bracket@0.1.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-posix-bracket@0.1.1|2",
         "pkgId": "is-posix-bracket@0.1.1",
       },
       {
         "deps": [
           {
-            "nodeId": "is-posix-bracket@0.1.1",
+            "nodeId": "is-posix-bracket@0.1.1|1",
           },
         ],
-        "nodeId": "expand-brackets@0.1.5",
+        "nodeId": "expand-brackets@0.1.5|1",
+        "pkgId": "expand-brackets@0.1.5",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-posix-bracket@0.1.1|2",
+          },
+        ],
+        "nodeId": "expand-brackets@0.1.5|2",
         "pkgId": "expand-brackets@0.1.5",
       },
       {
         "deps": [],
-        "nodeId": "is-extglob@1.0.0",
+        "nodeId": "is-extglob@1.0.0|1",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|2",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|3",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|4",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|5",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|6",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|7",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|8",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|9",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|10",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|11",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|12",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|13",
+        "pkgId": "is-extglob@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extglob@1.0.0|14",
         "pkgId": "is-extglob@1.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "is-extglob@1.0.0",
+            "nodeId": "is-extglob@1.0.0|1",
           },
         ],
-        "nodeId": "extglob@0.3.2",
+        "nodeId": "extglob@0.3.2|1",
+        "pkgId": "extglob@0.3.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-extglob@1.0.0|8",
+          },
+        ],
+        "nodeId": "extglob@0.3.2|2",
         "pkgId": "extglob@0.3.2",
       },
       {
         "deps": [],
-        "nodeId": "filename-regex@2.0.0",
+        "nodeId": "filename-regex@2.0.0|1",
+        "pkgId": "filename-regex@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "filename-regex@2.0.0|2",
         "pkgId": "filename-regex@2.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "is-extglob@1.0.0",
+            "nodeId": "is-extglob@1.0.0|3",
           },
         ],
-        "nodeId": "is-glob@2.0.1",
+        "nodeId": "is-glob@2.0.1|1",
+        "pkgId": "is-glob@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-extglob@1.0.0|4",
+          },
+        ],
+        "nodeId": "is-glob@2.0.1|2",
+        "pkgId": "is-glob@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-extglob@1.0.0|5",
+          },
+        ],
+        "nodeId": "is-glob@2.0.1|3",
+        "pkgId": "is-glob@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-extglob@1.0.0|7",
+          },
+        ],
+        "nodeId": "is-glob@2.0.1|4",
+        "pkgId": "is-glob@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-extglob@1.0.0|10",
+          },
+        ],
+        "nodeId": "is-glob@2.0.1|5",
+        "pkgId": "is-glob@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-extglob@1.0.0|11",
+          },
+        ],
+        "nodeId": "is-glob@2.0.1|6",
+        "pkgId": "is-glob@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-extglob@1.0.0|12",
+          },
+        ],
+        "nodeId": "is-glob@2.0.1|7",
+        "pkgId": "is-glob@2.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-extglob@1.0.0|14",
+          },
+        ],
+        "nodeId": "is-glob@2.0.1|8",
         "pkgId": "is-glob@2.0.1",
       },
       {
         "deps": [],
-        "nodeId": "normalize-path@2.0.1",
+        "nodeId": "normalize-path@2.0.1|1",
         "pkgId": "normalize-path@2.0.1",
       },
       {
         "deps": [],
-        "nodeId": "for-in@0.1.5",
+        "nodeId": "normalize-path@2.0.1|2",
+        "pkgId": "normalize-path@2.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "for-in@0.1.5|1",
+        "pkgId": "for-in@0.1.5",
+      },
+      {
+        "deps": [],
+        "nodeId": "for-in@0.1.5|2",
         "pkgId": "for-in@0.1.5",
       },
       {
         "deps": [
           {
-            "nodeId": "for-in@0.1.5",
+            "nodeId": "for-in@0.1.5|1",
           },
         ],
-        "nodeId": "for-own@0.1.4",
+        "nodeId": "for-own@0.1.4|1",
+        "pkgId": "for-own@0.1.4",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "for-in@0.1.5|2",
+          },
+        ],
+        "nodeId": "for-own@0.1.4|2",
         "pkgId": "for-own@0.1.4",
       },
       {
         "deps": [],
-        "nodeId": "is-extendable@0.1.1",
+        "nodeId": "is-extendable@0.1.1|1",
+        "pkgId": "is-extendable@0.1.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-extendable@0.1.1|2",
         "pkgId": "is-extendable@0.1.1",
       },
       {
         "deps": [
           {
-            "nodeId": "for-own@0.1.4",
+            "nodeId": "for-own@0.1.4|1",
           },
           {
-            "nodeId": "is-extendable@0.1.1",
+            "nodeId": "is-extendable@0.1.1|1",
           },
         ],
-        "nodeId": "object.omit@2.0.0",
+        "nodeId": "object.omit@2.0.0|1",
         "pkgId": "object.omit@2.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "is-glob@2.0.1",
+            "nodeId": "for-own@0.1.4|2",
+          },
+          {
+            "nodeId": "is-extendable@0.1.1|2",
           },
         ],
-        "nodeId": "glob-parent@2.0.0",
+        "nodeId": "object.omit@2.0.0|2",
+        "pkgId": "object.omit@2.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-glob@2.0.1|2",
+          },
+        ],
+        "nodeId": "glob-parent@2.0.0|1",
         "pkgId": "glob-parent@2.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "glob-parent@2.0.0",
-          },
-          {
-            "nodeId": "is-glob@2.0.1",
+            "nodeId": "is-glob@2.0.1|6",
           },
         ],
-        "nodeId": "glob-base@0.3.0",
+        "nodeId": "glob-parent@2.0.0|2",
+        "pkgId": "glob-parent@2.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "glob-parent@2.0.0|1",
+          },
+          {
+            "nodeId": "is-glob@2.0.1|3",
+          },
+        ],
+        "nodeId": "glob-base@0.3.0|1",
+        "pkgId": "glob-base@0.3.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "glob-parent@2.0.0|2",
+          },
+          {
+            "nodeId": "is-glob@2.0.1|7",
+          },
+        ],
+        "nodeId": "glob-base@0.3.0|2",
         "pkgId": "glob-base@0.3.0",
       },
       {
         "deps": [],
-        "nodeId": "is-dotfile@1.0.2",
+        "nodeId": "is-dotfile@1.0.2|1",
+        "pkgId": "is-dotfile@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-dotfile@1.0.2|2",
         "pkgId": "is-dotfile@1.0.2",
       },
       {
         "deps": [
           {
-            "nodeId": "glob-base@0.3.0",
+            "nodeId": "glob-base@0.3.0|1",
           },
           {
-            "nodeId": "is-dotfile@1.0.2",
+            "nodeId": "is-dotfile@1.0.2|1",
           },
           {
-            "nodeId": "is-extglob@1.0.0",
+            "nodeId": "is-extglob@1.0.0|6",
           },
           {
-            "nodeId": "is-glob@2.0.1",
+            "nodeId": "is-glob@2.0.1|4",
           },
         ],
-        "nodeId": "parse-glob@3.0.4",
+        "nodeId": "parse-glob@3.0.4|1",
+        "pkgId": "parse-glob@3.0.4",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "glob-base@0.3.0|2",
+          },
+          {
+            "nodeId": "is-dotfile@1.0.2|2",
+          },
+          {
+            "nodeId": "is-extglob@1.0.0|13",
+          },
+          {
+            "nodeId": "is-glob@2.0.1|8",
+          },
+        ],
+        "nodeId": "parse-glob@3.0.4|2",
         "pkgId": "parse-glob@3.0.4",
       },
       {
         "deps": [],
-        "nodeId": "is-primitive@2.0.0",
+        "nodeId": "is-primitive@2.0.0|1",
+        "pkgId": "is-primitive@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-primitive@2.0.0|2",
+        "pkgId": "is-primitive@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-primitive@2.0.0|3",
+        "pkgId": "is-primitive@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-primitive@2.0.0|4",
         "pkgId": "is-primitive@2.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "is-primitive@2.0.0",
+            "nodeId": "is-primitive@2.0.0|1",
           },
         ],
-        "nodeId": "is-equal-shallow@0.1.3",
+        "nodeId": "is-equal-shallow@0.1.3|1",
         "pkgId": "is-equal-shallow@0.1.3",
       },
       {
         "deps": [
           {
-            "nodeId": "is-equal-shallow@0.1.3",
-          },
-          {
-            "nodeId": "is-primitive@2.0.0",
+            "nodeId": "is-primitive@2.0.0|3",
           },
         ],
-        "nodeId": "regex-cache@0.4.3",
+        "nodeId": "is-equal-shallow@0.1.3|2",
+        "pkgId": "is-equal-shallow@0.1.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-equal-shallow@0.1.3|1",
+          },
+          {
+            "nodeId": "is-primitive@2.0.0|2",
+          },
+        ],
+        "nodeId": "regex-cache@0.4.3|1",
         "pkgId": "regex-cache@0.4.3",
       },
       {
         "deps": [
           {
-            "nodeId": "arr-diff@2.0.0",
+            "nodeId": "is-equal-shallow@0.1.3|2",
           },
           {
-            "nodeId": "array-unique@0.2.1",
-          },
-          {
-            "nodeId": "braces@1.8.5",
-          },
-          {
-            "nodeId": "expand-brackets@0.1.5",
-          },
-          {
-            "nodeId": "extglob@0.3.2",
-          },
-          {
-            "nodeId": "filename-regex@2.0.0",
-          },
-          {
-            "nodeId": "is-extglob@1.0.0",
-          },
-          {
-            "nodeId": "is-glob@2.0.1",
-          },
-          {
-            "nodeId": "kind-of@3.0.3",
-          },
-          {
-            "nodeId": "normalize-path@2.0.1",
-          },
-          {
-            "nodeId": "object.omit@2.0.0",
-          },
-          {
-            "nodeId": "parse-glob@3.0.4",
-          },
-          {
-            "nodeId": "regex-cache@0.4.3",
+            "nodeId": "is-primitive@2.0.0|4",
           },
         ],
-        "nodeId": "micromatch@2.3.8",
+        "nodeId": "regex-cache@0.4.3|2",
+        "pkgId": "regex-cache@0.4.3",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "arr-diff@2.0.0|1",
+          },
+          {
+            "nodeId": "array-unique@0.2.1|1",
+          },
+          {
+            "nodeId": "braces@1.8.5|1",
+          },
+          {
+            "nodeId": "expand-brackets@0.1.5|1",
+          },
+          {
+            "nodeId": "extglob@0.3.2|1",
+          },
+          {
+            "nodeId": "filename-regex@2.0.0|1",
+          },
+          {
+            "nodeId": "is-extglob@1.0.0|2",
+          },
+          {
+            "nodeId": "is-glob@2.0.1|1",
+          },
+          {
+            "nodeId": "kind-of@3.0.3|6",
+          },
+          {
+            "nodeId": "normalize-path@2.0.1|1",
+          },
+          {
+            "nodeId": "object.omit@2.0.0|1",
+          },
+          {
+            "nodeId": "parse-glob@3.0.4|1",
+          },
+          {
+            "nodeId": "regex-cache@0.4.3|1",
+          },
+        ],
+        "nodeId": "micromatch@2.3.8|1",
         "pkgId": "micromatch@2.3.8",
       },
       {
         "deps": [
           {
-            "nodeId": "find-up@1.1.2",
+            "nodeId": "arr-diff@2.0.0|2",
+          },
+          {
+            "nodeId": "array-unique@0.2.1|2",
+          },
+          {
+            "nodeId": "braces@1.8.5|2",
+          },
+          {
+            "nodeId": "expand-brackets@0.1.5|2",
+          },
+          {
+            "nodeId": "extglob@0.3.2|2",
+          },
+          {
+            "nodeId": "filename-regex@2.0.0|2",
+          },
+          {
+            "nodeId": "is-extglob@1.0.0|9",
+          },
+          {
+            "nodeId": "is-glob@2.0.1|5",
+          },
+          {
+            "nodeId": "kind-of@3.0.3|10",
+          },
+          {
+            "nodeId": "normalize-path@2.0.1|2",
+          },
+          {
+            "nodeId": "object.omit@2.0.0|2",
+          },
+          {
+            "nodeId": "parse-glob@3.0.4|2",
+          },
+          {
+            "nodeId": "regex-cache@0.4.3|2",
+          },
+        ],
+        "nodeId": "micromatch@2.3.8|2",
+        "pkgId": "micromatch@2.3.8",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "find-up@1.1.2|3",
           },
         ],
         "nodeId": "pkg-up@1.0.0",
@@ -4162,10 +7437,19 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "glob@7.0.3",
+            "nodeId": "glob@7.0.3|2",
           },
         ],
-        "nodeId": "rimraf@2.5.2",
+        "nodeId": "rimraf@2.5.2|1",
+        "pkgId": "rimraf@2.5.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "glob@7.0.3|3",
+          },
+        ],
+        "nodeId": "rimraf@2.5.2|2",
         "pkgId": "rimraf@2.5.2",
       },
       {
@@ -4181,22 +7465,22 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "foreground-child@1.5.1",
+            "nodeId": "foreground-child@1.5.1|2",
           },
           {
-            "nodeId": "mkdirp@0.5.1",
+            "nodeId": "mkdirp@0.5.1|5",
           },
           {
             "nodeId": "os-homedir@1.0.1",
           },
           {
-            "nodeId": "rimraf@2.5.2",
+            "nodeId": "rimraf@2.5.2|2",
           },
           {
-            "nodeId": "signal-exit@2.1.2",
+            "nodeId": "signal-exit@2.1.2|3",
           },
           {
-            "nodeId": "which@1.2.10",
+            "nodeId": "which@1.2.10|6",
           },
         ],
         "nodeId": "spawn-wrap@1.2.3",
@@ -4204,223 +7488,517 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "lodash.keys@4.0.7",
+        "nodeId": "lodash.keys@4.0.7|1",
         "pkgId": "lodash.keys@4.0.7",
       },
       {
         "deps": [],
-        "nodeId": "lodash.rest@4.0.3",
+        "nodeId": "lodash.keys@4.0.7|2",
+        "pkgId": "lodash.keys@4.0.7",
+      },
+      {
+        "deps": [],
+        "nodeId": "lodash.keys@4.0.7|3",
+        "pkgId": "lodash.keys@4.0.7",
+      },
+      {
+        "deps": [],
+        "nodeId": "lodash.rest@4.0.3|1",
+        "pkgId": "lodash.rest@4.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "lodash.rest@4.0.3|2",
+        "pkgId": "lodash.rest@4.0.3",
+      },
+      {
+        "deps": [],
+        "nodeId": "lodash.rest@4.0.3|3",
         "pkgId": "lodash.rest@4.0.3",
       },
       {
         "deps": [
           {
-            "nodeId": "lodash.keys@4.0.7",
+            "nodeId": "lodash.keys@4.0.7|1",
           },
           {
-            "nodeId": "lodash.rest@4.0.3",
+            "nodeId": "lodash.rest@4.0.3|1",
           },
         ],
-        "nodeId": "lodash.assign@4.0.9",
+        "nodeId": "lodash.assign@4.0.9|1",
+        "pkgId": "lodash.assign@4.0.9",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "lodash.keys@4.0.7|2",
+          },
+          {
+            "nodeId": "lodash.rest@4.0.3|2",
+          },
+        ],
+        "nodeId": "lodash.assign@4.0.9|2",
+        "pkgId": "lodash.assign@4.0.9",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "lodash.keys@4.0.7|3",
+          },
+          {
+            "nodeId": "lodash.rest@4.0.3|3",
+          },
+        ],
+        "nodeId": "lodash.assign@4.0.9|3",
         "pkgId": "lodash.assign@4.0.9",
       },
       {
         "deps": [],
-        "nodeId": "is-arrayish@0.2.1",
+        "nodeId": "is-arrayish@0.2.1|1",
+        "pkgId": "is-arrayish@0.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-arrayish@0.2.1|2",
+        "pkgId": "is-arrayish@0.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "is-arrayish@0.2.1|3",
         "pkgId": "is-arrayish@0.2.1",
       },
       {
         "deps": [
           {
-            "nodeId": "is-arrayish@0.2.1",
+            "nodeId": "is-arrayish@0.2.1|1",
           },
         ],
-        "nodeId": "error-ex@1.3.0",
+        "nodeId": "error-ex@1.3.0|1",
         "pkgId": "error-ex@1.3.0",
       },
       {
         "deps": [
           {
-            "nodeId": "error-ex@1.3.0",
+            "nodeId": "is-arrayish@0.2.1|2",
           },
         ],
-        "nodeId": "parse-json@2.2.0",
+        "nodeId": "error-ex@1.3.0|2",
+        "pkgId": "error-ex@1.3.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "is-arrayish@0.2.1|3",
+          },
+        ],
+        "nodeId": "error-ex@1.3.0|3",
+        "pkgId": "error-ex@1.3.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "error-ex@1.3.0|1",
+          },
+        ],
+        "nodeId": "parse-json@2.2.0|1",
+        "pkgId": "parse-json@2.2.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "error-ex@1.3.0|2",
+          },
+        ],
+        "nodeId": "parse-json@2.2.0|2",
+        "pkgId": "parse-json@2.2.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "error-ex@1.3.0|3",
+          },
+        ],
+        "nodeId": "parse-json@2.2.0|3",
         "pkgId": "parse-json@2.2.0",
       },
       {
         "deps": [],
-        "nodeId": "pify@2.3.0",
+        "nodeId": "pify@2.3.0|1",
+        "pkgId": "pify@2.3.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "pify@2.3.0|2",
+        "pkgId": "pify@2.3.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "pify@2.3.0|3",
+        "pkgId": "pify@2.3.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "pify@2.3.0|4",
+        "pkgId": "pify@2.3.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "pify@2.3.0|5",
         "pkgId": "pify@2.3.0",
       },
       {
         "deps": [
           {
-            "nodeId": "graceful-fs@4.1.4",
+            "nodeId": "graceful-fs@4.1.4|2",
           },
           {
-            "nodeId": "parse-json@2.2.0",
+            "nodeId": "parse-json@2.2.0|1",
           },
           {
-            "nodeId": "pify@2.3.0",
+            "nodeId": "pify@2.3.0|1",
           },
           {
-            "nodeId": "pinkie-promise@2.0.1",
+            "nodeId": "pinkie-promise@2.0.1|10",
           },
           {
-            "nodeId": "strip-bom@2.0.0",
+            "nodeId": "strip-bom@2.0.0|3",
           },
         ],
-        "nodeId": "load-json-file@1.1.0",
+        "nodeId": "load-json-file@1.1.0|1",
+        "pkgId": "load-json-file@1.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "graceful-fs@4.1.4|4",
+          },
+          {
+            "nodeId": "parse-json@2.2.0|2",
+          },
+          {
+            "nodeId": "pify@2.3.0|3",
+          },
+          {
+            "nodeId": "pinkie-promise@2.0.1|14",
+          },
+          {
+            "nodeId": "strip-bom@2.0.0|4",
+          },
+        ],
+        "nodeId": "load-json-file@1.1.0|2",
+        "pkgId": "load-json-file@1.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "graceful-fs@4.1.4|5",
+          },
+          {
+            "nodeId": "parse-json@2.2.0|3",
+          },
+          {
+            "nodeId": "pify@2.3.0|4",
+          },
+          {
+            "nodeId": "pinkie-promise@2.0.1|17",
+          },
+          {
+            "nodeId": "strip-bom@2.0.0|5",
+          },
+        ],
+        "nodeId": "load-json-file@1.1.0|3",
         "pkgId": "load-json-file@1.1.0",
       },
       {
         "deps": [],
-        "nodeId": "hosted-git-info@2.1.5",
+        "nodeId": "hosted-git-info@2.1.5|1",
         "pkgId": "hosted-git-info@2.1.5",
       },
       {
         "deps": [],
-        "nodeId": "builtin-modules@1.1.1",
+        "nodeId": "hosted-git-info@2.1.5|2",
+        "pkgId": "hosted-git-info@2.1.5",
+      },
+      {
+        "deps": [],
+        "nodeId": "builtin-modules@1.1.1|1",
+        "pkgId": "builtin-modules@1.1.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "builtin-modules@1.1.1|2",
         "pkgId": "builtin-modules@1.1.1",
       },
       {
         "deps": [
           {
-            "nodeId": "builtin-modules@1.1.1",
+            "nodeId": "builtin-modules@1.1.1|1",
           },
         ],
-        "nodeId": "is-builtin-module@1.0.0",
+        "nodeId": "is-builtin-module@1.0.0|1",
+        "pkgId": "is-builtin-module@1.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "builtin-modules@1.1.1|2",
+          },
+        ],
+        "nodeId": "is-builtin-module@1.0.0|2",
         "pkgId": "is-builtin-module@1.0.0",
       },
       {
         "deps": [],
-        "nodeId": "semver@5.1.0",
+        "nodeId": "semver@5.1.0|1",
         "pkgId": "semver@5.1.0",
       },
       {
         "deps": [],
-        "nodeId": "spdx-license-ids@1.2.1",
+        "nodeId": "semver@5.1.0|2",
+        "pkgId": "semver@5.1.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "spdx-license-ids@1.2.1|1",
+        "pkgId": "spdx-license-ids@1.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "spdx-license-ids@1.2.1|2",
+        "pkgId": "spdx-license-ids@1.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "spdx-license-ids@1.2.1|3",
+        "pkgId": "spdx-license-ids@1.2.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "spdx-license-ids@1.2.1|4",
         "pkgId": "spdx-license-ids@1.2.1",
       },
       {
         "deps": [
           {
-            "nodeId": "spdx-license-ids@1.2.1",
+            "nodeId": "spdx-license-ids@1.2.1|1",
           },
         ],
-        "nodeId": "spdx-correct@1.0.2",
+        "nodeId": "spdx-correct@1.0.2|1",
+        "pkgId": "spdx-correct@1.0.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "spdx-license-ids@1.2.1|3",
+          },
+        ],
+        "nodeId": "spdx-correct@1.0.2|2",
         "pkgId": "spdx-correct@1.0.2",
       },
       {
         "deps": [],
-        "nodeId": "spdx-exceptions@1.0.4",
+        "nodeId": "spdx-exceptions@1.0.4|1",
+        "pkgId": "spdx-exceptions@1.0.4",
+      },
+      {
+        "deps": [],
+        "nodeId": "spdx-exceptions@1.0.4|2",
         "pkgId": "spdx-exceptions@1.0.4",
       },
       {
         "deps": [
           {
-            "nodeId": "spdx-exceptions@1.0.4",
+            "nodeId": "spdx-exceptions@1.0.4|1",
           },
           {
-            "nodeId": "spdx-license-ids@1.2.1",
+            "nodeId": "spdx-license-ids@1.2.1|2",
           },
         ],
-        "nodeId": "spdx-expression-parse@1.0.2",
+        "nodeId": "spdx-expression-parse@1.0.2|1",
         "pkgId": "spdx-expression-parse@1.0.2",
       },
       {
         "deps": [
           {
-            "nodeId": "spdx-correct@1.0.2",
+            "nodeId": "spdx-exceptions@1.0.4|2",
           },
           {
-            "nodeId": "spdx-expression-parse@1.0.2",
+            "nodeId": "spdx-license-ids@1.2.1|4",
           },
         ],
-        "nodeId": "validate-npm-package-license@3.0.1",
+        "nodeId": "spdx-expression-parse@1.0.2|2",
+        "pkgId": "spdx-expression-parse@1.0.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "spdx-correct@1.0.2|1",
+          },
+          {
+            "nodeId": "spdx-expression-parse@1.0.2|1",
+          },
+        ],
+        "nodeId": "validate-npm-package-license@3.0.1|1",
         "pkgId": "validate-npm-package-license@3.0.1",
       },
       {
         "deps": [
           {
-            "nodeId": "hosted-git-info@2.1.5",
+            "nodeId": "spdx-correct@1.0.2|2",
           },
           {
-            "nodeId": "is-builtin-module@1.0.0",
-          },
-          {
-            "nodeId": "semver@5.1.0",
-          },
-          {
-            "nodeId": "validate-npm-package-license@3.0.1",
+            "nodeId": "spdx-expression-parse@1.0.2|2",
           },
         ],
-        "nodeId": "normalize-package-data@2.3.5",
+        "nodeId": "validate-npm-package-license@3.0.1|2",
+        "pkgId": "validate-npm-package-license@3.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "hosted-git-info@2.1.5|1",
+          },
+          {
+            "nodeId": "is-builtin-module@1.0.0|1",
+          },
+          {
+            "nodeId": "semver@5.1.0|1",
+          },
+          {
+            "nodeId": "validate-npm-package-license@3.0.1|1",
+          },
+        ],
+        "nodeId": "normalize-package-data@2.3.5|1",
         "pkgId": "normalize-package-data@2.3.5",
       },
       {
         "deps": [
           {
-            "nodeId": "graceful-fs@4.1.4",
+            "nodeId": "hosted-git-info@2.1.5|2",
           },
           {
-            "nodeId": "pify@2.3.0",
+            "nodeId": "is-builtin-module@1.0.0|2",
           },
           {
-            "nodeId": "pinkie-promise@2.0.1",
+            "nodeId": "semver@5.1.0|2",
+          },
+          {
+            "nodeId": "validate-npm-package-license@3.0.1|2",
           },
         ],
-        "nodeId": "path-type@1.1.0",
+        "nodeId": "normalize-package-data@2.3.5|2",
+        "pkgId": "normalize-package-data@2.3.5",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "graceful-fs@4.1.4|3",
+          },
+          {
+            "nodeId": "pify@2.3.0|2",
+          },
+          {
+            "nodeId": "pinkie-promise@2.0.1|11",
+          },
+        ],
+        "nodeId": "path-type@1.1.0|1",
         "pkgId": "path-type@1.1.0",
       },
       {
         "deps": [
           {
-            "nodeId": "load-json-file@1.1.0",
+            "nodeId": "graceful-fs@4.1.4|6",
           },
           {
-            "nodeId": "normalize-package-data@2.3.5",
+            "nodeId": "pify@2.3.0|5",
           },
           {
-            "nodeId": "path-type@1.1.0",
+            "nodeId": "pinkie-promise@2.0.1|18",
           },
         ],
-        "nodeId": "read-pkg@1.1.0",
+        "nodeId": "path-type@1.1.0|2",
+        "pkgId": "path-type@1.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "load-json-file@1.1.0|1",
+          },
+          {
+            "nodeId": "normalize-package-data@2.3.5|1",
+          },
+          {
+            "nodeId": "path-type@1.1.0|1",
+          },
+        ],
+        "nodeId": "read-pkg@1.1.0|1",
         "pkgId": "read-pkg@1.1.0",
       },
       {
         "deps": [
           {
-            "nodeId": "find-up@1.1.2",
+            "nodeId": "load-json-file@1.1.0|3",
           },
           {
-            "nodeId": "read-pkg@1.1.0",
+            "nodeId": "normalize-package-data@2.3.5|2",
+          },
+          {
+            "nodeId": "path-type@1.1.0|2",
           },
         ],
-        "nodeId": "read-pkg-up@1.0.1",
+        "nodeId": "read-pkg@1.1.0|2",
+        "pkgId": "read-pkg@1.1.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "find-up@1.1.2|4",
+          },
+          {
+            "nodeId": "read-pkg@1.1.0|1",
+          },
+        ],
+        "nodeId": "read-pkg-up@1.0.1|1",
+        "pkgId": "read-pkg-up@1.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "find-up@1.1.2|6",
+          },
+          {
+            "nodeId": "read-pkg@1.1.0|2",
+          },
+        ],
+        "nodeId": "read-pkg-up@1.0.1|2",
         "pkgId": "read-pkg-up@1.0.1",
       },
       {
         "deps": [],
-        "nodeId": "require-main-filename@1.0.1",
+        "nodeId": "require-main-filename@1.0.1|1",
+        "pkgId": "require-main-filename@1.0.1",
+      },
+      {
+        "deps": [],
+        "nodeId": "require-main-filename@1.0.1|2",
         "pkgId": "require-main-filename@1.0.1",
       },
       {
         "deps": [
           {
-            "nodeId": "arrify@1.0.1",
+            "nodeId": "arrify@1.0.1|2",
           },
           {
-            "nodeId": "lodash.assign@4.0.9",
+            "nodeId": "lodash.assign@4.0.9|1",
           },
           {
-            "nodeId": "micromatch@2.3.8",
+            "nodeId": "micromatch@2.3.8|2",
           },
           {
-            "nodeId": "read-pkg-up@1.0.1",
+            "nodeId": "read-pkg-up@1.0.1|1",
           },
           {
-            "nodeId": "require-main-filename@1.0.1",
+            "nodeId": "require-main-filename@1.0.1|1",
           },
         ],
         "nodeId": "test-exclude@1.1.0",
@@ -4433,51 +8011,157 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "number-is-nan@1.0.0",
+        "nodeId": "number-is-nan@1.0.0|1",
+        "pkgId": "number-is-nan@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "number-is-nan@1.0.0|2",
+        "pkgId": "number-is-nan@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "number-is-nan@1.0.0|3",
+        "pkgId": "number-is-nan@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "number-is-nan@1.0.0|4",
+        "pkgId": "number-is-nan@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "number-is-nan@1.0.0|5",
+        "pkgId": "number-is-nan@1.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "number-is-nan@1.0.0|6",
         "pkgId": "number-is-nan@1.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "number-is-nan@1.0.0",
+            "nodeId": "number-is-nan@1.0.0|1",
           },
         ],
-        "nodeId": "code-point-at@1.0.0",
+        "nodeId": "code-point-at@1.0.0|1",
         "pkgId": "code-point-at@1.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "number-is-nan@1.0.0",
+            "nodeId": "number-is-nan@1.0.0|3",
           },
         ],
-        "nodeId": "is-fullwidth-code-point@1.0.0",
+        "nodeId": "code-point-at@1.0.0|2",
+        "pkgId": "code-point-at@1.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "number-is-nan@1.0.0|5",
+          },
+        ],
+        "nodeId": "code-point-at@1.0.0|3",
+        "pkgId": "code-point-at@1.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "number-is-nan@1.0.0|2",
+          },
+        ],
+        "nodeId": "is-fullwidth-code-point@1.0.0|1",
+        "pkgId": "is-fullwidth-code-point@1.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "number-is-nan@1.0.0|4",
+          },
+        ],
+        "nodeId": "is-fullwidth-code-point@1.0.0|2",
+        "pkgId": "is-fullwidth-code-point@1.0.0",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "number-is-nan@1.0.0|6",
+          },
+        ],
+        "nodeId": "is-fullwidth-code-point@1.0.0|3",
         "pkgId": "is-fullwidth-code-point@1.0.0",
       },
       {
         "deps": [],
-        "nodeId": "ansi-regex@2.0.0",
+        "nodeId": "ansi-regex@2.0.0|1",
+        "pkgId": "ansi-regex@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "ansi-regex@2.0.0|2",
+        "pkgId": "ansi-regex@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "ansi-regex@2.0.0|3",
+        "pkgId": "ansi-regex@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "ansi-regex@2.0.0|4",
         "pkgId": "ansi-regex@2.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "code-point-at@1.0.0",
+            "nodeId": "code-point-at@1.0.0|1",
           },
           {
-            "nodeId": "is-fullwidth-code-point@1.0.0",
+            "nodeId": "is-fullwidth-code-point@1.0.0|1",
           },
           {
             "nodeId": "strip-ansi@3.0.1|2",
           },
         ],
-        "nodeId": "string-width@1.0.1",
+        "nodeId": "string-width@1.0.1|1",
         "pkgId": "string-width@1.0.1",
       },
       {
         "deps": [
           {
-            "nodeId": "string-width@1.0.1",
+            "nodeId": "code-point-at@1.0.0|2",
+          },
+          {
+            "nodeId": "is-fullwidth-code-point@1.0.0|2",
+          },
+          {
+            "nodeId": "strip-ansi@3.0.1|4",
+          },
+        ],
+        "nodeId": "string-width@1.0.1|2",
+        "pkgId": "string-width@1.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "code-point-at@1.0.0|3",
+          },
+          {
+            "nodeId": "is-fullwidth-code-point@1.0.0|3",
+          },
+          {
+            "nodeId": "strip-ansi@3.0.1|5",
+          },
+        ],
+        "nodeId": "string-width@1.0.1|3",
+        "pkgId": "string-width@1.0.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "string-width@1.0.1|2",
           },
         ],
         "nodeId": "wrap-ansi@2.0.0",
@@ -4486,10 +8170,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "string-width@1.0.1",
+            "nodeId": "string-width@1.0.1|1",
           },
           {
-            "nodeId": "strip-ansi@3.0.1|2",
+            "nodeId": "strip-ansi@3.0.1|3",
           },
           {
             "nodeId": "wrap-ansi@2.0.0",
@@ -4534,10 +8218,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "find-up@1.1.2",
+            "nodeId": "find-up@1.1.2|5",
           },
           {
-            "nodeId": "load-json-file@1.1.0",
+            "nodeId": "load-json-file@1.1.0|2",
           },
           {
             "nodeId": "object-assign@4.1.0",
@@ -4575,7 +8259,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "camelcase@2.1.1",
           },
           {
-            "nodeId": "lodash.assign@4.0.9",
+            "nodeId": "lodash.assign@4.0.9|3",
           },
         ],
         "nodeId": "yargs-parser@2.4.0",
@@ -4590,10 +8274,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "cliui@3.2.0",
           },
           {
-            "nodeId": "decamelize@1.2.0",
+            "nodeId": "decamelize@1.2.0|2",
           },
           {
-            "nodeId": "lodash.assign@4.0.9",
+            "nodeId": "lodash.assign@4.0.9|2",
           },
           {
             "nodeId": "os-locale@1.4.0",
@@ -4602,16 +8286,16 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "pkg-conf@1.1.3",
           },
           {
-            "nodeId": "read-pkg-up@1.0.1",
+            "nodeId": "read-pkg-up@1.0.1|2",
           },
           {
-            "nodeId": "require-main-filename@1.0.1",
+            "nodeId": "require-main-filename@1.0.1|2",
           },
           {
             "nodeId": "set-blocking@1.0.0",
           },
           {
-            "nodeId": "string-width@1.0.1",
+            "nodeId": "string-width@1.0.1|3",
           },
           {
             "nodeId": "window-size@0.2.0",
@@ -4632,7 +8316,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "append-transform@0.4.0",
           },
           {
-            "nodeId": "arrify@1.0.1",
+            "nodeId": "arrify@1.0.1|1",
           },
           {
             "nodeId": "caching-transform@1.0.1",
@@ -4641,31 +8325,31 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "convert-source-map@1.2.0",
           },
           {
-            "nodeId": "default-require-extensions@1.0.0",
+            "nodeId": "default-require-extensions@1.0.0|2",
           },
           {
             "nodeId": "find-cache-dir@0.1.1",
           },
           {
-            "nodeId": "find-up@1.1.2",
+            "nodeId": "find-up@1.1.2|2",
           },
           {
-            "nodeId": "foreground-child@1.5.1",
+            "nodeId": "foreground-child@1.5.1|1",
           },
           {
-            "nodeId": "glob@7.0.3",
+            "nodeId": "glob@7.0.3|1",
           },
           {
             "nodeId": "istanbul@0.4.3",
           },
           {
-            "nodeId": "md5-hex@1.3.0",
+            "nodeId": "md5-hex@1.3.0|2",
           },
           {
-            "nodeId": "micromatch@2.3.8",
+            "nodeId": "micromatch@2.3.8|1",
           },
           {
-            "nodeId": "mkdirp@0.5.1",
+            "nodeId": "mkdirp@0.5.1|4",
           },
           {
             "nodeId": "pkg-up@1.0.0",
@@ -4674,13 +8358,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "resolve-from@2.0.0",
           },
           {
-            "nodeId": "rimraf@2.5.2",
+            "nodeId": "rimraf@2.5.2|1",
           },
           {
             "nodeId": "signal-exit@3.0.0",
           },
           {
-            "nodeId": "source-map@0.5.6",
+            "nodeId": "source-map@0.5.6|2",
           },
           {
             "nodeId": "spawn-wrap@1.2.3",
@@ -4707,48 +8391,140 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "process-nextick-args@2.0.0",
+        "nodeId": "process-nextick-args@2.0.0|1",
+        "pkgId": "process-nextick-args@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "process-nextick-args@2.0.0|2",
+        "pkgId": "process-nextick-args@2.0.0",
+      },
+      {
+        "deps": [],
+        "nodeId": "process-nextick-args@2.0.0|3",
         "pkgId": "process-nextick-args@2.0.0",
       },
       {
         "deps": [
           {
-            "nodeId": "safe-buffer@5.1.2",
+            "nodeId": "safe-buffer@5.1.2|3",
           },
         ],
-        "nodeId": "string_decoder@1.1.1",
+        "nodeId": "string_decoder@1.1.1|1",
+        "pkgId": "string_decoder@1.1.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "safe-buffer@5.1.2|5",
+          },
+        ],
+        "nodeId": "string_decoder@1.1.1|2",
+        "pkgId": "string_decoder@1.1.1",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "safe-buffer@5.1.2|7",
+          },
+        ],
+        "nodeId": "string_decoder@1.1.1|3",
         "pkgId": "string_decoder@1.1.1",
       },
       {
         "deps": [],
-        "nodeId": "util-deprecate@1.0.2",
+        "nodeId": "util-deprecate@1.0.2|1",
+        "pkgId": "util-deprecate@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "util-deprecate@1.0.2|2",
+        "pkgId": "util-deprecate@1.0.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "util-deprecate@1.0.2|3",
         "pkgId": "util-deprecate@1.0.2",
       },
       {
         "deps": [
           {
-            "nodeId": "core-util-is@1.0.2",
+            "nodeId": "core-util-is@1.0.2|6",
           },
           {
-            "nodeId": "inherits@2.0.3",
+            "nodeId": "inherits@2.0.3|8",
           },
           {
-            "nodeId": "isarray@1.0.0",
+            "nodeId": "isarray@1.0.0|3",
           },
           {
-            "nodeId": "process-nextick-args@2.0.0",
+            "nodeId": "process-nextick-args@2.0.0|1",
           },
           {
-            "nodeId": "safe-buffer@5.1.2",
+            "nodeId": "safe-buffer@5.1.2|2",
           },
           {
-            "nodeId": "string_decoder@1.1.1",
+            "nodeId": "string_decoder@1.1.1|1",
           },
           {
-            "nodeId": "util-deprecate@1.0.2",
+            "nodeId": "util-deprecate@1.0.2|1",
           },
         ],
-        "nodeId": "readable-stream@2.3.6",
+        "nodeId": "readable-stream@2.3.6|1",
+        "pkgId": "readable-stream@2.3.6",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "core-util-is@1.0.2|8",
+          },
+          {
+            "nodeId": "inherits@2.0.3|12",
+          },
+          {
+            "nodeId": "isarray@1.0.0|4",
+          },
+          {
+            "nodeId": "process-nextick-args@2.0.0|2",
+          },
+          {
+            "nodeId": "safe-buffer@5.1.2|4",
+          },
+          {
+            "nodeId": "string_decoder@1.1.1|2",
+          },
+          {
+            "nodeId": "util-deprecate@1.0.2|2",
+          },
+        ],
+        "nodeId": "readable-stream@2.3.6|2",
+        "pkgId": "readable-stream@2.3.6",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "core-util-is@1.0.2|9",
+          },
+          {
+            "nodeId": "inherits@2.0.3|14",
+          },
+          {
+            "nodeId": "isarray@1.0.0|5",
+          },
+          {
+            "nodeId": "process-nextick-args@2.0.0|3",
+          },
+          {
+            "nodeId": "safe-buffer@5.1.2|6",
+          },
+          {
+            "nodeId": "string_decoder@1.1.1|3",
+          },
+          {
+            "nodeId": "util-deprecate@1.0.2|3",
+          },
+        ],
+        "nodeId": "readable-stream@2.3.6|3",
         "pkgId": "readable-stream@2.3.6",
       },
       {
@@ -4773,34 +8549,57 @@ exports[`without versionProvenance matches snapshot 1`] = `
       },
       {
         "deps": [],
-        "nodeId": "events-to-array@1.1.2",
+        "nodeId": "events-to-array@1.1.2|1",
+        "pkgId": "events-to-array@1.1.2",
+      },
+      {
+        "deps": [],
+        "nodeId": "events-to-array@1.1.2|2",
         "pkgId": "events-to-array@1.1.2",
       },
       {
         "deps": [
           {
-            "nodeId": "events-to-array@1.1.2",
+            "nodeId": "events-to-array@1.1.2|1",
           },
           {
-            "nodeId": "inherits@2.0.3",
+            "nodeId": "inherits@2.0.3|11",
           },
           {
-            "nodeId": "js-yaml@3.11.0",
+            "nodeId": "js-yaml@3.11.0|4",
           },
           {
-            "nodeId": "readable-stream@2.3.6",
+            "nodeId": "readable-stream@2.3.6|2",
           },
         ],
-        "nodeId": "tap-parser@1.3.2",
+        "nodeId": "tap-parser@1.3.2|1",
         "pkgId": "tap-parser@1.3.2",
       },
       {
         "deps": [
           {
-            "nodeId": "punycode@1.4.1",
+            "nodeId": "events-to-array@1.1.2|2",
           },
           {
-            "nodeId": "strip-ansi@3.0.1|1",
+            "nodeId": "inherits@2.0.3|13",
+          },
+          {
+            "nodeId": "js-yaml@3.11.0|5",
+          },
+          {
+            "nodeId": "readable-stream@2.3.6|3",
+          },
+        ],
+        "nodeId": "tap-parser@1.3.2|2",
+        "pkgId": "tap-parser@1.3.2",
+      },
+      {
+        "deps": [
+          {
+            "nodeId": "punycode@1.4.1|3",
+          },
+          {
+            "nodeId": "strip-ansi@3.0.1|6",
           },
         ],
         "nodeId": "unicode-length@1.0.3",
@@ -4812,25 +8611,25 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "color-support@1.1.3",
           },
           {
-            "nodeId": "debug@2.2.0",
+            "nodeId": "debug@2.2.0|6",
           },
           {
             "nodeId": "diff@1.4.0",
           },
           {
-            "nodeId": "escape-string-regexp@1.0.5",
+            "nodeId": "escape-string-regexp@1.0.5|2",
           },
           {
-            "nodeId": "glob@7.1.3",
+            "nodeId": "glob@7.1.3|3",
           },
           {
-            "nodeId": "js-yaml@3.11.0",
+            "nodeId": "js-yaml@3.11.0|3",
           },
           {
-            "nodeId": "readable-stream@1.1.14",
+            "nodeId": "readable-stream@1.1.14|3",
           },
           {
-            "nodeId": "tap-parser@1.3.2",
+            "nodeId": "tap-parser@1.3.2|1",
           },
           {
             "nodeId": "unicode-length@1.0.3",
@@ -4847,7 +8646,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
       {
         "deps": [
           {
-            "nodeId": "bluebird@3.5.2",
+            "nodeId": "bluebird@3.5.2|2",
           },
           {
             "nodeId": "clean-yaml-object@0.1.0",
@@ -4865,13 +8664,13 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "foreground-child@1.5.6",
           },
           {
-            "nodeId": "glob@7.1.3",
+            "nodeId": "glob@7.1.3|2",
           },
           {
-            "nodeId": "isexe@1.1.2",
+            "nodeId": "isexe@1.1.2|1",
           },
           {
-            "nodeId": "js-yaml@3.11.0",
+            "nodeId": "js-yaml@3.11.0|2",
           },
           {
             "nodeId": "nyc@6.6.1",
@@ -4883,10 +8682,10 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "opener@1.5.1",
           },
           {
-            "nodeId": "readable-stream@2.3.6",
+            "nodeId": "readable-stream@2.3.6|1",
           },
           {
-            "nodeId": "signal-exit@2.1.2",
+            "nodeId": "signal-exit@2.1.2|4",
           },
           {
             "nodeId": "stack-utils@0.4.0",
@@ -4898,7 +8697,7 @@ exports[`without versionProvenance matches snapshot 1`] = `
             "nodeId": "tap-mocha-reporter@0.0.27",
           },
           {
-            "nodeId": "tap-parser@1.3.2",
+            "nodeId": "tap-parser@1.3.2|2",
           },
           {
             "nodeId": "tmatch@2.0.1",

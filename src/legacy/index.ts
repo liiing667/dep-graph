@@ -37,11 +37,67 @@ interface DepTree extends DepTreeDep {
   };
 }
 
+/**
+ * Object identity of tree nodes needs to survive the conversion to a graph.
+ * Two different tree nodes may have exactly the same name/version/subtree,
+ * but they are still different package instances. Keeping a per-conversion
+ * identity for every tree object lets us produce a distinct graph node for
+ * each of them, while still collapsing repeated references to the *same*
+ * object (as those represent the same instance).
+ */
+interface TreeIdentity {
+  ids: WeakMap<DepTreeDep, number>;
+  nextId: number;
+}
+
+/**
+ * Dep-graphs produced from a tree are still backed by the original tree
+ * objects. `graphToDepTree` can use this to return the very same nodes (and
+ * therefore the same labels, provenance and object identity) when nothing has
+ * changed in between.
+ */
+const originalDepTrees = new WeakMap<types.DepGraph, DepTree>();
+
 function addLabel(dep: DepTreeDep, key: string, value: string) {
   if (!dep.labels) {
     dep.labels = {};
   }
   dep.labels[key] = value;
+}
+
+function getTreeNodeIdentity(
+  depTree: DepTreeDep,
+  treeIdentity: TreeIdentity,
+): number {
+  if (!depTree || typeof depTree !== 'object') {
+    return 0;
+  }
+
+  let id = treeIdentity.ids.get(depTree);
+  if (id === undefined) {
+    id = treeIdentity.nextId++;
+    treeIdentity.ids.set(depTree, id);
+  }
+  return id;
+}
+
+function copyNodeInfo(nodeInfo: types.NodeInfo): types.NodeInfo {
+  const copy: types.NodeInfo = {};
+
+  if (nodeInfo.versionProvenance) {
+    copy.versionProvenance = nodeInfo.versionProvenance;
+  }
+  if (nodeInfo.labels) {
+    // Labels are mutable metadata on the tree node. Copy them so that
+    // processing one instance can never affect another instance.
+    copy.labels = { ...nodeInfo.labels };
+  }
+
+  return copy;
+}
+
+function getNodeInfo(dep: DepTreeDep): types.NodeInfo {
+  return copyNodeInfo(dep);
 }
 
 /**
@@ -75,13 +131,33 @@ async function depTreeToGraph(
     ];
   }
 
-  const builder = new DepGraphBuilder(pkgManagerInfo, rootPkg);
+  const builder = new DepGraphBuilder(
+    pkgManagerInfo,
+    rootPkg,
+    getNodeInfo(depTree),
+  );
 
-  await buildGraph(builder, depTree, depTree.name!, true);
+  const treeIdentity: TreeIdentity = {
+    ids: new WeakMap(),
+    nextId: 0,
+  };
+  await buildGraph(
+    builder,
+    depTree,
+    depTree.name!,
+    true,
+    new Map(),
+    treeIdentity,
+  );
 
   const depGraph = await builder.build();
 
-  return shortenNodeIds(depGraph as types.DepGraphInternal);
+  const shortenedDepGraph = await shortenNodeIds(
+    depGraph as types.DepGraphInternal,
+  );
+  originalDepTrees.set(shortenedDepGraph, depTree);
+
+  return shortenedDepGraph;
 }
 
 async function buildGraph(
@@ -90,6 +166,7 @@ async function buildGraph(
   pkgName: string,
   isRoot = false,
   memoizationMap: Map<DepTree, string> = new Map(),
+  treeIdentity: TreeIdentity = { ids: new WeakMap(), nextId: 0 },
 ): Promise<string> {
   if (memoizationMap.has(depTree)) {
     return memoizationMap.get(depTree)!;
@@ -103,6 +180,10 @@ async function buildGraph(
   const depNodesIds: string[] = [];
 
   const hash = crypto.createHash('sha1');
+  // Include the identity of the original tree object, rather than only its
+  // content. Otherwise two structurally identical subtrees would hash to the
+  // same value and be merged into a single graph node.
+  hash.update(`tree-node:${getTreeNodeIdentity(depTree, treeIdentity)}`);
   if (depTree.versionProvenance) {
     hash.update(objectHash(depTree.versionProvenance));
   }
@@ -122,6 +203,7 @@ async function buildGraph(
       depName,
       false,
       memoizationMap,
+      treeIdentity,
     );
 
     const depPkg: types.PkgInfo = {
@@ -137,16 +219,7 @@ async function buildGraph(
 
     depNodesIds.push(depNodeId);
 
-    const nodeInfo: types.NodeInfo = {};
-
-    if (dep.versionProvenance) {
-      nodeInfo.versionProvenance = dep.versionProvenance;
-    }
-    if (dep.labels) {
-      nodeInfo.labels = dep.labels;
-    }
-
-    builder.addPkgNode(depPkg, depNodeId, nodeInfo);
+    builder.addPkgNode(depPkg, depNodeId, getNodeInfo(dep));
 
     hash.update(depNodeId);
   }
@@ -164,16 +237,7 @@ async function buildGraph(
     };
     pkgNodeId = getNodeId(pkg.name, pkg.version, treeHash);
 
-    const nodeInfo: types.NodeInfo = {};
-
-    if (depTree.versionProvenance) {
-      nodeInfo.versionProvenance = depTree.versionProvenance;
-    }
-    if (depTree.labels) {
-      nodeInfo.labels = depTree.labels;
-    }
-
-    builder.addPkgNode(pkg, pkgNodeId, nodeInfo);
+    builder.addPkgNode(pkg, pkgNodeId, getNodeInfo(depTree));
   }
 
   for (const depNodeId of depNodesIds) {
@@ -190,7 +254,11 @@ async function buildGraph(
 async function shortenNodeIds(
   depGraph: types.DepGraphInternal,
 ): Promise<types.DepGraph> {
-  const builder = new DepGraphBuilder(depGraph.pkgManager, depGraph.rootPkg);
+  const builder = new DepGraphBuilder(
+    depGraph.pkgManager,
+    depGraph.rootPkg,
+    copyNodeInfo(depGraph.getNode(depGraph.rootNodeId)),
+  );
 
   const nodesMap: { [key: string]: string } = {};
 
@@ -255,6 +323,25 @@ async function graphToDepTree(
 ): Promise<DepTree> {
   const depGraph = depGraphInterface as types.DepGraphInternal;
 
+  // If this graph was created from a tree in this process, return the
+  // original tree. Besides being faster, this keeps the identity of tree
+  // nodes intact across the round-trip. Pruning changes the shape of the
+  // tree, so it always starts from a fresh conversion.
+  const originalDepTree = originalDepTrees.get(depGraphInterface);
+  if (originalDepTree && !opts.deduplicateWithinTopLevelDeps) {
+    originalDepTree.type = depGraph.pkgManager.name;
+    originalDepTree.packageFormatVersion = constructPackageFormatVersion(
+      pkgType,
+    );
+
+    const originalTargetOS = constructTargetOS(depGraph);
+    if (originalTargetOS) {
+      originalDepTree.targetOS = originalTargetOS;
+    }
+
+    return originalDepTree;
+  }
+
   const [depTree] = await buildSubtree(
     depGraph,
     depGraph.rootNodeId,
@@ -302,12 +389,56 @@ function constructTargetOS(
   return { name, version };
 }
 
+/**
+ * A content based identity for a subtree. Node IDs now distinguish tree
+ * objects, so they cannot be used when explicitly deduplicating within a
+ * top-level dependency: two distinct instances with identical content should
+ * still be deduplicated in that mode.
+ */
+function getSubtreeSignature(
+  depGraph: types.DepGraphInternal,
+  nodeId: string,
+  cache: Map<string, string>,
+  path: Set<string> = new Set(),
+): string {
+  const cached = cache.get(nodeId);
+  if (cached !== undefined) {
+    return cached;
+  }
+  if (path.has(nodeId)) {
+    return 'cycle';
+  }
+
+  path.add(nodeId);
+  const pkg = depGraph.getNodePkg(nodeId);
+  const nodeInfo = depGraph.getNode(nodeId);
+  const deps = depGraph
+    .getNodeDepsNodeIds(nodeId)
+    .map((depNodeId) =>
+      getSubtreeSignature(depGraph, depNodeId, cache, path),
+    )
+    .sort();
+  path.delete(nodeId);
+
+  const signature = objectHash([
+    pkg.name,
+    pkg.version,
+    pkg.purl,
+    nodeInfo.versionProvenance,
+    nodeInfo.labels,
+    deps,
+  ]);
+  cache.set(nodeId, signature);
+  return signature;
+}
+
 async function buildSubtree(
   depGraph: types.DepGraphInternal,
   nodeId: string,
   maybeDeduplicationSet: Set<string> | false | null = false, // false = disabled; null = not in deduplication scope yet
   ancestors: string[] = [],
   memoizationMap: MemoizationMap = new Map(),
+  deduplicationKeyCache: Map<string, string> = new Map(),
 ): Promise<[DepTree, Cycles | undefined]> {
   if (!maybeDeduplicationSet) {
     const memoizedDepTree = getMemoizedDepTree(
@@ -349,13 +480,18 @@ async function buildSubtree(
   }
 
   if (maybeDeduplicationSet) {
-    if (maybeDeduplicationSet.has(nodeId)) {
+    const deduplicationKey = getSubtreeSignature(
+      depGraph,
+      nodeId,
+      deduplicationKeyCache,
+    );
+    if (maybeDeduplicationSet.has(deduplicationKey)) {
       if (depInstanceIds.length > 0) {
         addLabel(depTree, 'pruned', 'true');
       }
       return [depTree, undefined];
     }
-    maybeDeduplicationSet.add(nodeId);
+    maybeDeduplicationSet.add(deduplicationKey);
   }
 
   const cycles: Cycles = [];
@@ -371,6 +507,7 @@ async function buildSubtree(
       maybeDeduplicationSet,
       ancestors.concat(nodeId),
       memoizationMap,
+      deduplicationKeyCache,
     );
     if (subtreeCycles) {
       for (const cycle of subtreeCycles) {

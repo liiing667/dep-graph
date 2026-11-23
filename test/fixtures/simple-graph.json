@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.2.0",
+  "schemaVersion": "1.3.0",
   "pkgManager": {
     "name": "maven"
   },
@@ -70,7 +70,17 @@
         ]
       },
       {
-        "nodeId": "e@5.0.0",
+        "nodeId": "e@5.0.0|1",
+        "pkgId": "e@5.0.0",
+        "deps": [],
+        "info": {
+          "labels": {
+            "key": "value"
+          }
+        }
+      },
+      {
+        "nodeId": "e@5.0.0|2",
         "pkgId": "e@5.0.0",
         "deps": [],
         "info": {
@@ -84,7 +94,7 @@
         "pkgId": "d@0.0.1",
         "deps": [
           {
-            "nodeId": "e@5.0.0"
+            "nodeId": "e@5.0.0|1"
           }
         ]
       },
@@ -120,7 +130,7 @@
         "pkgId": "d@0.0.2",
         "deps": [
           {
-            "nodeId": "e@5.0.0"
+            "nodeId": "e@5.0.0|2"
           }
         ]
       },
