@@ -47,37 +47,98 @@ export async function filterNodesFromGraph(
   );
   if (nodeIdsToFilterOut.length === 0) return originalDepGraph;
 
+  const nodeIdsToFilterOutSet = new Set(nodeIdsToFilterOut);
+
+  // Compute the set of nodes that remain reachable from the root once the
+  // filtered-out nodes are removed. A node only survives when every edge on
+  // at least one root-to-node path survives; descendants that become
+  // unreachable (including nodes shared with an "unfiltered" ancestor) are
+  // dropped here instead of being pulled back in by a sibling path later on.
+  // This single reachable set drives both the subgraph reconstruction and the
+  // parent-chain reporting, so they can never disagree.
+  const reachableNodeIds = collectReachableNodeIds(
+    depGraph,
+    nodeIdsToFilterOutSet,
+  );
+
+  // Nothing reachable was removed (e.g. only already-orphaned nodes matched):
+  // keep returning the original instance, preserving reference equality. The
+  // root can never be orphaned, so equal cardinality here means every node
+  // (including the root) stayed reachable.
+  if (reachableNodeIds.size === existingNodeIds.size) {
+    return originalDepGraph;
+  }
+
   const depGraphBuilder = new DepGraphBuilder(
     depGraph.pkgManager,
     depGraph.rootPkg,
   );
 
-  const nodeIdsToFilterOutSet = new Set(nodeIdsToFilterOut);
-
-  const queue: [NodeId, NodeId?][] = [[depGraph.rootNodeId, undefined]];
+  // Rebuild the subgraph strictly from the reachable set. Every edge of a
+  // reachable node whose other endpoint is also reachable is reproduced, so
+  // legitimate sibling edges of shared ancestors are kept. The `visited`
+  // guard makes this safe for cyclic graphs.
+  const visitedNodeIds: Set<NodeId> = new Set([depGraph.rootNodeId]);
+  const queue: NodeId[] = [depGraph.rootNodeId];
 
   while (queue.length > 0) {
-    const [nodeId, parentNodeId] = queue.pop()!;
+    const nodeId = queue.pop()!;
 
-    if (nodeIdsToFilterOutSet.has(nodeId)) continue;
+    for (const depNodeId of depGraph.getNodeDepsNodeIds(nodeId)) {
+      if (!reachableNodeIds.has(depNodeId)) continue;
 
-    if (parentNodeId) {
-      const pkgInfo = depGraph.getNodePkg(nodeId);
-      let nodeInfo: NodeInfo | undefined = depGraph.getNode(nodeId);
+      const pkgInfo = depGraph.getNodePkg(depNodeId);
+      let nodeInfo: NodeInfo | undefined = depGraph.getNode(depNodeId);
       if (isEmpty(nodeInfo)) nodeInfo = undefined;
 
-      depGraphBuilder.addPkgNode(pkgInfo, nodeId, nodeInfo);
-      depGraphBuilder.connectDep(parentNodeId, nodeId);
-    }
+      depGraphBuilder.addPkgNode(pkgInfo, depNodeId, nodeInfo);
+      depGraphBuilder.connectDep(nodeId, depNodeId);
 
-    const dependencies = depGraph.getNodeDepsNodeIds(nodeId).slice().reverse();
-
-    for (const depNodeId of dependencies) {
-      queue.push([depNodeId, nodeId]);
+      if (!visitedNodeIds.has(depNodeId)) {
+        visitedNodeIds.add(depNodeId);
+        queue.push(depNodeId);
+      }
     }
   }
 
   return depGraphBuilder.build();
+}
+
+/**
+ * Walk the graph from the root, never crossing a filtered-out node, and
+ * return the set of node ids that stay reachable. The walk is cycle-safe:
+ * each node is enqueued at most once.
+ */
+function collectReachableNodeIds(
+  depGraph: DepGraphInternal,
+  nodeIdsToFilterOut: Set<NodeId>,
+): Set<NodeId> {
+  const reachableNodeIds: Set<NodeId> = new Set();
+
+  if (nodeIdsToFilterOut.has(depGraph.rootNodeId)) {
+    return reachableNodeIds;
+  }
+
+  const queue: NodeId[] = [depGraph.rootNodeId];
+  reachableNodeIds.add(depGraph.rootNodeId);
+
+  while (queue.length > 0) {
+    const nodeId = queue.pop()!;
+
+    for (const depNodeId of depGraph.getNodeDepsNodeIds(nodeId)) {
+      if (
+        nodeIdsToFilterOut.has(depNodeId) ||
+        reachableNodeIds.has(depNodeId)
+      ) {
+        continue;
+      }
+
+      reachableNodeIds.add(depNodeId);
+      queue.push(depNodeId);
+    }
+  }
+
+  return reachableNodeIds;
 }
 
 function isString(pkgToFilter: string | PkgInfo): pkgToFilter is string {
