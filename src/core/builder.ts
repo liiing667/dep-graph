@@ -4,6 +4,17 @@ import { DepGraphImpl } from './dep-graph';
 
 export { DepGraphBuilder };
 
+export interface DepGraphBuilderOptions {
+  /**
+   * Node id used for the root package. Defaults to `root-node`.
+   *
+   * Graph data coming from scanners may use a different root id. Keeping the
+   * caller supplied id makes it possible to build subgraphs that still refer
+   * to the same root as the source graph.
+   */
+  rootNodeId?: string;
+}
+
 class DepGraphBuilder {
   get rootNodeId(): string {
     return this._rootNodeId;
@@ -26,6 +37,7 @@ class DepGraphBuilder {
     pkgManager: types.PkgManager,
     rootPkg?: types.PkgInfo,
     nodeInfo?: types.NodeInfo,
+    options: DepGraphBuilderOptions = {},
   ) {
     const graph = new graphlib.Graph({
       directed: true,
@@ -39,7 +51,7 @@ class DepGraphBuilder {
       };
     }
 
-    this._rootNodeId = 'root-node';
+    this._rootNodeId = options?.rootNodeId ?? 'root-node';
     this._rootPkgId = DepGraphBuilder._getPkgId(rootPkg);
     this._pkgs[this._rootPkgId] = rootPkg;
 
