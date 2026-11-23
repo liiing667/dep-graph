@@ -64,21 +64,46 @@ export interface DepGraph {
     version?: string;
     purl?: string;
   }>;
-  pkgPathsToRoot(pkg: Pkg): Array<Array<{
+  pkgPathsToRoot(pkg: Pkg, opts?: PathQueryOptions): Array<Array<{
     name: string;
     version?: string;
     purl?: string;
   }>>;
-  directDepsLeadingTo(pkg: Pkg): Array<{
+  pkgPathsToRootWithStatus(
+    pkg: Pkg,
+    opts?: PathQueryOptions,
+  ): PathsToRootResult;
+  directDepsLeadingTo(pkg: Pkg, opts?: PathQueryOptions): Array<{
     name: string;
     version?: string;
     purl?: string;
   }>;
-  countPathsToRoot(pkg: Pkg): number;
+  directDepsLeadingToWithStatus(
+    pkg: Pkg,
+    opts?: PathQueryOptions,
+  ): DirectDepsResult;
+  countPathsToRoot(pkg: Pkg, opts?: PathQueryOptions): number;
+  countPathsToRootWithStatus(
+    pkg: Pkg,
+    opts?: PathQueryOptions,
+  ): PathCountResult;
+  hasCycles(opts?: CycleQueryOptions): boolean | undefined;
+  hasCyclesWithStatus(opts?: CycleQueryOptions): CycleStatusResult;
   toJSON(): DepGraphData;
   equals(other: DepGraph, options?: { compareRoot?: boolean }): boolean;
 }
 ```
+
+Path queries accept an optional `limit` (the historical output cap) and an
+optional `budget` (the maximum number of node visits). Their status-bearing
+forms, and `hasCyclesWithStatus`, report `'complete'`, `'truncated'` (an
+explicit `limit` was reached) or `'unknown'` (the traversal budget ran out).
+A query whose answer is `unknown` never returns a partial parent chain as if
+it were complete: the legacy methods throw `TraversalIncompleteError`, while
+the status-bearing methods return only the complete root paths discovered so
+far together with `status: 'unknown'`. A cycle check with an exhausted budget
+returns `undefined` / `status: 'unknown'` instead of reporting the graph as
+acyclic.
 
 ### `DepGraphData`
 

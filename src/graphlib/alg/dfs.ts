@@ -1,4 +1,3 @@
-import * as each from 'lodash.foreach';
 import { Graph } from '../graph';
 
 /*
@@ -17,29 +16,51 @@ export function dfs(g: Graph, vs: string[], order: 'pre' | 'post'): string[] {
   const navigation = (g.isDirected() ? g.successors : g.neighbors).bind(g);
 
   const acc: string[] = [];
-  const visited: { [v: string]: boolean } = {};
-  each(vs, (v) => {
+  const visited: Set<string> = new Set();
+
+  for (const v of vs) {
     if (!g.hasNode(v)) {
       throw new Error('Graph does not have node: ' + v);
     }
 
-    doDfs(g, v, order === 'post', visited, navigation, acc);
-  });
-  return acc;
-}
+    if (visited.has(v)) continue;
 
-function doDfs(g, v: string, postorder, visited, navigation, acc) {
-  if (!(v in visited)) {
-    visited[v] = true;
+    const postorder = order === 'post';
+    visited.add(v);
+    if (!postorder) acc.push(v);
 
-    if (!postorder) {
-      acc.push(v);
-    }
-    each(navigation(v), function (w) {
-      doDfs(g, w, postorder, visited, navigation, acc);
-    });
-    if (postorder) {
-      acc.push(v);
+    const stack: Array<{
+      nodeId: string;
+      neighbors: string[];
+      next: number;
+    }> = [
+      {
+        nodeId: v,
+        neighbors: navigation(v),
+        next: 0,
+      },
+    ];
+
+    while (stack.length > 0) {
+      const frame = stack[stack.length - 1];
+      if (frame.next >= frame.neighbors.length) {
+        stack.pop();
+        if (postorder) acc.push(frame.nodeId);
+        continue;
+      }
+
+      const next = frame.neighbors[frame.next++];
+      if (visited.has(next)) continue;
+
+      visited.add(next);
+      if (!postorder) acc.push(next);
+      stack.push({
+        nodeId: next,
+        neighbors: navigation(next),
+        next: 0,
+      });
     }
   }
+
+  return acc;
 }

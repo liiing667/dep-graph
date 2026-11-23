@@ -1,8 +1,9 @@
 export { Graph } from './graph';
-import { isAcyclic } from './alg/is-acyclic';
+import { isAcyclic, isAcyclicWithBudget } from './alg/is-acyclic';
 import { postorder } from './alg/postorder';
 
 export const alg = {
   isAcyclic,
+  isAcyclicWithBudget,
   postorder,
 };

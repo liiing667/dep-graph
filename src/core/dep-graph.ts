@@ -2,6 +2,7 @@ import * as _isEqual from 'lodash.isequal';
 import * as graphlib from '../graphlib';
 import * as types from './types';
 import { createFromJSON } from './create-from-json';
+import { TraversalIncompleteError, ValidationError } from './errors';
 
 export { DepGraphImpl };
 
@@ -10,6 +11,117 @@ type PkgId = string;
 interface GraphNode {
   pkgId: string;
   info?: types.NodeInfo;
+}
+
+interface PathCountCacheEntry {
+  count: number;
+  status: 'complete';
+}
+
+/**
+ * Per-query traversal state. A state object is never shared between two
+ * public queries, which is what keeps path budgets and partial counts from
+ * leaking from one package (or one graph generation) to the next.
+ */
+interface TraversalState {
+  readonly limit?: number;
+  readonly budget?: number;
+  expansions: number;
+  visited: Set<NodeId>;
+  budgetExhausted: boolean;
+  incomplete: boolean;
+  limitHit: boolean;
+}
+
+interface PathFrame {
+  nodeId: NodeId;
+  parentIds: NodeId[];
+  nextParent: number;
+  pathPkgs: types.PkgInfo[];
+  ancestors: Set<NodeId>;
+}
+
+function normalizeLimit(limit?: number): number | undefined {
+  if (limit === undefined) return undefined;
+  if (
+    typeof limit !== 'number' ||
+    !Number.isFinite(limit) ||
+    limit < 0 ||
+    !Number.isInteger(limit)
+  ) {
+    throw new ValidationError(
+      `path limit must be a non-negative finite integer, got ${String(limit)}`,
+    );
+  }
+  // `0` has historically meant "no limit" (the old code used truthiness).
+  return limit === 0 ? undefined : limit;
+}
+
+function normalizeBudget(budget?: number): number | undefined {
+  if (budget === undefined) return undefined;
+  if (
+    typeof budget !== 'number' ||
+    !Number.isFinite(budget) ||
+    budget < 0 ||
+    !Number.isInteger(budget)
+  ) {
+    throw new ValidationError(
+      `traversal budget must be a non-negative finite integer, got ${String(
+        budget,
+      )}`,
+    );
+  }
+  return budget;
+}
+
+function createTraversalState(
+  limit?: number,
+  budget?: number,
+): TraversalState {
+  return {
+    limit,
+    budget,
+    expansions: 0,
+    visited: new Set<NodeId>(),
+    budgetExhausted: false,
+    incomplete: false,
+    limitHit: false,
+  };
+}
+
+function consumeNode(state: TraversalState, nodeId: NodeId): boolean {
+  if (state.budget !== undefined && state.expansions >= state.budget) {
+    state.budgetExhausted = true;
+    return false;
+  }
+  state.expansions++;
+  state.visited.add(nodeId);
+  return true;
+}
+
+function statusOf(state: TraversalState): {
+  status: types.TraversalStatus;
+  reason?: types.TraversalReason;
+} {
+  if (state.limitHit) {
+    // An explicit cap was reached and there is still work left. That is a
+    // known truncation even if the traversal budget also happened to run out.
+    return { status: 'truncated', reason: 'limit' };
+  }
+  if (state.budgetExhausted) {
+    return { status: 'unknown', reason: 'budget' };
+  }
+  if (state.incomplete) {
+    return { status: 'unknown', reason: 'unreachable-root' };
+  }
+  return { status: 'complete' };
+}
+
+function packageInfo(pkg: types.Pkg): types.Pkg {
+  return {
+    name: pkg.name,
+    version: pkg.version,
+  };
 }
 
 class DepGraphImpl implements types.DepGraphInternal {
@@ -24,9 +136,16 @@ class DepGraphImpl implements types.DepGraphInternal {
 
   private _rootPkgId: PkgId;
 
-  private _countNodePathsToRootCache: Map<NodeId, number> = new Map();
+  /**
+   * Only complete, unbounded counts are stored here. Limited or budgeted
+   * queries never read or write this cache, so a partial count from one query
+   * can never be observed by another package.
+   */
+  private _countNodePathsToRootCache: Map<NodeId, PathCountCacheEntry> =
+    new Map();
 
   private _hasCycles: boolean | undefined;
+  private _hasCyclesComplete = false;
 
   public constructor(
     private _graph: graphlib.Graph,
@@ -116,49 +235,197 @@ class DepGraphImpl implements types.DepGraphInternal {
     return parents;
   }
 
-  public hasCycles(): boolean {
-    // `isAcyclic` is expensive, so memoize
-    if (this._hasCycles === undefined) {
-      this._hasCycles = !graphlib.alg.isAcyclic(this._graph);
+  public hasCycles(
+    opts?: types.CycleQueryOptions & { withStatus?: false },
+  ): boolean | undefined;
+  public hasCycles(
+    opts: types.CycleQueryOptions & { withStatus: true },
+  ): types.CycleStatusResult;
+  public hasCycles(
+    opts: types.CycleQueryOptions = {},
+  ): boolean | undefined | types.CycleStatusResult {
+    const result = this.hasCyclesWithStatus(opts);
+    return opts.withStatus ? result : result.hasCycles;
+  }
+
+  public hasCyclesWithStatus(
+    opts: types.CycleQueryOptions = {},
+  ): types.CycleStatusResult {
+    const requestedBudget = opts.budget ?? opts.limit;
+    const budget = normalizeBudget(requestedBudget);
+
+    if (this._hasCyclesComplete) {
+      return {
+        status: 'complete',
+        hasCycles: this._hasCycles,
+        budget: requestedBudget,
+        visitedNodes: 0,
+        expansions: 0,
+      };
     }
-    return this._hasCycles;
+
+    const detection = graphlib.alg.isAcyclicWithBudget(this._graph, budget);
+    if (detection.complete) {
+      this._hasCycles = detection.isAcyclic === false;
+      this._hasCyclesComplete = true;
+    }
+
+    return {
+      status: detection.complete ? 'complete' : 'unknown',
+      hasCycles:
+        detection.isAcyclic === undefined ? undefined : !detection.isAcyclic,
+      budget: requestedBudget,
+      visitedNodes: detection.visitedNodes,
+      expansions: detection.expansions,
+      reason: detection.complete ? undefined : 'budget',
+    };
   }
 
   public pkgPathsToRoot(
     pkg: types.Pkg,
-    opts?: { limit?: number },
-  ): types.PkgInfo[][] {
-    const pathsToRoot: types.PkgInfo[][] = [];
-    const limit = opts?.limit;
+    opts?: types.PathQueryOptions & { withStatus?: false },
+  ): types.PkgInfo[][];
+  public pkgPathsToRoot(
+    pkg: types.Pkg,
+    opts: types.PathQueryOptions & { withStatus: true },
+  ): types.PathsToRootResult;
+  public pkgPathsToRoot(
+    pkg: types.Pkg,
+    opts: types.PathQueryOptions = {},
+  ): types.PkgInfo[][] | types.PathsToRootResult {
+    const result = this.pkgPathsToRootWithStatus(pkg, opts);
 
-    for (const nodeId of this.getPkgNodeIds(pkg)) {
-      const pathsFromNodeToRoot = this.pathsFromNodeToRoot(nodeId, [], {
-        limit,
-      });
-
-      for (const path of pathsFromNodeToRoot) {
-        pathsToRoot.push(path);
-      }
-
-      if (limit && pathsToRoot.length >= limit) {
-        break;
-      }
+    if (opts.withStatus) {
+      return result;
     }
-    // note: sorting to get shorter paths first -
-    //  it's nicer - and better resembles older behaviour
-    return pathsToRoot.sort((a, b) => a.length - b.length);
+
+    if (result.status === 'unknown' && !opts.allowIncomplete) {
+      throw new TraversalIncompleteError('unknown', { ...result });
+    }
+
+    return this.attachPathArrayMetadata(result.paths, result);
   }
 
-  public countPathsToRoot(pkg: types.Pkg, opts?: { limit?: number }): number {
+  public pkgPathsToRootWithStatus(
+    pkg: types.Pkg,
+    opts: types.PathQueryOptions = {},
+  ): types.PathsToRootResult {
+    const limit = normalizeLimit(opts.limit);
+    const budget = normalizeBudget(opts.budget);
+    const state = createTraversalState(limit, budget);
+    const paths: types.PkgInfo[][] = [];
+    const nodeIds = this.getPkgNodeIds(pkg);
+
+    for (let i = 0; i < nodeIds.length; i++) {
+      if (state.budgetExhausted || state.limitHit) break;
+
+      this.enumeratePathsFromNode(
+        nodeIds[i],
+        state,
+        i < nodeIds.length - 1,
+        paths,
+      );
+    }
+
+    // Note: sorting to get shorter paths first -
+    //  it's nicer - and better resembles older behaviour.
+    paths.sort((a, b) => a.length - b.length);
+
+    const { status, reason } = statusOf(state);
+    return {
+      target: packageInfo(pkg),
+      paths,
+      status,
+      complete: status === 'complete',
+      truncated: status === 'truncated',
+      unknown: status === 'unknown',
+      limit: opts.limit,
+      budget: opts.budget,
+      visitedNodes: state.visited.size,
+      expansions: state.expansions,
+      reason,
+    };
+  }
+
+  public countPathsToRoot(
+    pkg: types.Pkg,
+    opts?: types.PathQueryOptions & { withStatus?: false },
+  ): number;
+  public countPathsToRoot(
+    pkg: types.Pkg,
+    opts: types.PathQueryOptions & { withStatus: true },
+  ): types.PathCountResult;
+  public countPathsToRoot(
+    pkg: types.Pkg,
+    opts: types.PathQueryOptions = {},
+  ): number | types.PathCountResult {
+    const result = this.countPathsToRootWithStatus(pkg, opts);
+
+    if (opts.withStatus) {
+      return result;
+    }
+
+    if (result.status === 'unknown') {
+      if (opts.allowIncomplete && result.partialCount !== undefined) {
+        return result.partialCount;
+      }
+      throw new TraversalIncompleteError('unknown', { ...result });
+    }
+
+    return result.count as number;
+  }
+
+  public countPathsToRootWithStatus(
+    pkg: types.Pkg,
+    opts: types.PathQueryOptions = {},
+  ): types.PathCountResult {
+    const limit = normalizeLimit(opts.limit);
+    const budget = normalizeBudget(opts.budget);
+    // Probe one path past the caller's cap so an answer that happens to end
+    // exactly at the cap can still be reported as complete.
+    const probeLimit = limit === undefined ? undefined : limit + 1;
+    const state = createTraversalState(probeLimit, budget);
     let count = 0;
-    const limit = opts?.limit;
-    for (const nodeId of this.getPkgNodeIds(pkg)) {
-      count += this.countNodePathsToRoot(nodeId, limit);
-      if (limit && count >= limit) {
-        return limit;
+
+    if (budget === undefined) {
+      for (const nodeId of this.getPkgNodeIds(pkg)) {
+        count += this.countNodePathsToRootComplete(nodeId, probeLimit, state);
+        if (probeLimit !== undefined && count >= probeLimit) {
+          count = limit as number;
+          state.limitHit = true;
+          break;
+        }
+      }
+    } else {
+      for (const nodeId of this.getPkgNodeIds(pkg)) {
+        if (state.budgetExhausted || state.limitHit) break;
+
+        const outcome = this.countNodePathsToRootBudgeted(nodeId, state);
+        count += outcome.count;
+        if (probeLimit !== undefined && count >= probeLimit) {
+          count = limit as number;
+          state.limitHit = true;
+          break;
+        }
+        if (outcome.status === 'unknown') break;
       }
     }
-    return count;
+
+    const { status, reason } = statusOf(state);
+    return {
+      target: packageInfo(pkg),
+      count: status === 'unknown' ? undefined : count,
+      partialCount: status === 'unknown' ? count : undefined,
+      status,
+      complete: status === 'complete',
+      truncated: status === 'truncated',
+      unknown: status === 'unknown',
+      limit: opts.limit,
+      budget: opts.budget,
+      visitedNodes: state.visited.size,
+      expansions: state.expansions,
+      reason,
+    };
   }
 
   public isTransitive(pkg: types.Pkg): boolean {
@@ -197,14 +464,68 @@ class DepGraphImpl implements types.DepGraphInternal {
     );
   }
 
-  public directDepsLeadingTo(pkg: types.Pkg): types.PkgInfo[] {
-    const pkgNodes = this.getPkgNodeIds(pkg);
+  public directDepsLeadingTo(
+    pkg: types.Pkg,
+    opts?: types.PathQueryOptions & { withStatus?: false },
+  ): types.PkgInfo[];
+  public directDepsLeadingTo(
+    pkg: types.Pkg,
+    opts: types.PathQueryOptions & { withStatus: true },
+  ): types.DirectDepsResult;
+  public directDepsLeadingTo(
+    pkg: types.Pkg,
+    opts: types.PathQueryOptions = {},
+  ): types.PkgInfo[] | types.DirectDepsResult {
+    const result = this.directDepsLeadingToWithStatus(pkg, opts);
+
+    if (opts.withStatus) {
+      return result;
+    }
+
+    if (result.status === 'unknown' && !opts.allowIncomplete) {
+      throw new TraversalIncompleteError('unknown', { ...result });
+    }
+
+    return result.directDeps;
+  }
+
+  public directDepsLeadingToWithStatus(
+    pkg: types.Pkg,
+    opts: types.PathQueryOptions = {},
+  ): types.DirectDepsResult {
+    const budget = normalizeBudget(opts.budget);
+    const state = createTraversalState(undefined, budget);
+    const pkgNodes = new Set(this.getPkgNodeIds(pkg));
     const directDeps = this.getNodeDepsNodeIds(this.rootNodeId);
-    const nodes = directDeps.filter((directDep) => {
-      const reachableNodes = graphlib.alg.postorder(this._graph, [directDep]);
-      return reachableNodes.filter((node) => pkgNodes.includes(node)).length;
-    });
-    return nodes.map((node) => this.getNodePkg(node));
+    const leadingDeps: types.PkgInfo[] = [];
+
+    for (const directDep of directDeps) {
+      if (state.budgetExhausted) break;
+
+      const reachesPkg = this.reachesAnyNode(directDep, pkgNodes, state);
+      if (reachesPkg === undefined) {
+        state.budgetExhausted = true;
+        break;
+      }
+      if (reachesPkg) {
+        leadingDeps.push(this.getNodePkg(directDep));
+      }
+    }
+
+    const { status, reason } = statusOf(state);
+    return {
+      target: packageInfo(pkg),
+      directDeps: leadingDeps,
+      status,
+      complete: status === 'complete',
+      truncated: status === 'truncated',
+      unknown: status === 'unknown',
+      limit: opts.limit,
+      budget: opts.budget,
+      visitedNodes: state.visited.size,
+      expansions: state.expansions,
+      reason,
+    };
   }
 
   /**
@@ -248,6 +569,343 @@ class DepGraphImpl implements types.DepGraphInternal {
         nodes,
       },
     };
+  }
+
+  private attachPathArrayMetadata(
+    paths: types.PkgInfo[][],
+    result: types.PathsToRootResult,
+  ): types.PkgInfo[][] {
+    const metadata: PropertyDescriptorMap = {};
+    for (const key of [
+      'status',
+      'complete',
+      'truncated',
+      'unknown',
+      'limit',
+      'budget',
+      'reason',
+      'visitedNodes',
+      'expansions',
+      'target',
+    ] as const) {
+      metadata[key] = {
+        value: result[key],
+        enumerable: false,
+        configurable: true,
+      };
+    }
+    Object.defineProperties(paths, metadata);
+    return paths;
+  }
+
+  /**
+   * Enumerate complete root paths in explicit stack form. A path is only
+   * returned when it actually reaches the root; dead ends are recorded as an
+   * incomplete traversal rather than being published as half parent chains.
+   */
+  private enumeratePathsFromNode(
+    startNodeId: NodeId,
+    state: TraversalState,
+    hasMoreStartNodes: boolean,
+    paths: types.PkgInfo[][],
+  ): void {
+    if (!consumeNode(state, startNodeId)) return;
+
+    const startPkg = this.getNodePkg(startNodeId);
+    const pathsBefore = paths.length;
+    if (startNodeId === this._rootNodeId) {
+      paths.push([startPkg]);
+      this.noteLimitReached(state, paths, [], hasMoreStartNodes);
+      return;
+    }
+
+    const startParents = this.getNodeParentsNodeIds(startNodeId);
+    if (startParents.length === 0) {
+      // A non-root node with no predecessors cannot produce a path to root.
+      state.incomplete = true;
+      return;
+    }
+
+    const stack: PathFrame[] = [
+      {
+        nodeId: startNodeId,
+        parentIds: startParents,
+        nextParent: 0,
+        pathPkgs: [startPkg],
+        ancestors: new Set<NodeId>([startNodeId]),
+      },
+    ];
+
+    while (stack.length > 0) {
+      if (state.budgetExhausted || state.limitHit) return;
+
+      const frame = stack[stack.length - 1];
+      if (frame.nextParent >= frame.parentIds.length) {
+        stack.pop();
+        continue;
+      }
+
+      const parentId = frame.parentIds[frame.nextParent++];
+      if (frame.ancestors.has(parentId)) continue;
+      if (!consumeNode(state, parentId)) return;
+
+      const parentPkg = this.getNodePkg(parentId);
+
+      if (parentId === this._rootNodeId) {
+        paths.push(frame.pathPkgs.concat(parentPkg));
+        this.noteLimitReached(state, paths, stack, hasMoreStartNodes);
+        continue;
+      }
+
+      const parentIds = this.getNodeParentsNodeIds(parentId);
+      if (parentIds.length === 0) {
+        // Half parent chain: do not publish it and do not claim the query is
+        // complete.
+        state.incomplete = true;
+        continue;
+      }
+
+      stack.push({
+        nodeId: parentId,
+        parentIds,
+        nextParent: 0,
+        pathPkgs: frame.pathPkgs.concat(parentPkg),
+        ancestors: new Set<NodeId>(frame.ancestors).add(parentId),
+      });
+    }
+
+    if (paths.length === pathsBefore) {
+      // Every branch was pruned (for example a component that cannot reach
+      // root), so silently returning [] would be an unjustified complete
+      // "no paths" answer.
+      state.incomplete = true;
+    }
+  }
+
+  private noteLimitReached(
+    state: TraversalState,
+    paths: types.PkgInfo[][],
+    stack: PathFrame[],
+    hasMoreStartNodes: boolean,
+  ): void {
+    if (state.limit === undefined || paths.length < state.limit) return;
+    if (hasMoreStartNodes || this.hasPendingPathWork(stack)) {
+      state.limitHit = true;
+    }
+  }
+
+  private hasPendingPathWork(stack: PathFrame[]): boolean {
+    return stack.some((frame) => frame.nextParent < frame.parentIds.length);
+  }
+
+  /**
+   * Complete (unbounded) path counting. Only this path is allowed to populate
+   * the count cache.
+   */
+  private countNodePathsToRootComplete(
+    nodeId: NodeId,
+    limit: number | undefined,
+    state: TraversalState,
+  ): number {
+    state.expansions++;
+    state.visited.add(nodeId);
+
+    if (limit === undefined) {
+      const cached = this._countNodePathsToRootCache.get(nodeId);
+      if (cached) {
+        return cached.count;
+      }
+    }
+
+    let count: number;
+    if (nodeId === this._rootNodeId) {
+      count = 1;
+    } else if (this.hasCyclesWithStatus().hasCycles === true) {
+      // When cycles exist, we must walk every simple path individually to
+      // avoid counting paths that loop back on themselves.
+      count = this.countNodePathsToRootBacktracking(
+        nodeId,
+        state,
+        limit,
+        0,
+        new Set(),
+      );
+    } else {
+      // Without cycles, we can compute path counts by summing each parent's
+      // count. This avoids the exponential cost of enumerating every path.
+      count = this.countNodePathsToRootMemoized(nodeId, limit, state);
+    }
+
+    if (limit === undefined) {
+      this._countNodePathsToRootCache.set(nodeId, {
+        count,
+        status: 'complete',
+      });
+    }
+    return count;
+  }
+
+  /**
+   * Memoized path counting, the count is the sum of the counts of the parents.
+   * Only valid for acyclic graphs.
+   */
+  private countNodePathsToRootMemoized(
+    nodeId: NodeId,
+    limit: number | undefined,
+    state: TraversalState,
+  ): number {
+    let count = 0;
+    for (const parentNodeId of this.getNodeParentsNodeIds(nodeId)) {
+      count += this.countNodePathsToRootComplete(parentNodeId, limit, state);
+      if (limit !== undefined && count >= limit) {
+        return limit;
+      }
+    }
+    return count;
+  }
+
+  /**
+   * Backtracking approach that enumerates simple paths.
+   * Required for cyclic graphs where memoization is not applicable.
+   */
+  private countNodePathsToRootBacktracking(
+    nodeId: NodeId,
+    state: TraversalState,
+    limit: number | undefined = undefined,
+    count = 0,
+    visited: Set<NodeId> = new Set(),
+  ): number {
+    state.expansions++;
+    state.visited.add(nodeId);
+
+    if (nodeId === this._rootNodeId) {
+      return count + 1;
+    }
+    visited.add(nodeId);
+    for (const parentNodeId of this.getNodeParentsNodeIds(nodeId)) {
+      if (visited.has(parentNodeId)) {
+        continue;
+      }
+      count = this.countNodePathsToRootBacktracking(
+        parentNodeId,
+        state,
+        limit,
+        count,
+        visited,
+      );
+      if (limit !== undefined && count >= limit) {
+        visited.delete(nodeId);
+        return limit;
+      }
+    }
+    visited.delete(nodeId);
+    return count;
+  }
+
+  /**
+   * Budgeted path counting uses the same simple-path semantics as the cyclic
+   * backtracking implementation, so it is correct for both cyclic and acyclic
+   * graphs. It never touches the shared cache.
+   */
+  private countNodePathsToRootBudgeted(
+    startNodeId: NodeId,
+    state: TraversalState,
+  ): { count: number; status: types.TraversalStatus } {
+    if (!consumeNode(state, startNodeId)) {
+      return { count: 0, status: 'unknown' };
+    }
+    if (startNodeId === this._rootNodeId) {
+      state.limitHit = state.limit !== undefined && state.limit <= 1;
+      return { count: 1, status: state.limitHit ? 'truncated' : 'complete' };
+    }
+
+    const startParents = this.getNodeParentsNodeIds(startNodeId);
+    if (startParents.length === 0) {
+      return { count: 0, status: 'complete' };
+    }
+
+    let count = 0;
+    const stack: Array<{
+      nodeId: NodeId;
+      parentIds: NodeId[];
+      nextParent: number;
+      ancestors: Set<NodeId>;
+    }> = [
+      {
+        nodeId: startNodeId,
+        parentIds: startParents,
+        nextParent: 0,
+        ancestors: new Set<NodeId>([startNodeId]),
+      },
+    ];
+
+    while (stack.length > 0) {
+      if (state.budgetExhausted) {
+        return { count, status: 'unknown' };
+      }
+
+      const frame = stack[stack.length - 1];
+      if (frame.nextParent >= frame.parentIds.length) {
+        stack.pop();
+        continue;
+      }
+
+      const parentId = frame.parentIds[frame.nextParent++];
+      if (frame.ancestors.has(parentId)) continue;
+      if (!consumeNode(state, parentId)) {
+        return { count, status: 'unknown' };
+      }
+
+      if (parentId === this._rootNodeId) {
+        count++;
+        if (state.limit !== undefined && count >= state.limit) {
+          state.limitHit = true;
+          return { count, status: 'truncated' };
+        }
+        continue;
+      }
+
+      const parentIds = this.getNodeParentsNodeIds(parentId);
+      if (parentIds.length === 0) {
+        continue;
+      }
+
+      stack.push({
+        nodeId: parentId,
+        parentIds,
+        nextParent: 0,
+        ancestors: new Set<NodeId>(frame.ancestors).add(parentId),
+      });
+    }
+
+    return { count, status: 'complete' };
+  }
+
+  private reachesAnyNode(
+    startNodeId: NodeId,
+    targets: Set<NodeId>,
+    state: TraversalState,
+  ): boolean | undefined {
+    if (!consumeNode(state, startNodeId)) return undefined;
+    if (targets.has(startNodeId)) return true;
+
+    const stack: NodeId[] = [startNodeId];
+    const seen = new Set<NodeId>([startNodeId]);
+
+    while (stack.length > 0) {
+      if (state.budgetExhausted) return undefined;
+
+      const nodeId = stack.pop()!;
+      for (const depNodeId of this.getNodeDepsNodeIds(nodeId)) {
+        if (seen.has(depNodeId)) continue;
+        if (!consumeNode(state, depNodeId)) return undefined;
+        if (targets.has(depNodeId)) return true;
+        seen.add(depNodeId);
+        stack.push(depNodeId);
+      }
+    }
+
+    return false;
   }
 
   private nodeEquals(
@@ -335,110 +993,5 @@ class DepGraphImpl implements types.DepGraphInternal {
       throw new Error(`no such node: ${nodeId}`);
     }
     return node;
-  }
-
-  private pathsFromNodeToRoot(
-    nodeId: string,
-    ancestors: string[] = [],
-    opts: { limit?: number },
-  ): types.PkgInfo[][] {
-    const parentNodesIds = this.getNodeParentsNodeIds(nodeId);
-    const pkgInfo = this.getNodePkg(nodeId);
-
-    if (parentNodesIds.length === 0) {
-      return [[pkgInfo]];
-    }
-
-    const allPaths: types.PkgInfo[][] = [];
-    ancestors = ancestors.concat(nodeId);
-    const limit = opts.limit;
-
-    for (const id of parentNodesIds) {
-      if (ancestors.includes(id)) continue;
-
-      const pathsFromNodeToRoot = this.pathsFromNodeToRoot(id, ancestors, opts);
-
-      for (const path of pathsFromNodeToRoot) {
-        allPaths.push([pkgInfo].concat(path));
-      }
-
-      if (limit && allPaths.length >= limit) {
-        break;
-      }
-    }
-
-    return allPaths;
-  }
-
-  private countNodePathsToRoot(nodeId: string, limit?: number): number {
-    if (this._countNodePathsToRootCache.has(nodeId)) {
-      return this._countNodePathsToRootCache.get(nodeId)!;
-    }
-
-    let count: number;
-    if (nodeId === this._rootNodeId) {
-      count = 1;
-    } else if (this.hasCycles()) {
-      // When cycles exist, we must walk every path individually to avoid
-      // counting paths that loop back on themselves.
-      count = this.countNodePathsToRootBacktracking(nodeId, limit);
-    } else {
-      // Without cycles, we can compute path counts by summing each parent's
-      // count. This avoids the exponential cost of enumerating every path.
-      count = this.countNodePathsToRootMemoized(nodeId, limit);
-    }
-
-    if (!limit) {
-      this._countNodePathsToRootCache.set(nodeId, count);
-    }
-    return count;
-  }
-
-  /**
-   * Memoized path counting, the count is the sum of the counts of the parents.
-   * Only valid for acyclic graphs.
-   */
-  private countNodePathsToRootMemoized(nodeId: string, limit = 0): number {
-    let count = 0;
-    for (const parentNodeId of this.getNodeParentsNodeIds(nodeId)) {
-      count += this.countNodePathsToRoot(parentNodeId, limit);
-      if (limit && count >= limit) {
-        return limit;
-      }
-    }
-    return count;
-  }
-
-  /**
-   * Backtracking approach that enumerates simple paths.
-   * Required for cyclic graphs where memoization is not applicable.
-   */
-  private countNodePathsToRootBacktracking(
-    nodeId: string,
-    limit = 0,
-    count = 0,
-    visited: Set<string> = new Set(),
-  ): number {
-    if (nodeId === this._rootNodeId) {
-      return count + 1;
-    }
-    visited.add(nodeId);
-    for (const parentNodeId of this.getNodeParentsNodeIds(nodeId)) {
-      if (visited.has(parentNodeId)) {
-        continue;
-      }
-      count = this.countNodePathsToRootBacktracking(
-        parentNodeId,
-        limit,
-        count,
-        visited,
-      );
-      if (limit && count >= limit) {
-        visited.delete(nodeId);
-        return limit;
-      }
-    }
-    visited.delete(nodeId);
-    return count;
   }
 }
